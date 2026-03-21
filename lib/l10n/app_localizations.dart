@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/message_lookup_by_library.dart';
 
 // ignore_for_file: type=lint
 
@@ -27,28 +27,13 @@ class AppLocalizations {
 
   final String localeName;
 
-  /// The title of the application
   String get appTitle => Intl.message('AnymeX', name: 'appTitle', desc: 'The title of the application');
-
-  /// Section title for continue watching
   String get continueWatching => Intl.message('Continue Watching', name: 'continueWatching', desc: 'Section title for continue watching');
-
-  /// Snackbar message when trying to refresh without login
   String get loginPrompt => Intl.message('W-what are you doing step-bro, login before you do that (●´⌓`●)', name: 'loginPrompt', desc: 'Snackbar message when trying to refresh without login');
-
-  /// Greeting prefix
   String get greetingHey => Intl.message('Hey ', name: 'greetingHey', desc: 'Greeting prefix');
-
-  /// Greeting question
   String get greetingQuestion => Intl.message(', what are we doing today?', name: 'greetingQuestion', desc: 'Greeting question');
-
-  /// Subtitle on home page
   String get homeSubtitle => Intl.message('Find your favourite anime or manga, manhwa or whatever you like!', name: 'homeSubtitle', desc: 'Subtitle on home page');
-
-  /// Section title for recommended novels
   String get recommendedNovels => Intl.message('Recommended Novels', name: 'recommendedNovels', desc: 'Section title for recommended novels');
-
-  /// Guest user name
   String get guest => Intl.message('Guest', name: 'guest', desc: 'Guest user name');
 }
 
@@ -66,9 +51,6 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
-
-// 以下为自动生成的 messages 部分（用于 Intl 查找）
-import 'package:intl/message_lookup_by_library.dart';
 
 final Map<String, dynamic> messages = {
   'appTitle': MessageLookupByLibrary.simpleMessage('AnymeX'),
@@ -97,8 +79,7 @@ class MessageLookupByLibrary {
   static MessageLookupByLibrary? of(String? locale) => instance;
 }
 
-// 辅助函数：初始化消息
 Future<void> initializeMessages(String locale) async {
-  // 不需要额外操作，因为 messages 已经内嵌
+  // No initialization needed
   return;
 }
