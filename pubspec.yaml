@@ -148,6 +148,7 @@ flutter_native_splash:
         # image: assets/images/logo.png
 
 flutter:
+    generate: true
     uses-material-design: true
 
     assets:
