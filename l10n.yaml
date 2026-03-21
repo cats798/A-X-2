@@ -1,4 +1,4 @@
 arb-dir: lib/l10n
-output-dir: lib/generated
+output-dir: lib/l10n          # 改为与 arb 文件同目录
 template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
