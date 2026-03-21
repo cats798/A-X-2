@@ -52,12 +52,18 @@ jobs:
         run: |
           flutter clean
           flutter pub get
-          # 使用显式参数生成本地化文件
-          flutter gen-l10n --arb-dir=lib/l10n --output-dir=.dart_tool/flutter_gen/gen_l10n --template-arb-file=app_en.arb
-          # 将生成的文件复制到 lib/flutter_gen，确保导入路径有效
-          mkdir -p lib/flutter_gen/gen_l10n
-          cp -r .dart_tool/flutter_gen/gen_l10n/* lib/flutter_gen/gen_l10n/ || true
-          ls -la lib/flutter_gen/gen_l10n/
+          # 确保 l10n.yaml 正确
+          cat > l10n.yaml << 'EOF'
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-dir: lib/generated
+EOF
+          # 生成本地化文件
+          flutter gen-l10n
+          # 验证生成
+          echo "✅ Generated files:"
+          ls -la lib/generated/ || (echo "❌ Generation failed" && exit 1)
 
       - name: Build iOS (unsigned for TrollStore)
         run: |
