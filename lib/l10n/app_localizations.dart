@@ -11,7 +11,6 @@ class AppLocalizations {
 
   static const List<Locale> supportedLocales = [Locale('en'), Locale('zh')];
 
-  // 英文资源
   static const Map<String, String> _en = {
     'appTitle': 'AnymeX',
     'continueWatching': 'Continue Watching',
@@ -23,7 +22,6 @@ class AppLocalizations {
     'guest': 'Guest',
   };
 
-  // 中文资源
   static const Map<String, String> _zh = {
     'appTitle': 'AnymeX',
     'continueWatching': '继续观看',
