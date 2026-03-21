@@ -76,6 +76,8 @@ jobs:
   release:
     needs: build-ios          # 等待构建完成
     runs-on: ubuntu-latest
+    permissions:              # 添加这一块
+      contents: write         # 允许创建 Release
     if: startsWith(github.ref, 'refs/tags/')   # 仅当由标签触发时才创建 Release
     steps:
       - name: Download built artifact
