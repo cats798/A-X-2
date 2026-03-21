@@ -1,4 +1,4 @@
-name: Build iOS IPA
+name: Build iOS IPA (TrollStore)
 on:
   push:
     tags:
@@ -7,7 +7,6 @@ on:
 
 env:
   FLUTTER_VERSION: "3.32.8"
-  ZSIGN_VERSION: "0.7"
 
 jobs:
   build-ios:
@@ -49,26 +48,12 @@ jobs:
           GIT_CALLBACK_SCHEME=$GIT_CALLBACK_SCHEME
           EOF
 
-      - name: Build iOS
-        env:
-          P12_BASE64: ${{ secrets.P12_CERTIFICATE }}
-          PROVISIONING_PROFILE_BASE64: ${{ secrets.PROVISIONING_PROFILE }}
-          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+      - name: Build iOS (unsigned for TrollStore)
         run: |
           flutter pub get
           flutter build ios --release --no-codesign
           mkdir -p build/ios/iphoneos/Payload
           ln -s ../Runner.app build/ios/iphoneos/Payload/Runner.app
-          if [ -n "$P12_BASE64" ] && [ -n "$PROVISIONING_PROFILE_BASE64" ] && [ -n "$P12_PASSWORD" ]; then
-            echo "$P12_BASE64" | base64 --decode > certificate.p12
-            echo "$PROVISIONING_PROFILE_BASE64" | base64 --decode > profile.mobileprovision
-            curl -sL -o zsign.zip "https://github.com/zhlynn/zsign/releases/download/v${{ env.ZSIGN_VERSION }}/zsign-v${{ env.ZSIGN_VERSION }}-macos-x64.zip"
-            unzip -q zsign.zip
-            chmod +x zsign
-            ./zsign -f -k ./certificate.p12 -p "$P12_PASSWORD" -m ./profile.mobileprovision ./build/ios/iphoneos/Payload/Runner.app
-          else
-            echo "⚠️ No signing secrets provided — building unsigned .ipa"
-          fi
           cd build/ios/iphoneos
           zip -qr ./AnymeX-iOS-${{ github.ref_name }}.ipa Payload
 
