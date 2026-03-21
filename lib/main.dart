@@ -230,8 +230,8 @@ class _MainAppState extends State<MainApp> {
         }
       },
       child: GetMaterialApp(
-        localizationsDelegates: [
-          AppLocalizationsDelegate,
+        localizationsDelegates: const [
+          AppLocalizationsDelegate(),
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
