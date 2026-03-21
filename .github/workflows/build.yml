@@ -51,6 +51,7 @@ jobs:
       - name: Build iOS (unsigned for TrollStore)
         run: |
           flutter pub get
+          flutter gen-l10n          # 添加这一行
           flutter build ios --release --no-codesign
           mkdir -p build/ios/iphoneos/Payload
           ln -s ../Runner.app build/ios/iphoneos/Payload/Runner.app
