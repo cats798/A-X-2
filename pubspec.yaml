@@ -8,9 +8,11 @@ environment:
     flutter: ">=3.0.0"
 
 dependencies:
+    flutter:
+        sdk: flutter
     flutter_localizations:
         sdk: flutter
-    intl: ^0.19.0
+    intl: ^0.20.1
     algorithmic: ^0.0.11
     blur: ^4.0.0
     cached_network_image: ^3.4.1
@@ -23,8 +25,6 @@ dependencies:
     extended_image: ^10.0.1
     flutter_tts: any
     file_picker: ^8.1.7
-    flutter:
-        sdk: flutter
     flutter_dotenv: ^5.2.1
     flutter_html: ^3.0.0
     flutter_inappwebview: ^6.1.5
@@ -45,7 +45,6 @@ dependencies:
     iconly: ^1.0.1
     iconsax: ^0.0.8
     install_plugin: ^2.1.0
-    intl: ^0.20.1
     kenburns_nullsafety: ^1.0.1
 
     outlined_text: ^1.0.1
