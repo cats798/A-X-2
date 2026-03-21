@@ -10,6 +10,11 @@ import 'package:intl/message_lookup_by_library.dart';
 class AppLocalizations {
   AppLocalizations(this.localeName);
 
+  static const List<Locale> supportedLocales = [
+    Locale('en'),
+    Locale('zh'),
+  ];
+
   static Future<AppLocalizations> load(Locale locale) {
     final name = locale.countryCode?.isEmpty ?? true ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
