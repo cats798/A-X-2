@@ -24,6 +24,7 @@ import 'package:anymex_extension_runtime_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:anymex/l10n/app_localizations.dart';  // 新增
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -74,13 +75,15 @@ class _HomePageState extends State<HomePage> {
           return const SizedBox.shrink();
         }
 
+        final l10n = AppLocalizations.of(context)!;
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: Text(
-                "Continue Watching",
+                l10n.continueWatching,  // 替换
                 style: TextStyle(
                   fontFamily: "Poppins-SemiBold",
                   fontSize: 17,
@@ -180,6 +183,8 @@ class _HomePageState extends State<HomePage> {
     const appBarHeight = kToolbarHeight + 20;
     final double bottomNavBarHeight = MediaQuery.of(context).padding.bottom;
 
+    final l10n = AppLocalizations.of(context)!;  // 新增
+
     bool isMobile =
         getResponsiveValue(context, desktopValue: false, mobileValue: true);
 
@@ -191,9 +196,7 @@ class _HomePageState extends State<HomePage> {
     return RefreshIndicator(
       onRefresh: () {
         if (!serviceHandler.isLoggedIn.value) {
-          snackBar(
-              "W-what are you doing step-bro, login before you do that (●´⌓`●)",
-              duration: 1200);
+          snackBar(l10n.loginPrompt, duration: 1200);  // 替换
         }
         return serviceHandler.refresh();
       },
@@ -218,18 +221,18 @@ class _HomePageState extends State<HomePage> {
                       child: AnymexTextSpans(
                         fontSize: 27,
                         spans: [
-                          const AnymexTextSpan(
-                              text: 'Hey ',
+                          AnymexTextSpan(
+                              text: l10n.greetingHey,  // 替换
                               size: 30,
                               variant: TextVariant.bold),
                           AnymexTextSpan(
                               text:
-                                  '${serviceHandler.isLoggedIn.value ? serviceHandler.profileData.value.name : 'Guest'}',
+                                  '${serviceHandler.isLoggedIn.value ? serviceHandler.profileData.value.name : l10n.guest}',  // 替换
                               size: 30,
                               color: context.colors.primary,
                               variant: TextVariant.bold),
-                          const AnymexTextSpan(
-                              text: ', what are we doing today?',
+                          AnymexTextSpan(
+                              text: l10n.greetingQuestion,  // 替换
                               size: 30,
                               variant: TextVariant.bold),
                         ],
@@ -246,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'Find your favourite anime or manga, manhwa or whatever you like!',
+                          l10n.homeSubtitle,  // 替换
                           style: TextStyle(
                             color: Theme.of(context)
                                 .colorScheme
@@ -270,7 +273,7 @@ class _HomePageState extends State<HomePage> {
                       }),
                       if (novelData.isNotEmpty)
                         ReusableCarousel(
-                          title: "Recommended Novels",
+                          title: l10n.recommendedNovels,  // 替换
                           data: novelData,
                           type: ItemType.novel,
                           source: sourceController.activeNovelSource.value,
