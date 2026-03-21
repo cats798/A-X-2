@@ -231,7 +231,7 @@ class _MainAppState extends State<MainApp> {
       },
       child: GetMaterialApp(
         localizationsDelegates: [
-          AppLocalizations.delegate,
+          AppLocalizationsDelegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
