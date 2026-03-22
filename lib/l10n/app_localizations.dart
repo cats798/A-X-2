@@ -839,7 +839,7 @@ class AppLocalizations {
     'noExtensionManagers': '未找到扩展管理器。',
     'failedToRemoveRepo': '移除仓库失败',
     'repoAddedSingular': '已添加 1 个仓库',
-    'repoAddedPlural': '已添加 $count 个仓库',
+    'repoAddedPlural': '已添加 \$count 个仓库',
     'notSupported': '不支持',
     'animeNotSupported': '此管理器不支持动漫。',
     'mangaNotSupported': '此管理器不支持漫画。',
