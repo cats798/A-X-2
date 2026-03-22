@@ -23,6 +23,7 @@ import 'package:anymex/widgets/non_widgets/snackbar.dart';
 import 'package:anymex_extension_runtime_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:anymex/l10n/app_localizations.dart';  // 添加导入
 
 class MyLibrary extends StatelessWidget {
   const MyLibrary({super.key});
@@ -257,7 +258,8 @@ class _LibraryContent extends StatelessWidget {
       final source =
           sourceController.getNovelExtensionByName(item.season ?? '');
       if (source == null) {
-        errorSnackBar('Install ${item.season} extension');
+        final l10n = AppLocalizations.of(context)!;
+        errorSnackBar('${l10n.installExtension} ${item.season}');
         return;
       }
 
