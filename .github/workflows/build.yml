@@ -96,6 +96,8 @@ jobs:
           body: |
             自动构建的 iOS 版本，适用于 TrollStore 安装。
             
+            新增：测试中文
+
             📲 使用方法：
             1. 下载 `.ipa` 文件
             2. 使用 TrollStore 打开并安装
