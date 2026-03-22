@@ -13,6 +13,183 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    // settings_comments.dart
+    'commentSystem': 'Comment System',
+    'aboutCommentum': 'About Commentum v2',
+    'aboutCommentumDesc': 'Powered by Commentum v2 - Advanced comment system with moderation',
+    'userRole': 'User Role',
+    'superAdminDesc': 'Full system access and control',
+    'adminDesc': 'Can moderate and manage users',
+    'moderatorDesc': 'Can moderate content',
+    'userDesc': 'Basic commenting privileges',
+    'moderationPanel': 'Moderation Panel',
+    'moderationPanelDesc': 'Access moderation tools and reports',
+    'reportedComments': 'Reported Comments',
+    'reportedCommentsDesc': 'View and manage reported content',
+    'commentPreferences': 'Comment Preferences',
+    'commentPreferencesDesc': 'Customize comment display and behavior',
+    'notificationSettings': 'Notification Settings',
+    'notificationSettingsDesc': 'Configure comment notifications',
+    'helpAndSupport': 'Help & Support',
+    'helpAndSupportDesc': 'Get help with the comment system',
+    'privacyAndSafety': 'Privacy & Safety',
+    'privacyAndSafetyDesc': 'Privacy settings and safety features',
+
+    // commentum dialog texts
+    'commentumFeatures': 'Commentum v2 is an advanced comment system that provides:',
+    'feature1': 'Real-time commenting with nested replies',
+    'feature2': 'Advanced moderation tools',
+    'feature3': 'User role management (User, Moderator, Admin, Super Admin)',
+    'feature4': 'Content reporting and safety features',
+    'feature5': 'Voting system with upvotes/downvotes',
+    'feature6': 'Cross-platform support (AniList, MyAnimeList, SIMKL)',
+    'userRolesPermissions': 'User Roles & Permissions',
+    'currentRolePermissions': 'Your current role and permissions:',
+    'userPermissions': 'Create comments\nEdit own comments\nDelete own comments\nVote on comments\nReport inappropriate content',
+    'moderatorPermissions': 'All User permissions\nEdit/delete any comment\nPin/unpin comments\nLock/unlock threads\nWarn users\nMute users temporarily\nResolve reports',
+    'adminPermissions': 'All Moderator permissions\nBan/unban users permanently\nShadow ban users\nFull user management',
+    'superAdminPermissions': 'All Admin permissions\nSystem configuration\nRole management\nDiscord bot management',
+    'noModeratorPermission': 'You need moderator or admin permissions to access this panel',
+    'moderationPanelComingSoon': 'Moderation panel coming soon!',
+    'reportsPanelComingSoon': 'Reports panel coming soon!',
+    'commentPrefFuture': 'Comment display preferences will be available in future updates.',
+    'plannedFeatures': 'Planned features:',
+    'sortDefault': 'Default sorting order',
+    'commentDensity': 'Comment density settings',
+    'showHideAvatars': 'Show/hide avatars',
+    'fontSizeAdjust': 'Font size adjustment',
+    'autoPlayVideos': 'Auto-play videos in comments',
+    'notificationFuture': 'Comment notification preferences will be available in future updates.',
+    'notifReplies': 'Replies to your comments',
+    'notifMentions': 'Mentions in comments',
+    'notifModeration': 'Moderation notifications',
+    'notifReportResolution': 'Report resolution updates',
+    'howToUse': 'How to use the comment system:',
+    'step1': 'Log in with your AniList, MyAnimeList, or SIMKL account',
+    'step2': 'Comments are automatically linked to your account',
+    'step3': 'You can edit or delete your own comments',
+    'step4': 'Vote on comments you like or dislike',
+    'step5': 'Report inappropriate content to moderators',
+    'needHelp': 'Need help?',
+    'helpText': '• Contact moderators for content issues\n• Report bugs through the app settings\n• Join our Discord community for support',
+    'privacyImportant': 'Your privacy is important:',
+    'privacy1': 'Only your username and avatar are shown publicly',
+    'privacy2': 'Your personal information is never shared',
+    'privacy3': 'Comments can be deleted but may be retained for moderation',
+    'privacy4': 'Reported content is reviewed by moderators',
+    'safetyFeatures': 'Safety features:',
+    'safety1': 'Content filtering and moderation',
+    'safety2': 'User reporting system',
+    'safety3': 'Ban and warning system for violations',
+    'safety4': 'Shadow banning for repeat offenders',
+
+    // settings_experimental.dart
+    'experimentalSettings': 'Experimental Settings',
+    'reader': 'Reader',
+    'cacheDuration': 'Cache Duration',
+    'cacheDurationDesc': 'When should the image cache be cleared?',
+    'player': 'Player',
+    'anime4kEnhancement': 'Anime 4K Enhancement',
+    'anime4kDesc': 'Real-time 4K upscaling for anime content',
+    'enableShaders': 'Enable Shaders',
+    'shadersDescMobile': 'if Enabled the Shaders will be applied to the player through hdr menu',
+    'shadersDescDesktop': 'if Enabled the Shaders will be applied to the player through keybindings',
+    'chooseShaderProfile': 'Choose Shader Profile',
+    'shaderProfileDesc': 'Choose accordingly to your system specs.\nMid End = Eg. GTX 980, GTX 1060, RX 570\nHigh End = Eg. GTX 1080, RTX 2070, RTX 3060, RX 590, Vega 56',
+    'selectProfile': 'SELECT PROFILE',
+    'warning': 'Warning',
+    'warningBlackScreen': 'you might get black screen or it may not work.',
+    'warningLag': 'will lag like hell on older gpus',
+    'shaderProfilesInit': 'Shader Profiles Initialized',
+    'shaderShortcuts': 'Use keyboard shortcuts during playback to switch profiles',
+    'keybindings': 'Available Keybindings:',
+    'downloadShaders': 'Download 4K Shaders',
+    'downloadSize': 'Download size: ~4MB',
+    'midEnd': 'MID-END',
+    'highEnd': 'HIGH-END',
+
+    // settings_moderation.dart
+    'yourRole': 'Your Role',
+    'moderationQueue': 'Moderation Queue',
+    'pendingReports': 'pending reports',
+    'userManagement': 'User Management',
+    'userManagementDesc': 'Manage user roles and permissions',
+    'moderationHistory': 'Moderation History',
+    'moderationHistoryDesc': 'View past moderation actions',
+    'searchUser': 'Search User',
+    'searchUserDesc': 'Find and manage specific users',
+    'searchComments': 'Search Comments',
+    'searchCommentsDesc': 'Search through comment content',
+    'statisticsDesc': 'View moderation statistics',
+    'moderationNotifDesc': 'Configure moderation notifications',
+    'moderationRules': 'Moderation Rules',
+    'moderationRulesDesc': 'View and configure moderation rules',
+    'noAdminPermission': 'You need admin permissions to access this panel',
+    'moderationQueueComingSoon': 'Moderation queue interface coming soon!',
+    'userManagementComingSoon': 'User management interface coming soon!',
+    'modHistoryFuture': 'Moderation history will be available in future updates.',
+    'filterActionType': 'Filter by action type',
+    'filterDateRange': 'Filter by date range',
+    'filterModerator': 'Filter by moderator',
+    'exportLogs': 'Export moderation logs',
+    'appealSystem': 'Appeal system',
+    'userSearchFuture': 'User search functionality will be available in future updates.',
+    'searchByUsername': 'Search by username',
+    'searchByUserId': 'Search by user ID',
+    'searchByCommentHistory': 'Search by comment history',
+    'advancedFiltering': 'Advanced filtering options',
+    'commentSearchFuture': 'Comment search functionality will be available in future updates.',
+    'searchByContent': 'Search by content',
+    'searchByDateRange': 'Search by date range',
+    'searchByReportStatus': 'Search by report status',
+    'statisticsFuture': 'Moderation statistics will be available in future updates.',
+    'plannedMetrics': 'Planned metrics:',
+    'reportsResolved': 'Reports resolved',
+    'usersWarnedBanned': 'Users warned/banned',
+    'commentsModerated': 'Comments moderated',
+    'responseTimes': 'Response times',
+    'trendsAnalytics': 'Trends and analytics',
+    'modNotifFuture': 'Notification settings will be available in future updates.',
+    'plannedNotifications': 'Planned notifications:',
+    'newReports': 'New reports',
+    'reportResolutions': 'Report resolutions',
+    'userAppeals': 'User appeals',
+    'systemAlerts': 'System alerts',
+    'modRulesFuture': 'Moderation rules configuration will be available in future updates.',
+    'customBannedKeywords': 'Custom banned keywords',
+    'autoModThresholds': 'Auto-moderation thresholds',
+    'rolePermissions': 'Role-specific permissions',
+    'contentFilteringRules': 'Content filtering rules',
+
+    // settings_storage_manager.dart
+    'imageCacheCleared': 'Image cache cleared',
+    'clearCacheFailed': 'Failed to clear cache',
+    'factoryReset': 'Factory Reset',
+    'factoryResetWarning': 'This will permanently delete all data stored of AnymeX. This cannot be undone.',
+    'deleteAll': 'Delete All',
+    'isarDataDeleted': 'Isar data deleted',
+    'factoryResetFailed': 'Factory reset failed',
+    'cachedImages': 'Cached Images',
+    'threshold': 'Threshold',
+    'autoClearThreshold': 'Auto-clear threshold',
+    'autoClearDesc': 'If image cache reaches this size, it will be cleared automatically.',
+    'clearImageCacheNow': 'Clear image cache now',
+    'clearImageCacheDesc': 'Delete all currently cached network images.',
+    'factoryResetDesc': 'Delete everything stored of AnymeX permanently.',
+    'cacheExceededCleared': 'Image cache exceeded threshold and was cleared',
+
+    // settings_tap_zones.dart
+    'tapZones': 'Tap Zones',
+    'resetToDefault': 'Reset to Default',
+    'resetLayout': 'Reset Layout?',
+    'resetLayoutWarning': 'This will revert the current layout to its original settings.',
+    'reset': 'Reset',
+    'paged': 'Paged',
+    'webtoon': 'Webtoon',
+    'enableTapZones': 'Enable Tap Zones',
+    'useCustomGestures': 'Use custom gestures',
+    'tapZoneInstruction': 'Tap a zone to change its action',
+    'tapAction': 'Tap Action',
     'extensions': 'Extensions',
     'noExtensionManagers': 'No extension managers found.',
     'failedToRemoveRepo': 'Failed to remove repo',
@@ -448,6 +625,183 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    // settings_comments.dart
+    'commentSystem': '评论系统',
+    'aboutCommentum': '关于 Commentum v2',
+    'aboutCommentumDesc': '基于 Commentum v2 - 带审核功能的先进评论系统',
+    'userRole': '用户角色',
+    'superAdminDesc': '完全系统访问和控制权限',
+    'adminDesc': '可以审核和管理用户',
+    'moderatorDesc': '可以审核内容',
+    'userDesc': '基本评论权限',
+    'moderationPanel': '审核面板',
+    'moderationPanelDesc': '访问审核工具和举报',
+    'reportedComments': '举报的评论',
+    'reportedCommentsDesc': '查看和管理被举报的内容',
+    'commentPreferences': '评论偏好',
+    'commentPreferencesDesc': '自定义评论显示和行为',
+    'notificationSettings': '通知设置',
+    'notificationSettingsDesc': '配置评论通知',
+    'helpAndSupport': '帮助与支持',
+    'helpAndSupportDesc': '获取评论系统的帮助',
+    'privacyAndSafety': '隐私与安全',
+    'privacyAndSafetyDesc': '隐私设置和安全功能',
+
+    // commentum dialog texts
+    'commentumFeatures': 'Commentum v2 是一个先进的评论系统，提供以下功能：',
+    'feature1': '实时评论及嵌套回复',
+    'feature2': '高级审核工具',
+    'feature3': '用户角色管理（普通用户、审核员、管理员、超级管理员）',
+    'feature4': '内容举报和安全功能',
+    'feature5': '点赞/点踩投票系统',
+    'feature6': '跨平台支持（AniList, MyAnimeList, SIMKL）',
+    'userRolesPermissions': '用户角色与权限',
+    'currentRolePermissions': '您当前的角色和权限：',
+    'userPermissions': '发表评论\n编辑自己的评论\n删除自己的评论\n对评论投票\n举报不当内容',
+    'moderatorPermissions': '所有用户权限\n编辑/删除任何评论\n置顶/取消置顶评论\n锁定/解锁讨论串\n警告用户\n临时静音用户\n处理举报',
+    'adminPermissions': '所有审核员权限\n永久封禁/解封用户\n影子封禁用户\n完整用户管理',
+    'superAdminPermissions': '所有管理员权限\n系统配置\n角色管理\nDiscord 机器人管理',
+    'noModeratorPermission': '您需要审核员或管理员权限才能访问此面板',
+    'moderationPanelComingSoon': '审核面板即将推出！',
+    'reportsPanelComingSoon': '举报面板即将推出！',
+    'commentPrefFuture': '评论显示偏好将在未来更新中提供。',
+    'plannedFeatures': '计划功能：',
+    'sortDefault': '默认排序方式',
+    'commentDensity': '评论密度设置',
+    'showHideAvatars': '显示/隐藏头像',
+    'fontSizeAdjust': '字体大小调整',
+    'autoPlayVideos': '评论中的视频自动播放',
+    'notificationFuture': '评论通知偏好将在未来更新中提供。',
+    'notifReplies': '回复您的评论',
+    'notifMentions': '评论中提到您',
+    'notifModeration': '审核通知',
+    'notifReportResolution': '举报处理结果',
+    'howToUse': '如何使用评论系统：',
+    'step1': '使用 AniList、MyAnimeList 或 SIMKL 账号登录',
+    'step2': '评论会自动关联到您的账号',
+    'step3': '您可以编辑或删除自己的评论',
+    'step4': '对喜欢的或讨厌的评论进行投票',
+    'step5': '向审核员举报不当内容',
+    'needHelp': '需要帮助？',
+    'helpText': '• 联系审核员处理内容问题\n• 通过应用设置报告 Bug\n• 加入我们的 Discord 社区获取支持',
+    'privacyImportant': '您的隐私很重要：',
+    'privacy1': '只有您的用户名和头像会公开显示',
+    'privacy2': '您的个人信息绝不会被分享',
+    'privacy3': '评论可以被删除，但可能会保留用于审核',
+    'privacy4': '被举报的内容将由审核员审核',
+    'safetyFeatures': '安全功能：',
+    'safety1': '内容过滤和审核',
+    'safety2': '用户举报系统',
+    'safety3': '违规封禁和警告系统',
+    'safety4': '对屡犯者进行影子封禁',
+
+    // settings_experimental.dart
+    'experimentalSettings': '实验性设置',
+    'reader': '阅读器',
+    'cacheDuration': '缓存时长',
+    'cacheDurationDesc': '何时清除图片缓存？',
+    'player': '播放器',
+    'anime4kEnhancement': 'Anime 4K 增强',
+    'anime4kDesc': '实时 4K 动漫画面提升',
+    'enableShaders': '启用着色器',
+    'shadersDescMobile': '启用后，着色器将通过 HDR 菜单应用到播放器',
+    'shadersDescDesktop': '启用后，着色器将通过快捷键应用到播放器',
+    'chooseShaderProfile': '选择着色器配置',
+    'shaderProfileDesc': '根据您的系统规格选择。\n中端 = 例如 GTX 980, GTX 1060, RX 570\n高端 = 例如 GTX 1080, RTX 2070, RTX 3060, RX 590, Vega 56',
+    'selectProfile': '选择配置',
+    'warning': '警告',
+    'warningBlackScreen': '可能会导致黑屏或无法正常工作。',
+    'warningLag': '在老款 GPU 上可能会非常卡顿',
+    'shaderProfilesInit': '着色器配置已初始化',
+    'shaderShortcuts': '播放时使用键盘快捷键切换配置',
+    'keybindings': '可用快捷键：',
+    'downloadShaders': '下载 4K 着色器',
+    'downloadSize': '下载大小：约 4MB',
+    'midEnd': '中端',
+    'highEnd': '高端',
+
+    // settings_moderation.dart
+    'yourRole': '您的角色',
+    'moderationQueue': '审核队列',
+    'pendingReports': '待处理举报',
+    'userManagement': '用户管理',
+    'userManagementDesc': '管理用户角色和权限',
+    'moderationHistory': '审核历史',
+    'moderationHistoryDesc': '查看过去的审核操作',
+    'searchUser': '搜索用户',
+    'searchUserDesc': '查找和管理特定用户',
+    'searchComments': '搜索评论',
+    'searchCommentsDesc': '搜索评论内容',
+    'statisticsDesc': '查看审核统计',
+    'moderationNotifDesc': '配置审核通知',
+    'moderationRules': '审核规则',
+    'moderationRulesDesc': '查看和配置审核规则',
+    'noAdminPermission': '您需要管理员权限才能访问此面板',
+    'moderationQueueComingSoon': '审核队列界面即将推出！',
+    'userManagementComingSoon': '用户管理界面即将推出！',
+    'modHistoryFuture': '审核历史将在未来更新中提供。',
+    'filterActionType': '按操作类型筛选',
+    'filterDateRange': '按日期范围筛选',
+    'filterModerator': '按审核员筛选',
+    'exportLogs': '导出审核日志',
+    'appealSystem': '申诉系统',
+    'userSearchFuture': '用户搜索功能将在未来更新中提供。',
+    'searchByUsername': '按用户名搜索',
+    'searchByUserId': '按用户 ID 搜索',
+    'searchByCommentHistory': '按评论历史搜索',
+    'advancedFiltering': '高级筛选选项',
+    'commentSearchFuture': '评论搜索功能将在未来更新中提供。',
+    'searchByContent': '按内容搜索',
+    'searchByDateRange': '按日期范围搜索',
+    'searchByReportStatus': '按举报状态搜索',
+    'statisticsFuture': '审核统计将在未来更新中提供。',
+    'plannedMetrics': '计划统计指标：',
+    'reportsResolved': '已处理举报',
+    'usersWarnedBanned': '被警告/封禁的用户',
+    'commentsModerated': '被审核的评论',
+    'responseTimes': '响应时间',
+    'trendsAnalytics': '趋势与分析',
+    'modNotifFuture': '通知设置将在未来更新中提供。',
+    'plannedNotifications': '计划通知类型：',
+    'newReports': '新举报',
+    'reportResolutions': '举报处理结果',
+    'userAppeals': '用户申诉',
+    'systemAlerts': '系统提醒',
+    'modRulesFuture': '审核规则配置将在未来更新中提供。',
+    'customBannedKeywords': '自定义屏蔽关键词',
+    'autoModThresholds': '自动审核阈值',
+    'rolePermissions': '角色专属权限',
+    'contentFilteringRules': '内容过滤规则',
+
+    // settings_storage_manager.dart
+    'imageCacheCleared': '图片缓存已清除',
+    'clearCacheFailed': '清除缓存失败',
+    'factoryReset': '恢复出厂设置',
+    'factoryResetWarning': '这将永久删除 AnymeX 存储的所有数据，且无法撤销。',
+    'deleteAll': '删除所有',
+    'isarDataDeleted': 'Isar 数据已删除',
+    'factoryResetFailed': '恢复出厂设置失败',
+    'cachedImages': '已缓存图片',
+    'threshold': '阈值',
+    'autoClearThreshold': '自动清除阈值',
+    'autoClearDesc': '当图片缓存达到此大小时，将自动清除。',
+    'clearImageCacheNow': '立即清除图片缓存',
+    'clearImageCacheDesc': '删除所有当前缓存的网络图片。',
+    'factoryResetDesc': '永久删除 AnymeX 存储的所有数据。',
+    'cacheExceededCleared': '图片缓存超过阈值，已自动清除',
+
+    // settings_tap_zones.dart
+    'tapZones': '点击区域',
+    'resetToDefault': '重置为默认',
+    'resetLayout': '重置布局？',
+    'resetLayoutWarning': '这将把当前布局恢复为原始设置。',
+    'reset': '重置',
+    'paged': '分页模式',
+    'webtoon': 'Webtoon 模式',
+    'enableTapZones': '启用点击区域',
+    'useCustomGestures': '使用自定义手势',
+    'tapZoneInstruction': '点击某个区域以更改其动作',
+    'tapAction': '点击动作',
     'extensions': '扩展',
     'noExtensionManagers': '未找到扩展管理器。',
     'failedToRemoveRepo': '移除仓库失败',
@@ -891,6 +1245,183 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  // settings_comments.dart
+  String get commentSystem => _strings['commentSystem']!;
+  String get aboutCommentum => _strings['aboutCommentum']!;
+  String get aboutCommentumDesc => _strings['aboutCommentumDesc']!;
+  String get userRole => _strings['userRole']!;
+  String get superAdminDesc => _strings['superAdminDesc']!;
+  String get adminDesc => _strings['adminDesc']!;
+  String get moderatorDesc => _strings['moderatorDesc']!;
+  String get userDesc => _strings['userDesc']!;
+  String get moderationPanel => _strings['moderationPanel']!;
+  String get moderationPanelDesc => _strings['moderationPanelDesc']!;
+  String get reportedComments => _strings['reportedComments']!;
+  String get reportedCommentsDesc => _strings['reportedCommentsDesc']!;
+  String get commentPreferences => _strings['commentPreferences']!;
+  String get commentPreferencesDesc => _strings['commentPreferencesDesc']!;
+  String get notificationSettings => _strings['notificationSettings']!;
+  String get notificationSettingsDesc => _strings['notificationSettingsDesc']!;
+  String get helpAndSupport => _strings['helpAndSupport']!;
+  String get helpAndSupportDesc => _strings['helpAndSupportDesc']!;
+  String get privacyAndSafety => _strings['privacyAndSafety']!;
+  String get privacyAndSafetyDesc => _strings['privacyAndSafetyDesc']!;
+
+  // commentum dialog texts
+  String get commentumFeatures => _strings['commentumFeatures']!;
+  String get feature1 => _strings['feature1']!;
+  String get feature2 => _strings['feature2']!;
+  String get feature3 => _strings['feature3']!;
+  String get feature4 => _strings['feature4']!;
+  String get feature5 => _strings['feature5']!;
+  String get feature6 => _strings['feature6']!;
+  String get userRolesPermissions => _strings['userRolesPermissions']!;
+  String get currentRolePermissions => _strings['currentRolePermissions']!;
+  String get userPermissions => _strings['userPermissions']!;
+  String get moderatorPermissions => _strings['moderatorPermissions']!;
+  String get adminPermissions => _strings['adminPermissions']!;
+  String get superAdminPermissions => _strings['superAdminPermissions']!;
+  String get noModeratorPermission => _strings['noModeratorPermission']!;
+  String get moderationPanelComingSoon => _strings['moderationPanelComingSoon']!;
+  String get reportsPanelComingSoon => _strings['reportsPanelComingSoon']!;
+  String get commentPrefFuture => _strings['commentPrefFuture']!;
+  String get plannedFeatures => _strings['plannedFeatures']!;
+  String get sortDefault => _strings['sortDefault']!;
+  String get commentDensity => _strings['commentDensity']!;
+  String get showHideAvatars => _strings['showHideAvatars']!;
+  String get fontSizeAdjust => _strings['fontSizeAdjust']!;
+  String get autoPlayVideos => _strings['autoPlayVideos']!;
+  String get notificationFuture => _strings['notificationFuture']!;
+  String get notifReplies => _strings['notifReplies']!;
+  String get notifMentions => _strings['notifMentions']!;
+  String get notifModeration => _strings['notifModeration']!;
+  String get notifReportResolution => _strings['notifReportResolution']!;
+  String get howToUse => _strings['howToUse']!;
+  String get step1 => _strings['step1']!;
+  String get step2 => _strings['step2']!;
+  String get step3 => _strings['step3']!;
+  String get step4 => _strings['step4']!;
+  String get step5 => _strings['step5']!;
+  String get needHelp => _strings['needHelp']!;
+  String get helpText => _strings['helpText']!;
+  String get privacyImportant => _strings['privacyImportant']!;
+  String get privacy1 => _strings['privacy1']!;
+  String get privacy2 => _strings['privacy2']!;
+  String get privacy3 => _strings['privacy3']!;
+  String get privacy4 => _strings['privacy4']!;
+  String get safetyFeatures => _strings['safetyFeatures']!;
+  String get safety1 => _strings['safety1']!;
+  String get safety2 => _strings['safety2']!;
+  String get safety3 => _strings['safety3']!;
+  String get safety4 => _strings['safety4']!;
+
+  // settings_experimental.dart
+  String get experimentalSettings => _strings['experimentalSettings']!;
+  String get reader => _strings['reader']!;
+  String get cacheDuration => _strings['cacheDuration']!;
+  String get cacheDurationDesc => _strings['cacheDurationDesc']!;
+  String get player => _strings['player']!;
+  String get anime4kEnhancement => _strings['anime4kEnhancement']!;
+  String get anime4kDesc => _strings['anime4kDesc']!;
+  String get enableShaders => _strings['enableShaders']!;
+  String get shadersDescMobile => _strings['shadersDescMobile']!;
+  String get shadersDescDesktop => _strings['shadersDescDesktop']!;
+  String get chooseShaderProfile => _strings['chooseShaderProfile']!;
+  String get shaderProfileDesc => _strings['shaderProfileDesc']!;
+  String get selectProfile => _strings['selectProfile']!;
+  String get warning => _strings['warning']!;
+  String get warningBlackScreen => _strings['warningBlackScreen']!;
+  String get warningLag => _strings['warningLag']!;
+  String get shaderProfilesInit => _strings['shaderProfilesInit']!;
+  String get shaderShortcuts => _strings['shaderShortcuts']!;
+  String get keybindings => _strings['keybindings']!;
+  String get downloadShaders => _strings['downloadShaders']!;
+  String get downloadSize => _strings['downloadSize']!;
+  String get midEnd => _strings['midEnd']!;
+  String get highEnd => _strings['highEnd']!;
+
+  // settings_moderation.dart
+  String get yourRole => _strings['yourRole']!;
+  String get moderationQueue => _strings['moderationQueue']!;
+  String get pendingReports => _strings['pendingReports']!;
+  String get userManagement => _strings['userManagement']!;
+  String get userManagementDesc => _strings['userManagementDesc']!;
+  String get moderationHistory => _strings['moderationHistory']!;
+  String get moderationHistoryDesc => _strings['moderationHistoryDesc']!;
+  String get searchUser => _strings['searchUser']!;
+  String get searchUserDesc => _strings['searchUserDesc']!;
+  String get searchComments => _strings['searchComments']!;
+  String get searchCommentsDesc => _strings['searchCommentsDesc']!;
+  String get statisticsDesc => _strings['statisticsDesc']!;
+  String get moderationNotifDesc => _strings['moderationNotifDesc']!;
+  String get moderationRules => _strings['moderationRules']!;
+  String get moderationRulesDesc => _strings['moderationRulesDesc']!;
+  String get noAdminPermission => _strings['noAdminPermission']!;
+  String get moderationQueueComingSoon => _strings['moderationQueueComingSoon']!;
+  String get userManagementComingSoon => _strings['userManagementComingSoon']!;
+  String get modHistoryFuture => _strings['modHistoryFuture']!;
+  String get filterActionType => _strings['filterActionType']!;
+  String get filterDateRange => _strings['filterDateRange']!;
+  String get filterModerator => _strings['filterModerator']!;
+  String get exportLogs => _strings['exportLogs']!;
+  String get appealSystem => _strings['appealSystem']!;
+  String get userSearchFuture => _strings['userSearchFuture']!;
+  String get searchByUsername => _strings['searchByUsername']!;
+  String get searchByUserId => _strings['searchByUserId']!;
+  String get searchByCommentHistory => _strings['searchByCommentHistory']!;
+  String get advancedFiltering => _strings['advancedFiltering']!;
+  String get commentSearchFuture => _strings['commentSearchFuture']!;
+  String get searchByContent => _strings['searchByContent']!;
+  String get searchByDateRange => _strings['searchByDateRange']!;
+  String get searchByReportStatus => _strings['searchByReportStatus']!;
+  String get statisticsFuture => _strings['statisticsFuture']!;
+  String get plannedMetrics => _strings['plannedMetrics']!;
+  String get reportsResolved => _strings['reportsResolved']!;
+  String get usersWarnedBanned => _strings['usersWarnedBanned']!;
+  String get commentsModerated => _strings['commentsModerated']!;
+  String get responseTimes => _strings['responseTimes']!;
+  String get trendsAnalytics => _strings['trendsAnalytics']!;
+  String get modNotifFuture => _strings['modNotifFuture']!;
+  String get plannedNotifications => _strings['plannedNotifications']!;
+  String get newReports => _strings['newReports']!;
+  String get reportResolutions => _strings['reportResolutions']!;
+  String get userAppeals => _strings['userAppeals']!;
+  String get systemAlerts => _strings['systemAlerts']!;
+  String get modRulesFuture => _strings['modRulesFuture']!;
+  String get customBannedKeywords => _strings['customBannedKeywords']!;
+  String get autoModThresholds => _strings['autoModThresholds']!;
+  String get rolePermissions => _strings['rolePermissions']!;
+  String get contentFilteringRules => _strings['contentFilteringRules']!;
+
+  // settings_storage_manager.dart
+  String get imageCacheCleared => _strings['imageCacheCleared']!;
+  String get clearCacheFailed => _strings['clearCacheFailed']!;
+  String get factoryReset => _strings['factoryReset']!;
+  String get factoryResetWarning => _strings['factoryResetWarning']!;
+  String get deleteAll => _strings['deleteAll']!;
+  String get isarDataDeleted => _strings['isarDataDeleted']!;
+  String get factoryResetFailed => _strings['factoryResetFailed']!;
+  String get cachedImages => _strings['cachedImages']!;
+  String get threshold => _strings['threshold']!;
+  String get autoClearThreshold => _strings['autoClearThreshold']!;
+  String get autoClearDesc => _strings['autoClearDesc']!;
+  String get clearImageCacheNow => _strings['clearImageCacheNow']!;
+  String get clearImageCacheDesc => _strings['clearImageCacheDesc']!;
+  String get factoryResetDesc => _strings['factoryResetDesc']!;
+  String get cacheExceededCleared => _strings['cacheExceededCleared']!;
+
+  // settings_tap_zones.dart
+  String get tapZones => _strings['tapZones']!;
+  String get resetToDefault => _strings['resetToDefault']!;
+  String get resetLayout => _strings['resetLayout']!;
+  String get resetLayoutWarning => _strings['resetLayoutWarning']!;
+  String get reset => _strings['reset']!;
+  String get paged => _strings['paged']!;
+  String get webtoon => _strings['webtoon']!;
+  String get enableTapZones => _strings['enableTapZones']!;
+  String get useCustomGestures => _strings['useCustomGestures']!;
+  String get tapZoneInstruction => _strings['tapZoneInstruction']!;
+  String get tapAction => _strings['tapAction']!;
   String get extensions => _strings['extensions']!;
   String get noExtensionManagers => _strings['noExtensionManagers']!;
   String get failedToRemoveRepo => _strings['failedToRemoveRepo']!;
