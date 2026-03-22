@@ -5,6 +5,7 @@ import 'package:anymex/screens/manga/controller/reader_controller.dart';
 import 'package:anymex/widgets/common/glow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:anymex/l10n/app_localizations.dart';
 
 class TapZoneSettingsScreen extends StatefulWidget {
   const TapZoneSettingsScreen({super.key});
@@ -31,8 +32,6 @@ class _TapZoneSettingsScreenState extends State<TapZoneSettingsScreen> {
     _pagedVerticalLayout = _repo.getPagedVerticalLayout();
     _webtoonLayout = _repo.getWebtoonLayout();
     _webtoonHorizontalLayout = _repo.getWebtoonHorizontalLayout();
-    
-    
   }
 
   void _savePaged(TapZoneLayout layout) {
@@ -60,7 +59,6 @@ class _TapZoneSettingsScreenState extends State<TapZoneSettingsScreen> {
   }
 
   void _resetDefaults() {
-
     if (!_isWebtoon && !_isVertical) {
        _savePaged(TapZoneLayout.defaultPaged);
     } else if (!_isWebtoon && _isVertical) {
@@ -90,35 +88,36 @@ class _TapZoneSettingsScreenState extends State<TapZoneSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final currentLayout = _getCurrentLayout();
     final onSave = _getCurrentSaveCallback();
 
     return Glow(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Tap Zones"),
+          title: Text(l10n.tapZones),  // 新增键 'tapZones'
           actions: [
             IconButton(
               icon: const Icon(Icons.restart_alt_rounded),
-              tooltip: 'Reset to Default',
+              tooltip: l10n.resetToDefault,
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
                     backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-                    title: const Text('Reset Layout?', style: TextStyle(fontWeight: FontWeight.bold)),
-                    content: const Text('This will revert the current layout to its original settings.'),
+                    title: Text(l10n.resetLayout, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    content: Text(l10n.resetLayoutWarning),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: Text('Cancel', style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+                        child: Text(l10n.cancel, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
                       ),
                       TextButton(
                         onPressed: () {
                           _resetDefaults();
                           Navigator.pop(context);
                         },
-                        child: Text('Reset', style: TextStyle(color: Theme.of(context).colorScheme.error)),
+                        child: Text(l10n.reset, style: TextStyle(color: Theme.of(context).colorScheme.error)),
                       ),
                     ],
                   ),
@@ -135,8 +134,8 @@ class _TapZoneSettingsScreenState extends State<TapZoneSettingsScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: _ElegantSegmentedControl(
                 options: [
-                  (title: "Paged", icon: Transform.rotate(angle: 1.5708, child: const Icon(Icons.view_day_rounded, size: 18))),
-                  (title: "Webtoon", icon: const Icon(Icons.view_day_rounded, size: 18)),
+                  (title: l10n.paged, icon: Transform.rotate(angle: 1.5708, child: const Icon(Icons.view_day_rounded, size: 18))),
+                  (title: l10n.webtoon, icon: const Icon(Icons.view_day_rounded, size: 18)),
                 ],
                 selectedIndex: _isWebtoon ? 1 : 0,
                 onChanged: (index) => setState(() => _isWebtoon = index == 1),
@@ -158,8 +157,8 @@ class _TapZoneSettingsScreenState extends State<TapZoneSettingsScreen> {
             const Divider(),
 
             Obx(() => SwitchListTile(
-              title: const Text("Enable Tap Zones"),
-              subtitle: const Text("Use custom gestures"),
+              title: Text(l10n.enableTapZones),
+              subtitle: Text(l10n.useCustomGestures),
               value: _readerController.tapZonesEnabled.value,
               onChanged: (val) => _readerController.toggleTapZones(val),
               activeColor: Theme.of(context).colorScheme.primary,
@@ -171,7 +170,7 @@ class _TapZoneSettingsScreenState extends State<TapZoneSettingsScreen> {
                 child: AnimatedOpacity(
                   opacity: _readerController.tapZonesEnabled.value ? 1.0 : 0.4,
                   duration: const Duration(milliseconds: 200),
-                  child: _buildEditor(currentLayout, onSave),
+                  child: _buildEditor(l10n, currentLayout, onSave),
                 ),
               )),
             ),
@@ -182,13 +181,13 @@ class _TapZoneSettingsScreenState extends State<TapZoneSettingsScreen> {
   }
 
   Widget _buildEditor(
-      TapZoneLayout layout, Function(TapZoneLayout) onSave) {
+      AppLocalizations l10n, TapZoneLayout layout, Function(TapZoneLayout) onSave) {
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "Tap a zone to change its action",
+            l10n.tapZoneInstruction,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Colors.grey,
                 ),
@@ -234,6 +233,7 @@ class VisualZoneEditor extends StatelessWidget {
   });
 
   void _editZone(BuildContext context, int index) async {
+    final l10n = AppLocalizations.of(context)!;
     final zone = layout.zones[index];
     final selectedAction = await showModalBottomSheet<ReaderAction>(
       context: context,
@@ -271,7 +271,7 @@ class VisualZoneEditor extends StatelessWidget {
                     Icon(Icons.touch_app_rounded, color: theme.colorScheme.primary, size: 22),
                     const SizedBox(width: 12),
                     Text(
-                      "Tap Action",
+                      l10n.tapAction,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: theme.colorScheme.onSurface,
@@ -360,16 +360,12 @@ class VisualZoneEditor extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-    
         final w = constraints.maxWidth;
         final h = constraints.maxHeight;
 
         return Stack(
           children: [
-            
             Container(color: Colors.black.withOpacity(0.05)),
-            
-            // elegant feel ahhh
             Positioned.fill(
               child: CustomPaint(
                 painter: _GridPainter(
@@ -377,13 +373,7 @@ class VisualZoneEditor extends StatelessWidget {
                 ),
               ),
             ),
-
-           
-
-
-            // Zones 
             ...layout.zones.asMap().entries.map((entry) {
-               
                final index = entry.key;
               final zone = entry.value;
               final rect = zone.bounds;
@@ -558,5 +548,3 @@ class _ElegantSegmentedControl extends StatelessWidget {
     );
   }
 }
-
-
