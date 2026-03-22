@@ -13,6 +13,91 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'experimental': 'Experimental',
+    'enableExperimentalSettings': 'Enable Experimental Settings',
+    'experimentalDescription': 'Required for Core and Visual tuning. Keep off on low-end devices.',
+    'experimentalGateMessage': 'Core and Visual settings are disabled. Enable Experimental to use them.',
+    'decoderHwdec': 'Decoder (HWDec)',
+    'videoSync': 'Video Sync',
+    'frameInterpolation': 'Frame Interpolation',
+    'frameInterpolationDesc': 'Smoother motion, can increase GPU usage',
+    'audioPitchCorrection': 'Audio Pitch Correction',
+    'audioPitchCorrectionDesc': 'Keep voice pitch stable at higher speeds',
+    'cacheMinutes': 'Cache Minutes',
+    'cacheMinutesDesc': 'Read-ahead duration in Minutes',
+    'demuxerReadahead': 'Demuxer Readahead',
+    'demuxerReadaheadDesc': 'Readahead seconds',
+    'demuxerMaxBuffer': 'Demuxer Max Buffer',
+    'demuxerMaxBufferDesc': 'Maximum demuxer buffer (MB)',
+    'decoderThreads': 'Decoder Threads',
+    'decoderThreadsDesc': '0 means automatic thread count',
+    'bufferSize': 'Buffer Size',
+    'bufferSizeDesc': 'Network buffer size in MB',
+    'useBuffering': 'Use Buffering',
+    'useBufferingDesc': 'Enable buffering strategy for unstable networks',
+    'useLibmpv': 'Use LibMpv for Playback',
+    'useLibmpvDesc': 'Pick wisely! (LibMpv -> FEATURES, ExoPlayer -> PERFORMANCE)',
+    'useLibass': 'Use Libass for Subtitles',
+    'useLibassDesc': 'Better subtitle rendering using libass library',
+    'jsonThemeManager': 'JSON Theme Manager',
+    'jsonThemeInfo': 'If you are using a JSON theme, changes here will not affect player controls. Switch to a built-in theme to apply these settings.',
+    'swipeIndicatorTheme': 'Swipe Indicator Theme',
+    'defaultPortrait': 'Default Portrait',
+    'defaultPortraitDesc': 'For psychopaths who like watching in portrait',
+    'autoSkipOp': 'Auto Skip OP',
+    'autoSkipOpDesc': 'Auto skip the opening song',
+    'autoSkipEd': 'Auto Skip ED',
+    'autoSkipEdDesc': 'Auto skip the ending song',
+    'autoSkipRecap': 'Auto Skip Recap',
+    'autoSkipRecapDesc': 'Auto skip the recap section',
+    'autoSkipOnce': 'Auto Skip Once Only',
+    'autoSkipOnceDesc': 'Auto skip only once per watch',
+    'autoSkipFiller': 'Auto Skip Filler',
+    'autoSkipFillerDesc': 'Automatically skip filler episodes when going to next episode',
+    'enableSwipeControls': 'Enable Swipe Controls',
+    'enableSwipeControlsDesc': 'Enable if you want to use brightness and volume controls',
+    'saveLastFrame': 'Save Last Frame',
+    'saveLastFrameDesc': 'Saves a screenshot of the last frame you watched. Disabling this significantly reduces storage usage',
+    'doubleTapSeek': 'DoubleTap to Seek',
+    'doubleTapSeekDesc': 'Adjust Double Tap To Seek Duration',
+    'megaSkipDuration': 'MegaSkip Duration',
+    'megaSkipDurationDesc': 'Adjust MegaSkip Duration',
+    'markAsWatchedDesc': 'How much in percentage to mark episode as watched',
+    'transitionSubtitle': 'Transition Subtitle',
+    'transitionSubtitleDesc': 'By disabling this you can avoid the transition between subtitles.',
+    'autoTranslateSubtitles': 'Auto Translate Subtitles',
+    'autoTranslateSubtitlesDesc': 'Use AI to translate soft-subtitles live',
+    'subtitleFont': 'Subtitle Font',
+    'subtitleTransparency': 'Subtitle Transparency',
+    'subtitleTransparencyDesc': 'Adjust text visibility',
+    'bottomMargin': 'Bottom Margin',
+    'bottomMarginDesc': 'Distance from bottom of screen',
+    'changeSubtitleColor': 'Change subtitle colors',
+    'subtitleColor': 'Subtitle Color',
+    'selectSubtitleColor': 'Select Subtitle Color',
+    'subtitleOutlineColor': 'Subtitle Outline Color',
+    'changeSubtitleOutlineColor': 'Change subtitle outline color',
+    'selectSubtitleOutlineColor': 'Select Subtitle Outline Color',
+    'subtitleBackgroundColor': 'Subtitle Background Color',
+    'changeSubtitleBackgroundColor': 'Change subtitle background color',
+    'selectSubtitleBackgroundColor': 'Select Subtitle Background Color',
+    'selectSubtitleFont': 'Select Subtitle Font',
+    'outlineType': 'Outline Type',
+    'subtitleOutlineWidth': 'Subtitle Outline Width',
+    'adjustSubtitleOutlineWidth': 'Adjust Subtitle Outline Width',
+    'subtitlePreview': 'Subtitle Preview',
+    'subtitlePreviewText': 'Subtitle Preview Text',
+    'bottomControls': 'Bottom Controls',
+    'leftSide': 'Left Side',
+    'rightSide': 'Right Side',
+    'hidden': 'Hidden',
+    'showOnLeft': 'Show on left',
+    'showOnRight': 'Show on right',
+    'hideButton': 'Hide button',
+    'moveToRight': 'Move to right',
+    'moveToLeft': 'Move to left',
+    'controlTheme': 'Control Theme',
+    'playbackSpeed': 'Playback Speed',
     'appearance': 'Appearance',
     'defaultTheme': 'Default Theme',
     'defaultThemeDesc': 'Play around with App theme',
@@ -298,6 +383,91 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'experimental': '实验性',
+    'enableExperimentalSettings': '启用实验性设置',
+    'experimentalDescription': '核心和视觉调整所需。在低端设备上保持关闭。',
+    'experimentalGateMessage': '核心和视觉设置已禁用。启用实验性以使用它们。',
+    'decoderHwdec': '解码器 (HWDec)',
+    'videoSync': '视频同步',
+    'frameInterpolation': '帧插值',
+    'frameInterpolationDesc': '运动更流畅，可能增加 GPU 使用率',
+    'audioPitchCorrection': '音高修正',
+    'audioPitchCorrectionDesc': '在高速播放时保持音调稳定',
+    'cacheMinutes': '缓存分钟数',
+    'cacheMinutesDesc': '预读取时长（分钟）',
+    'demuxerReadahead': '解复用器预读',
+    'demuxerReadaheadDesc': '预读秒数',
+    'demuxerMaxBuffer': '解复用器最大缓冲',
+    'demuxerMaxBufferDesc': '最大解复用器缓冲区 (MB)',
+    'decoderThreads': '解码器线程数',
+    'decoderThreadsDesc': '0 表示自动线程数',
+    'bufferSize': '缓冲区大小',
+    'bufferSizeDesc': '网络缓冲区大小 (MB)',
+    'useBuffering': '使用缓冲',
+    'useBufferingDesc': '为不稳定的网络启用缓冲策略',
+    'useLibmpv': '使用 LibMpv 播放',
+    'useLibmpvDesc': '明智选择！（LibMpv → 功能丰富，ExoPlayer → 性能优先）',
+    'useLibass': '使用 Libass 字幕',
+    'useLibassDesc': '使用 libass 库提供更好的字幕渲染',
+    'jsonThemeManager': 'JSON 主题管理器',
+    'jsonThemeInfo': '如果您正在使用 JSON 主题，此处更改不会影响播放器控件。切换回内置主题以应用这些设置。',
+    'swipeIndicatorTheme': '滑动指示器主题',
+    'defaultPortrait': '默认竖屏',
+    'defaultPortraitDesc': '给喜欢竖屏观看的偏执狂',
+    'autoSkipOp': '自动跳过片头',
+    'autoSkipOpDesc': '自动跳过片头曲',
+    'autoSkipEd': '自动跳过片尾',
+    'autoSkipEdDesc': '自动跳过片尾曲',
+    'autoSkipRecap': '自动跳过回顾',
+    'autoSkipRecapDesc': '自动跳过回顾部分',
+    'autoSkipOnce': '仅跳过一次',
+    'autoSkipOnceDesc': '每次观看仅自动跳过一次',
+    'autoSkipFiller': '自动跳过填充集',
+    'autoSkipFillerDesc': '当播放下一集时自动跳过填充剧集',
+    'enableSwipeControls': '启用滑动控制',
+    'enableSwipeControlsDesc': '启用后可以使用亮度/音量滑动调节',
+    'saveLastFrame': '保存最后一帧',
+    'saveLastFrameDesc': '保存您观看的最后一帧截图。禁用可大幅减少存储占用',
+    'doubleTapSeek': '双击快进',
+    'doubleTapSeekDesc': '调整双击快进时长',
+    'megaSkipDuration': '超大跳转时长',
+    'megaSkipDurationDesc': '调整超大跳转时长',
+    'markAsWatchedDesc': '标记为已看所需百分比',
+    'transitionSubtitle': '字幕过渡动画',
+    'transitionSubtitleDesc': '禁用后可避免字幕之间的过渡效果',
+    'autoTranslateSubtitles': '自动翻译字幕',
+    'autoTranslateSubtitlesDesc': '使用 AI 实时翻译软字幕',
+    'subtitleFont': '字幕字体',
+    'subtitleTransparency': '字幕透明度',
+    'subtitleTransparencyDesc': '调整文字可见度',
+    'bottomMargin': '底部边距',
+    'bottomMarginDesc': '距离屏幕底部的距离',
+    'changeSubtitleColor': '更改字幕颜色',
+    'subtitleColor': '字幕颜色',
+    'selectSubtitleColor': '选择字幕颜色',
+    'subtitleOutlineColor': '字幕描边颜色',
+    'changeSubtitleOutlineColor': '更改字幕描边颜色',
+    'selectSubtitleOutlineColor': '选择字幕描边颜色',
+    'subtitleBackgroundColor': '字幕背景颜色',
+    'changeSubtitleBackgroundColor': '更改字幕背景颜色',
+    'selectSubtitleBackgroundColor': '选择字幕背景颜色',
+    'selectSubtitleFont': '选择字幕字体',
+    'outlineType': '描边类型',
+    'subtitleOutlineWidth': '字幕描边宽度',
+    'adjustSubtitleOutlineWidth': '调整字幕描边宽度',
+    'subtitlePreview': '字幕预览',
+    'subtitlePreviewText': '字幕预览文本',
+    'bottomControls': '底部控件',
+    'leftSide': '左侧',
+    'rightSide': '右侧',
+    'hidden': '隐藏',
+    'showOnLeft': '显示在左侧',
+    'showOnRight': '显示在右侧',
+    'hideButton': '隐藏按钮',
+    'moveToRight': '移至右侧',
+    'moveToLeft': '移至左侧',
+    'controlTheme': '控制主题',
+    'playbackSpeed': '播放速度',
     'appearance': '外观',
     'defaultTheme': '默认主题',
     'defaultThemeDesc': '随心改变应用主题',
@@ -591,6 +761,91 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  String get experimental => _strings['experimental']!;
+  String get enableExperimentalSettings => _strings['enableExperimentalSettings']!;
+  String get experimentalDescription => _strings['experimentalDescription']!;
+  String get experimentalGateMessage => _strings['experimentalGateMessage']!;
+  String get decoderHwdec => _strings['decoderHwdec']!;
+  String get videoSync => _strings['videoSync']!;
+  String get frameInterpolation => _strings['frameInterpolation']!;
+  String get frameInterpolationDesc => _strings['frameInterpolationDesc']!;
+  String get audioPitchCorrection => _strings['audioPitchCorrection']!;
+  String get audioPitchCorrectionDesc => _strings['audioPitchCorrectionDesc']!;
+  String get cacheMinutes => _strings['cacheMinutes']!;
+  String get cacheMinutesDesc => _strings['cacheMinutesDesc']!;
+  String get demuxerReadahead => _strings['demuxerReadahead']!;
+  String get demuxerReadaheadDesc => _strings['demuxerReadaheadDesc']!;
+  String get demuxerMaxBuffer => _strings['demuxerMaxBuffer']!;
+  String get demuxerMaxBufferDesc => _strings['demuxerMaxBufferDesc']!;
+  String get decoderThreads => _strings['decoderThreads']!;
+  String get decoderThreadsDesc => _strings['decoderThreadsDesc']!;
+  String get bufferSize => _strings['bufferSize']!;
+  String get bufferSizeDesc => _strings['bufferSizeDesc']!;
+  String get useBuffering => _strings['useBuffering']!;
+  String get useBufferingDesc => _strings['useBufferingDesc']!;
+  String get useLibmpv => _strings['useLibmpv']!;
+  String get useLibmpvDesc => _strings['useLibmpvDesc']!;
+  String get useLibass => _strings['useLibass']!;
+  String get useLibassDesc => _strings['useLibassDesc']!;
+  String get jsonThemeManager => _strings['jsonThemeManager']!;
+  String get jsonThemeInfo => _strings['jsonThemeInfo']!;
+  String get swipeIndicatorTheme => _strings['swipeIndicatorTheme']!;
+  String get defaultPortrait => _strings['defaultPortrait']!;
+  String get defaultPortraitDesc => _strings['defaultPortraitDesc']!;
+  String get autoSkipOp => _strings['autoSkipOp']!;
+  String get autoSkipOpDesc => _strings['autoSkipOpDesc']!;
+  String get autoSkipEd => _strings['autoSkipEd']!;
+  String get autoSkipEdDesc => _strings['autoSkipEdDesc']!;
+  String get autoSkipRecap => _strings['autoSkipRecap']!;
+  String get autoSkipRecapDesc => _strings['autoSkipRecapDesc']!;
+  String get autoSkipOnce => _strings['autoSkipOnce']!;
+  String get autoSkipOnceDesc => _strings['autoSkipOnceDesc']!;
+  String get autoSkipFiller => _strings['autoSkipFiller']!;
+  String get autoSkipFillerDesc => _strings['autoSkipFillerDesc']!;
+  String get enableSwipeControls => _strings['enableSwipeControls']!;
+  String get enableSwipeControlsDesc => _strings['enableSwipeControlsDesc']!;
+  String get saveLastFrame => _strings['saveLastFrame']!;
+  String get saveLastFrameDesc => _strings['saveLastFrameDesc']!;
+  String get doubleTapSeek => _strings['doubleTapSeek']!;
+  String get doubleTapSeekDesc => _strings['doubleTapSeekDesc']!;
+  String get megaSkipDuration => _strings['megaSkipDuration']!;
+  String get megaSkipDurationDesc => _strings['megaSkipDurationDesc']!;
+  String get markAsWatchedDesc => _strings['markAsWatchedDesc']!;
+  String get transitionSubtitle => _strings['transitionSubtitle']!;
+  String get transitionSubtitleDesc => _strings['transitionSubtitleDesc']!;
+  String get autoTranslateSubtitles => _strings['autoTranslateSubtitles']!;
+  String get autoTranslateSubtitlesDesc => _strings['autoTranslateSubtitlesDesc']!;
+  String get subtitleFont => _strings['subtitleFont']!;
+  String get subtitleTransparency => _strings['subtitleTransparency']!;
+  String get subtitleTransparencyDesc => _strings['subtitleTransparencyDesc']!;
+  String get bottomMargin => _strings['bottomMargin']!;
+  String get bottomMarginDesc => _strings['bottomMarginDesc']!;
+  String get changeSubtitleColor => _strings['changeSubtitleColor']!;
+  String get subtitleColor => _strings['subtitleColor']!;
+  String get selectSubtitleColor => _strings['selectSubtitleColor']!;
+  String get subtitleOutlineColor => _strings['subtitleOutlineColor']!;
+  String get changeSubtitleOutlineColor => _strings['changeSubtitleOutlineColor']!;
+  String get selectSubtitleOutlineColor => _strings['selectSubtitleOutlineColor']!;
+  String get subtitleBackgroundColor => _strings['subtitleBackgroundColor']!;
+  String get changeSubtitleBackgroundColor => _strings['changeSubtitleBackgroundColor']!;
+  String get selectSubtitleBackgroundColor => _strings['selectSubtitleBackgroundColor']!;
+  String get selectSubtitleFont => _strings['selectSubtitleFont']!;
+  String get outlineType => _strings['outlineType']!;
+  String get subtitleOutlineWidth => _strings['subtitleOutlineWidth']!;
+  String get adjustSubtitleOutlineWidth => _strings['adjustSubtitleOutlineWidth']!;
+  String get subtitlePreview => _strings['subtitlePreview']!;
+  String get subtitlePreviewText => _strings['subtitlePreviewText']!;
+  String get bottomControls => _strings['bottomControls']!;
+  String get leftSide => _strings['leftSide']!;
+  String get rightSide => _strings['rightSide']!;
+  String get hidden => _strings['hidden']!;
+  String get showOnLeft => _strings['showOnLeft']!;
+  String get showOnRight => _strings['showOnRight']!;
+  String get hideButton => _strings['hideButton']!;
+  String get moveToRight => _strings['moveToRight']!;
+  String get moveToLeft => _strings['moveToLeft']!;
+  String get controlTheme => _strings['controlTheme']!;
+  String get playbackSpeed => _strings['playbackSpeed']!;
   String get appearance => _strings['appearance']!;
   String get defaultTheme => _strings['defaultTheme']!;
   String get defaultThemeDesc => _strings['defaultThemeDesc']!;
