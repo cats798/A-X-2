@@ -13,6 +13,9 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    // 在 _en 中添加
+    'profile': 'Profile',
+    'extensions': 'Extensions',
     'appTitle': 'AnymeX',
     'home': 'Home',
     'search': 'Search',
@@ -186,6 +189,9 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    // 在 _zh 中添加
+    'profile': '个人资料',
+    'extensions': '扩展',
     'appTitle': 'AnymeX',
     'home': '主页',
     'search': '搜索',
