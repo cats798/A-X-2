@@ -33,6 +33,7 @@ class AppLocalizations {
     'hideMyManga': 'Hide My Manga',
     'season': 'Season',
     'country': 'Country',
+    'countryOfOrigin': 'Country of Origin',
     'year': 'Year',
     'duration': 'Duration (mins)',
     'chapters': 'Chapters',
@@ -42,6 +43,39 @@ class AppLocalizations {
     'source': 'Source',
     'status': 'Status',
     'sort': 'Sort',
+    'airingStatus': 'Airing Status',
+    'publishingStatus': 'Publishing Status',
+    'useYearRange': 'Use Year Range',
+    'episodesAndDuration': 'Episodes & Duration',
+    'filterByEpisodeCount': 'Filter by Episode Count',
+    'filterByDuration': 'Filter by Duration (min)',
+    'minutesShort': 'min',
+    'episodesShort': 'eps',
+    'chaptersAndVolumes': 'Chapters & Volumes',
+    'filterByChapterCount': 'Filter by Chapter Count',
+    'filterByVolumeCount': 'Filter by Volume Count',
+    'chaptersShort': 'ch',
+    'volumesShort': 'vol',
+    'selectSort': 'Select Sort',
+    'sortBy': 'Sort By',
+    'order': 'Order',
+    'addTags': 'Add Tags',
+    'editTags': 'Edit Tags ({count})',
+    'selectTags': 'Select Tags',
+    'searchTagsHint': 'Search tags...',
+    'doneWithCount': 'Done ({count} selected)',
+    'done': 'Done',
+    'streamingOn': 'Streaming On',
+    'readableOn': 'Readable On',
+    'selectStreamingService': 'Select Streaming Service',
+    'selectReadingPlatform': 'Select Reading Platform',
+    'editServices': 'Edit Services ({count})',
+    'editPlatforms': 'Edit Platforms ({count})',
+    'options': 'Options',
+    'applyFilters': 'Apply Filters',
+    'reset': 'Reset',
+
+    // 原有键...
     'appTitle': 'AnymeX',
     'home': 'Home',
     'search': 'Search',
@@ -60,7 +94,6 @@ class AppLocalizations {
     'next': 'Next',
     'previous': 'Previous',
     'close': 'Close',
-    'done': 'Done',
 
     // 主页相关
     'continueWatching': 'Continue Watching',
@@ -84,7 +117,6 @@ class AppLocalizations {
     'watch': 'Watch',
     'read': 'Read',
     'score': 'Score',
-    'status': 'Status',
     'addToList': 'Add to List',
     'removeFromList': 'Remove from List',
     'updateProgress': 'Update Progress',
@@ -163,8 +195,6 @@ class AppLocalizations {
     'endDate': 'End Date',
     'genres': 'Genres',
     'tags': 'Tags',
-    'source': 'Source',
-    'duration': 'Duration',
     'rating': 'Rating',
     'popularity': 'Popularity',
     'favoritesCount': 'Favorites',
@@ -189,8 +219,6 @@ class AppLocalizations {
 
     // 搜索/筛选
     'searchHint': 'Search anime, manga...',
-    'filter': 'Filter',
-    'sort': 'Sort',
     'apply': 'Apply',
     'clear': 'Clear',
 
@@ -239,6 +267,7 @@ class AppLocalizations {
     'hideMyManga': '隐藏我的漫画',
     'season': '季度',
     'country': '国家/地区',
+    'countryOfOrigin': '原产国',
     'year': '年份',
     'duration': '时长（分钟）',
     'chapters': '章节',
@@ -248,6 +277,39 @@ class AppLocalizations {
     'source': '来源',
     'status': '状态',
     'sort': '排序',
+    'airingStatus': '播出状态',
+    'publishingStatus': '出版状态',
+    'useYearRange': '使用年份范围',
+    'episodesAndDuration': '集数与时长',
+    'filterByEpisodeCount': '按集数筛选',
+    'filterByDuration': '按时长筛选（分钟）',
+    'minutesShort': '分钟',
+    'episodesShort': '集',
+    'chaptersAndVolumes': '章节与卷数',
+    'filterByChapterCount': '按章节数筛选',
+    'filterByVolumeCount': '按卷数筛选',
+    'chaptersShort': '章',
+    'volumesShort': '卷',
+    'selectSort': '选择排序',
+    'sortBy': '排序方式',
+    'order': '顺序',
+    'addTags': '添加标签',
+    'editTags': '编辑标签 ({count})',
+    'selectTags': '选择标签',
+    'searchTagsHint': '搜索标签...',
+    'doneWithCount': '完成 ({count} 个已选)',
+    'done': '完成',
+    'streamingOn': '流媒体平台',
+    'readableOn': '可阅读平台',
+    'selectStreamingService': '选择流媒体服务',
+    'selectReadingPlatform': '选择阅读平台',
+    'editServices': '编辑服务 ({count})',
+    'editPlatforms': '编辑平台 ({count})',
+    'options': '选项',
+    'applyFilters': '应用筛选',
+    'reset': '重置',
+
+    // 原有键...
     'appTitle': 'AnymeX',
     'home': '主页',
     'search': '搜索',
@@ -266,7 +328,6 @@ class AppLocalizations {
     'next': '下一步',
     'previous': '上一步',
     'close': '关闭',
-    'done': '完成',
 
     // 主页相关
     'continueWatching': '继续观看',
@@ -290,7 +351,6 @@ class AppLocalizations {
     'watch': '观看',
     'read': '阅读',
     'score': '评分',
-    'status': '状态',
     'addToList': '添加到列表',
     'removeFromList': '从列表移除',
     'updateProgress': '更新进度',
@@ -369,8 +429,6 @@ class AppLocalizations {
     'endDate': '完结日期',
     'genres': '类型',
     'tags': '标签',
-    'source': '来源',
-    'duration': '时长',
     'rating': '评分',
     'popularity': '人气',
     'favoritesCount': '收藏数',
@@ -395,8 +453,6 @@ class AppLocalizations {
 
     // 搜索/筛选
     'searchHint': '搜索动漫、漫画...',
-    'filter': '筛选',
-    'sort': '排序',
     'apply': '应用',
     'clear': '清除',
 
@@ -432,7 +488,7 @@ class AppLocalizations {
     }
   }
 
-  // 所有 getter
+  // 通用 getter
   String get adult => _strings['adult']!;
   String get filter => _strings['filter']!;
   String get image => _strings['image']!;
@@ -453,6 +509,7 @@ class AppLocalizations {
   String get hideMyManga => _strings['hideMyManga']!;
   String get season => _strings['season']!;
   String get country => _strings['country']!;
+  String get countryOfOrigin => _strings['countryOfOrigin']!;
   String get year => _strings['year']!;
   String get duration => _strings['duration']!;
   String get chapters => _strings['chapters']!;
@@ -462,6 +519,41 @@ class AppLocalizations {
   String get source => _strings['source']!;
   String get status => _strings['status']!;
   String get sort => _strings['sort']!;
+  String get airingStatus => _strings['airingStatus']!;
+  String get publishingStatus => _strings['publishingStatus']!;
+  String get useYearRange => _strings['useYearRange']!;
+  String get episodesAndDuration => _strings['episodesAndDuration']!;
+  String get filterByEpisodeCount => _strings['filterByEpisodeCount']!;
+  String get filterByDuration => _strings['filterByDuration']!;
+  String get minutesShort => _strings['minutesShort']!;
+  String get episodesShort => _strings['episodesShort']!;
+  String get chaptersAndVolumes => _strings['chaptersAndVolumes']!;
+  String get filterByChapterCount => _strings['filterByChapterCount']!;
+  String get filterByVolumeCount => _strings['filterByVolumeCount']!;
+  String get chaptersShort => _strings['chaptersShort']!;
+  String get volumesShort => _strings['volumesShort']!;
+  String get selectSort => _strings['selectSort']!;
+  String get sortBy => _strings['sortBy']!;
+  String get order => _strings['order']!;
+  String get addTags => _strings['addTags']!;
+  String get selectTags => _strings['selectTags']!;
+  String get searchTagsHint => _strings['searchTagsHint']!;
+  String get done => _strings['done']!;
+  String get streamingOn => _strings['streamingOn']!;
+  String get readableOn => _strings['readableOn']!;
+  String get selectStreamingService => _strings['selectStreamingService']!;
+  String get selectReadingPlatform => _strings['selectReadingPlatform']!;
+  String get options => _strings['options']!;
+  String get applyFilters => _strings['applyFilters']!;
+  String get reset => _strings['reset']!;
+
+  // 带参数的方法
+  String editTags(int count) => _strings['editTags']!.replaceAll('{count}', count.toString());
+  String doneWithCount(int count) => _strings['doneWithCount']!.replaceAll('{count}', count.toString());
+  String editServices(int count) => _strings['editServices']!.replaceAll('{count}', count.toString());
+  String editPlatforms(int count) => _strings['editPlatforms']!.replaceAll('{count}', count.toString());
+
+  // 以下是原有 getter（保留）
   String get appTitle => _strings['appTitle']!;
   String get home => _strings['home']!;
   String get search => _strings['search']!;
@@ -480,7 +572,6 @@ class AppLocalizations {
   String get next => _strings['next']!;
   String get previous => _strings['previous']!;
   String get close => _strings['close']!;
-  String get done => _strings['done']!;
   String get continueWatching => _strings['continueWatching']!;
   String get loginPrompt => _strings['loginPrompt']!;
   String get greetingHey => _strings['greetingHey']!;
@@ -496,7 +587,6 @@ class AppLocalizations {
   String get watch => _strings['watch']!;
   String get read => _strings['read']!;
   String get score => _strings['score']!;
-  String get status => _strings['status']!;
   String get addToList => _strings['addToList']!;
   String get removeFromList => _strings['removeFromList']!;
   String get updateProgress => _strings['updateProgress']!;
@@ -569,8 +659,6 @@ class AppLocalizations {
   String get endDate => _strings['endDate']!;
   String get genres => _strings['genres']!;
   String get tags => _strings['tags']!;
-  String get source => _strings['source']!;
-  String get duration => _strings['duration']!;
   String get rating => _strings['rating']!;
   String get popularity => _strings['popularity']!;
   String get favoritesCount => _strings['favoritesCount']!;
@@ -583,9 +671,6 @@ class AppLocalizations {
   String get cast => _strings['cast']!;
   String get staff => _strings['staff']!;
   String get characters => _strings['characters']!;
-  String get episodes => _strings['episodes']!;
-  String get chapters => _strings['chapters']!;
-  String get volumes => _strings['volumes']!;
   String get lists => _strings['lists']!;
   String get history => _strings['history']!;
   String get favorites => _strings['favorites']!;
@@ -593,8 +678,6 @@ class AppLocalizations {
   String get related => _strings['related']!;
   String get similar => _strings['similar']!;
   String get searchHint => _strings['searchHint']!;
-  String get filter => _strings['filter']!;
-  String get sort => _strings['sort']!;
   String get apply => _strings['apply']!;
   String get clear => _strings['clear']!;
   String get comments => _strings['comments']!;
