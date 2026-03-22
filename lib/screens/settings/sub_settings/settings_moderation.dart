@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:anymex/utils/theme_extensions.dart';
 import 'package:get/get.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
+import 'package:anymex/l10n/app_localizations.dart';
 
 class SettingsModeration extends StatefulWidget {
   const SettingsModeration({super.key});
@@ -45,18 +46,19 @@ class _SettingsModerationState extends State<SettingsModeration> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: SuperListView(
         padding: getResponsiveValue(context,
             mobileValue: const EdgeInsets.fromLTRB(10.0, 50.0, 10.0, 20.0),
             desktopValue: const EdgeInsets.fromLTRB(20.0, 50.0, 25.0, 20.0)),
         children: [
-          const Row(
+          Row(
             children: [
-              CustomBackButton(),
-              SizedBox(width: 10),
-              Text("Moderation Panel",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              const CustomBackButton(),
+              const SizedBox(width: 10),
+              Text(l10n.moderationPanel,  // 已存在键
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
             ],
           ),
           const SizedBox(height: 30),
@@ -73,7 +75,7 @@ class _SettingsModerationState extends State<SettingsModeration> {
               children: [
                 Obx(() => CustomTile(
                   icon: Icons.admin_panel_settings,
-                  title: "Your Role",
+                  title: l10n.yourRole,  // 新增键 'yourRole'
                   description: commentumService.currentUserRole.value.toUpperCase(),
                   postFix: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -109,8 +111,8 @@ class _SettingsModerationState extends State<SettingsModeration> {
               children: [
                 CustomTile(
                     icon: Icons.report_outlined,
-                    title: "Moderation Queue",
-                    description: "${moderationQueue.length} pending reports",
+                    title: l10n.moderationQueue,  // 新增键 'moderationQueue'
+                    description: "${moderationQueue.length} ${l10n.pendingReports}",  // 新增键 'pendingReports'
                     postFix: isLoadingQueue.value 
                         ? const SizedBox(
                             width: 20,
@@ -119,21 +121,21 @@ class _SettingsModerationState extends State<SettingsModeration> {
                           )
                         : null,
                     onTap: () {
-                      _navigateToModerationQueue();
+                      _navigateToModerationQueue(l10n);
                     }),
                 CustomTile(
                     icon: Icons.people_outline,
-                    title: "User Management",
-                    description: "Manage user roles and permissions",
+                    title: l10n.userManagement,  // 新增键 'userManagement'
+                    description: l10n.userManagementDesc,  // 新增键 'userManagementDesc'
                     onTap: () {
-                      _navigateToUserManagement();
+                      _navigateToUserManagement(l10n);
                     }),
                 CustomTile(
                     icon: Icons.history_outlined,
-                    title: "Moderation History",
-                    description: "View past moderation actions",
+                    title: l10n.moderationHistory,  // 新增键 'moderationHistory'
+                    description: l10n.moderationHistoryDesc,  // 新增键 'moderationHistoryDesc'
                     onTap: () {
-                      _showModerationHistory();
+                      _showModerationHistory(l10n);
                     }),
               ],
             ),
@@ -153,24 +155,24 @@ class _SettingsModerationState extends State<SettingsModeration> {
               children: [
                 CustomTile(
                     icon: Icons.search_outlined,
-                    title: "Search User",
-                    description: "Find and manage specific users",
+                    title: l10n.searchUser,  // 新增键 'searchUser'
+                    description: l10n.searchUserDesc,  // 新增键 'searchUserDesc'
                     onTap: () {
-                      _showUserSearch();
+                      _showUserSearch(l10n);
                     }),
                 CustomTile(
                     icon: Icons.content_paste_search_outlined,
-                    title: "Search Comments",
-                    description: "Search through comment content",
+                    title: l10n.searchComments,  // 新增键 'searchComments'
+                    description: l10n.searchCommentsDesc,  // 新增键 'searchCommentsDesc'
                     onTap: () {
-                      _showCommentSearch();
+                      _showCommentSearch(l10n);
                     }),
                 CustomTile(
                     icon: Icons.analytics_outlined,
-                    title: "Statistics",
-                    description: "View moderation statistics",
+                    title: l10n.statistics,  // 已有键 'statistics'
+                    description: l10n.statisticsDesc,  // 新增键 'statisticsDesc'
                     onTap: () {
-                      _showStatistics();
+                      _showStatistics(l10n);
                     }),
               ],
             ),
@@ -190,17 +192,17 @@ class _SettingsModerationState extends State<SettingsModeration> {
               children: [
                 CustomTile(
                     icon: Icons.notifications_outlined,
-                    title: "Notification Settings",
-                    description: "Configure moderation notifications",
+                    title: l10n.notificationSettings,
+                    description: l10n.moderationNotifDesc,  // 新增键 'moderationNotifDesc'
                     onTap: () {
-                      _showNotificationSettings();
+                      _showNotificationSettings(l10n);
                     }),
                 CustomTile(
                     icon: Icons.rule_outlined,
-                    title: "Moderation Rules",
-                    description: "View and configure moderation rules",
+                    title: l10n.moderationRules,  // 新增键 'moderationRules'
+                    description: l10n.moderationRulesDesc,  // 新增键 'moderationRulesDesc'
                     onTap: () {
-                      _showModerationRules();
+                      _showModerationRules(l10n);
                     }),
               ],
             ),
@@ -226,214 +228,204 @@ class _SettingsModerationState extends State<SettingsModeration> {
     }
   }
 
-  Future<void> _navigateToModerationQueue() async {
+  Future<void> _navigateToModerationQueue(AppLocalizations l10n) async {
     if (!await commentumService.isModerator()) {
-      snackBar('You need moderator permissions to access this panel');
+      snackBar(l10n.noModeratorPermission);
       return;
     }
-    
-    // Navigate to moderation queue (to be implemented)
-    snackBar('Moderation queue interface coming soon!');
+    snackBar(l10n.moderationQueueComingSoon);
   }
 
-  Future<void> _navigateToUserManagement() async {
+  Future<void> _navigateToUserManagement(AppLocalizations l10n) async {
     if (!await commentumService.isAdmin()) {
-      snackBar('You need admin permissions to access this panel');
+      snackBar(l10n.noAdminPermission);
       return;
     }
-    
-    // Navigate to user management (to be implemented)
-    snackBar('User management interface coming soon!');
+    snackBar(l10n.userManagementComingSoon);
   }
 
-  Future<void> _showModerationHistory() async {
+  Future<void> _showModerationHistory(AppLocalizations l10n) async {
     if (!await commentumService.isModerator()) {
-      snackBar('You need moderator permissions to access this panel');
+      snackBar(l10n.noModeratorPermission);
       return;
     }
-    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Moderation History'),
-        content: const Column(
+        title: Text(l10n.moderationHistory),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Moderation history will be available in future updates.'),
-            SizedBox(height: 8),
-            Text('Planned features:', style: TextStyle(fontWeight: FontWeight.bold)),
-            BulletPoint(text: 'Filter by action type'),
-            BulletPoint(text: 'Filter by date range'),
-            BulletPoint(text: 'Filter by moderator'),
-            BulletPoint(text: 'Export moderation logs'),
-            BulletPoint(text: 'Appeal system'),
+            Text(l10n.modHistoryFuture),
+            const SizedBox(height: 8),
+            Text(l10n.plannedFeatures, style: const TextStyle(fontWeight: FontWeight.bold)),
+            BulletPoint(text: l10n.filterActionType),
+            BulletPoint(text: l10n.filterDateRange),
+            BulletPoint(text: l10n.filterModerator),
+            BulletPoint(text: l10n.exportLogs),
+            BulletPoint(text: l10n.appealSystem),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _showUserSearch() async {
+  Future<void> _showUserSearch(AppLocalizations l10n) async {
     if (!await commentumService.isModerator()) {
-      snackBar('You need moderator permissions to access this panel');
+      snackBar(l10n.noModeratorPermission);
       return;
     }
-    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Search User'),
-        content: const Column(
+        title: Text(l10n.searchUser),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('User search functionality will be available in future updates.'),
-            SizedBox(height: 8),
-            Text('Planned features:', style: TextStyle(fontWeight: FontWeight.bold)),
-            BulletPoint(text: 'Search by username'),
-            BulletPoint(text: 'Search by user ID'),
-            BulletPoint(text: 'Search by comment history'),
-            BulletPoint(text: 'Advanced filtering options'),
+            Text(l10n.userSearchFuture),
+            const SizedBox(height: 8),
+            Text(l10n.plannedFeatures, style: const TextStyle(fontWeight: FontWeight.bold)),
+            BulletPoint(text: l10n.searchByUsername),
+            BulletPoint(text: l10n.searchByUserId),
+            BulletPoint(text: l10n.searchByCommentHistory),
+            BulletPoint(text: l10n.advancedFiltering),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _showCommentSearch() async {
+  Future<void> _showCommentSearch(AppLocalizations l10n) async {
     if (!await commentumService.isModerator()) {
-      snackBar('You need moderator permissions to access this panel');
+      snackBar(l10n.noModeratorPermission);
       return;
     }
-    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Search Comments'),
-        content: const Column(
+        title: Text(l10n.searchComments),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Comment search functionality will be available in future updates.'),
-            SizedBox(height: 8),
-            Text('Planned features:', style: TextStyle(fontWeight: FontWeight.bold)),
-            BulletPoint(text: 'Search by content'),
-            BulletPoint(text: 'Search by username'),
-            BulletPoint(text: 'Search by date range'),
-            BulletPoint(text: 'Search by report status'),
+            Text(l10n.commentSearchFuture),
+            const SizedBox(height: 8),
+            Text(l10n.plannedFeatures, style: const TextStyle(fontWeight: FontWeight.bold)),
+            BulletPoint(text: l10n.searchByContent),
+            BulletPoint(text: l10n.searchByUsername),
+            BulletPoint(text: l10n.searchByDateRange),
+            BulletPoint(text: l10n.searchByReportStatus),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _showStatistics() async {
+  Future<void> _showStatistics(AppLocalizations l10n) async {
     if (!await commentumService.isModerator()) {
-      snackBar('You need moderator permissions to access this panel');
+      snackBar(l10n.noModeratorPermission);
       return;
     }
-    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Moderation Statistics'),
-        content: const Column(
+        title: Text(l10n.statistics),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Moderation statistics will be available in future updates.'),
-            SizedBox(height: 8),
-            Text('Planned metrics:', style: TextStyle(fontWeight: FontWeight.bold)),
-            BulletPoint(text: 'Reports resolved'),
-            BulletPoint(text: 'Users warned/banned'),
-            BulletPoint(text: 'Comments moderated'),
-            BulletPoint(text: 'Response times'),
-            BulletPoint(text: 'Trends and analytics'),
+            Text(l10n.statisticsFuture),
+            const SizedBox(height: 8),
+            Text(l10n.plannedMetrics, style: const TextStyle(fontWeight: FontWeight.bold)),
+            BulletPoint(text: l10n.reportsResolved),
+            BulletPoint(text: l10n.usersWarnedBanned),
+            BulletPoint(text: l10n.commentsModerated),
+            BulletPoint(text: l10n.responseTimes),
+            BulletPoint(text: l10n.trendsAnalytics),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _showNotificationSettings() async {
+  Future<void> _showNotificationSettings(AppLocalizations l10n) async {
     if (!await commentumService.isModerator()) {
-      snackBar('You need moderator permissions to access this panel');
+      snackBar(l10n.noModeratorPermission);
       return;
     }
-    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Notification Settings'),
-        content: const Column(
+        title: Text(l10n.notificationSettings),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Notification settings will be available in future updates.'),
-            SizedBox(height: 8),
-            Text('Planned notifications:', style: TextStyle(fontWeight: FontWeight.bold)),
-            BulletPoint(text: 'New reports'),
-            BulletPoint(text: 'Report resolutions'),
-            BulletPoint(text: 'User appeals'),
-            BulletPoint(text: 'System alerts'),
+            Text(l10n.modNotifFuture),
+            const SizedBox(height: 8),
+            Text(l10n.plannedNotifications, style: const TextStyle(fontWeight: FontWeight.bold)),
+            BulletPoint(text: l10n.newReports),
+            BulletPoint(text: l10n.reportResolutions),
+            BulletPoint(text: l10n.userAppeals),
+            BulletPoint(text: l10n.systemAlerts),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _showModerationRules() async {
+  Future<void> _showModerationRules(AppLocalizations l10n) async {
     if (!await commentumService.isAdmin()) {
-      snackBar('You need admin permissions to access this panel');
+      snackBar(l10n.noAdminPermission);
       return;
     }
-    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Moderation Rules'),
-        content: const Column(
+        title: Text(l10n.moderationRules),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Moderation rules configuration will be available in future updates.'),
-            SizedBox(height: 8),
-            Text('Planned features:', style: TextStyle(fontWeight: FontWeight.bold)),
-            BulletPoint(text: 'Custom banned keywords'),
-            BulletPoint(text: 'Auto-moderation thresholds'),
-            BulletPoint(text: 'Role-specific permissions'),
-            BulletPoint(text: 'Content filtering rules'),
+            Text(l10n.modRulesFuture),
+            const SizedBox(height: 8),
+            Text(l10n.plannedFeatures, style: const TextStyle(fontWeight: FontWeight.bold)),
+            BulletPoint(text: l10n.customBannedKeywords),
+            BulletPoint(text: l10n.autoModThresholds),
+            BulletPoint(text: l10n.rolePermissions),
+            BulletPoint(text: l10n.contentFilteringRules),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
