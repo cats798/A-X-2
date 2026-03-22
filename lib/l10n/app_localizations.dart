@@ -13,6 +13,7 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'tweakSettings': 'Tweak Settings',
     'accountsDescription': 'Manage your connected accounts',
     'accountsDescription': 'Manage your accounts',
     'accounts': 'Accounts',
@@ -639,6 +640,7 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'tweakSettings': '微调设置',
     'accountsDescription': '管理您的关联账户',
     'accountsDescription': '管理您的账户',
     'accounts': '账户',
@@ -1273,6 +1275,7 @@ class AppLocalizations {
   }
 
   // 所有 getter 统一放在此处，每个键只定义一次
+  String get tweakSettings => _strings['tweakSettings']!;
   String get accountsDescription => _strings['accountsDescription']!;
   String get accounts => _strings['accounts']!;
   String get versionCopied => _strings['versionCopied']!;
