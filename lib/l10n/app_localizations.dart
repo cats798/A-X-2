@@ -1829,7 +1829,6 @@ class AppLocalizations {
   String get episodes => _strings['episodes']!;
   String get chapters => _strings['chapters']!;
   String get volumes => _strings['volumes']!;
-  String get lists => _strings['lists']!;
   String get history => _strings['history']!;
   String get favorites => _strings['favorites']!;
   String get recommendations => _strings['recommendations']!;
