@@ -1711,6 +1711,7 @@ class AppLocalizations {
   String get selectReadingPlatform => _strings['selectReadingPlatform']!;
   String get options => _strings['options']!;
   String get applyFilters => _strings['applyFilters']!;
+  String get appTitle => _strings['appTitle']!;
 
   // 带参数的方法
   String installExtensionFirst(String sourceName) => _strings['installExtensionFirst']!.replaceAll('{sourceName}', sourceName);
