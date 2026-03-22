@@ -13,6 +13,7 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'extensionsDescription': 'Extensions',
     'themeDescription': 'Theme description',
     'readerDescription': 'Reader settings description',
     'playerDescription': 'Player Description',
@@ -649,6 +650,7 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'extensionsDescription': '扩展',
     'themeDescription': '主题描述',
     'readerDescription': '阅读器设置描述',
     'playerDescription': '播放器描述',
@@ -1293,6 +1295,7 @@ class AppLocalizations {
   }
 
   // 所有 getter 统一放在此处，每个键只定义一次
+  String get extensionsDescription => _strings['extensionsDescription']!;
   String get themeDescription => _strings['themeDescription']!;
   String get readerDescription => _strings['readerDescription']!;
   String get playerDescription => _strings['playerDescription']!;
