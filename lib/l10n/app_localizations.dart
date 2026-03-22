@@ -13,6 +13,21 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'common': 'Common',
+    'universal': 'Universal',
+    'askForTrackingPermission': 'Ask for tracking permission',
+    'askForTrackingPermissionDesc': 'If enabled, AnymeX will ask for tracking permission; if not, it will track by default.',
+    'hideAdultContent': 'Hide Adult Content',
+    'hideAdultContentDesc': 'If enabled, you will not get a prompt for enabling adult content on AniList/MyAnimeList.',
+    'showContinueWatchingCard': 'Show Continue Watching Card',
+    'showContinueWatchingCardDesc': 'Display Continue Watching cards on home page from offline progress.',
+    'anilist': 'AniList',
+    'manageAnilistLists': 'Manage AniList Lists',
+    'myAnimeList': 'MyAnimeList',
+    'manageMyAnimeListLists': 'Manage MyAnimeList Lists',
+    'chooseListToShowOnHome': 'Choose which list to show on home page',
+    'manageHomePageCards': 'Manage Home Page Cards',
+    'close': 'Close',
     'chapter': 'Chapter',
     'unknown': '??',
     'errorMissingData': 'Error: Missing required data. It seems you closed the app directly after reading the chapter!',
@@ -255,6 +270,21 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'common': '通用',
+    'universal': '通用',
+    'askForTrackingPermission': '询问跟踪权限',
+    'askForTrackingPermissionDesc': '如果启用，AnymeX 将询问跟踪权限；否则将默认跟踪。',
+    'hideAdultContent': '隐藏成人内容',
+    'hideAdultContentDesc': '如果启用，你将不会收到启用成人内容的提示。',
+    'showContinueWatchingCard': '显示继续观看卡片',
+    'showContinueWatchingCardDesc': '在主屏幕上显示来自离线进度的继续观看卡片。',
+    'anilist': 'AniList',
+    'manageAnilistLists': '管理 AniList 列表',
+    'myAnimeList': 'MyAnimeList',
+    'manageMyAnimeListLists': '管理 MyAnimeList 列表',
+    'chooseListToShowOnHome': '选择要在主页显示的列表',
+    'manageHomePageCards': '管理主页卡片',
+    'close': '关闭',
     'chapter': '章',
     'unknown': '??',
     'errorMissingData': '错误：缺少必要数据。您可能在阅读章节后直接关闭了应用！',
@@ -505,6 +535,21 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  String get common => _strings['common']!;
+  String get universal => _strings['universal']!;
+  String get askForTrackingPermission => _strings['askForTrackingPermission']!;
+  String get askForTrackingPermissionDesc => _strings['askForTrackingPermissionDesc']!;
+  String get hideAdultContent => _strings['hideAdultContent']!;
+  String get hideAdultContentDesc => _strings['hideAdultContentDesc']!;
+  String get showContinueWatchingCard => _strings['showContinueWatchingCard']!;
+  String get showContinueWatchingCardDesc => _strings['showContinueWatchingCardDesc']!;
+  String get anilist => _strings['anilist']!;
+  String get manageAnilistLists => _strings['manageAnilistLists']!;
+  String get myAnimeList => _strings['myAnimeList']!;
+  String get manageMyAnimeListLists => _strings['manageMyAnimeListLists']!;
+  String get chooseListToShowOnHome => _strings['chooseListToShowOnHome']!;
+  String get manageHomePageCards => _strings['manageHomePageCards']!;
+  String get close => _strings['close']!;
   String get chapter => _strings['chapter']!;
   String get unknown => _strings['unknown']!;
   String get errorMissingData => _strings['errorMissingData']!;
