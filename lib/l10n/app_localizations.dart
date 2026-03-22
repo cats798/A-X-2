@@ -216,7 +216,7 @@ class AppLocalizations {
     'noExtensionManagers': 'No extension managers found.',
     'failedToRemoveRepo': 'Failed to remove repo',
     'repoAddedSingular': '1 repo added',
-    'repoAddedPlural': '$count repos added',
+    'repoAddedPlural': '\$count repos added',
     'notSupported': 'Not supported',
     'animeNotSupported': 'Anime is not supported by this manager.',
     'mangaNotSupported': 'Manga is not supported by this manager.',
