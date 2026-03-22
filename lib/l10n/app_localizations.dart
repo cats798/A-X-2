@@ -1741,7 +1741,6 @@ class AppLocalizations {
   String get anime => _strings['anime']!;
   String get manga => _strings['manga']!;
   String get novel => _strings['novel']!;
-  String get extensions => _strings['extensions']!;
   String get watch => _strings['watch']!;
   String get read => _strings['read']!;
   String get score => _strings['score']!;
