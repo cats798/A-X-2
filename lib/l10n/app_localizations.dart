@@ -4,8 +4,6 @@ import 'package:flutter/widgets.dart';
 class AppLocalizations {
   final Locale locale;
   AppLocalizations(this.locale);
-  String get profile => _strings['profile']!;
-  String get extensions => _strings['extensions']!;
 
   static AppLocalizations? of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
@@ -15,9 +13,6 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
-    // 在 _en 中添加
-    'profile': 'Profile',
-    'extensions': 'Extensions',
     'appTitle': 'AnymeX',
     'home': 'Home',
     'search': 'Search',
@@ -51,6 +46,10 @@ class AppLocalizations {
     'anime': 'Anime',
     'manga': 'Manga',
     'novel': 'Novel',
+
+    // 导航栏
+    'profile': 'Profile',
+    'extensions': 'Extensions',
 
     // 操作
     'watch': 'Watch',
@@ -101,7 +100,7 @@ class AppLocalizations {
     'forgotPassword': 'Forgot Password?',
     'resetPassword': 'Reset Password',
     'changePassword': 'Change Password',
-    'profile': 'Profile',
+    'profileSettings': 'Profile',
     'editProfile': 'Edit Profile',
     'avatar': 'Avatar',
     'name': 'Name',
@@ -191,9 +190,6 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
-    // 在 _zh 中添加
-    'profile': '个人资料',
-    'extensions': '扩展',
     'appTitle': 'AnymeX',
     'home': '主页',
     'search': '搜索',
@@ -227,6 +223,10 @@ class AppLocalizations {
     'anime': '动漫',
     'manga': '漫画',
     'novel': '小说',
+
+    // 导航栏
+    'profile': '个人资料',
+    'extensions': '扩展',
 
     // 操作
     'watch': '观看',
@@ -277,7 +277,7 @@ class AppLocalizations {
     'forgotPassword': '忘记密码？',
     'resetPassword': '重置密码',
     'changePassword': '修改密码',
-    'profile': '个人资料',
+    'profileSettings': '个人资料',
     'editProfile': '编辑资料',
     'avatar': '头像',
     'name': '昵称',
@@ -374,7 +374,7 @@ class AppLocalizations {
     }
   }
 
-  // Getter for each key
+  // 所有 getter
   String get appTitle => _strings['appTitle']!;
   String get home => _strings['home']!;
   String get search => _strings['search']!;
@@ -404,6 +404,8 @@ class AppLocalizations {
   String get anime => _strings['anime']!;
   String get manga => _strings['manga']!;
   String get novel => _strings['novel']!;
+  String get profile => _strings['profile']!;
+  String get extensions => _strings['extensions']!;
   String get watch => _strings['watch']!;
   String get read => _strings['read']!;
   String get score => _strings['score']!;
@@ -448,7 +450,7 @@ class AppLocalizations {
   String get forgotPassword => _strings['forgotPassword']!;
   String get resetPassword => _strings['resetPassword']!;
   String get changePassword => _strings['changePassword']!;
-  String get profile => _strings['profile']!;
+  String get profileSettings => _strings['profileSettings']!;
   String get editProfile => _strings['editProfile']!;
   String get avatar => _strings['avatar']!;
   String get name => _strings['name']!;
