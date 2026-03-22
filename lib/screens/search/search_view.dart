@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:anymex/l10n/app_localizations.dart';  // 添加本地化导入
 
 enum ViewMode { grid, list }
 
@@ -312,15 +313,16 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   String _getErrorMessage(dynamic error) {
+    final l10n = AppLocalizations.of(context)!;
     if (error.toString().contains('network') ||
         error.toString().contains('connection')) {
-      return 'Network error. Please check your connection.';
+      return l10n.networkError;
     } else if (error.toString().contains('timeout')) {
-      return 'Search timed out. Please try again.';
+      return l10n.timeoutError;
     } else if (error.toString().contains('404')) {
-      return 'Service not available. Please try later.';
+      return l10n.serviceUnavailable;
     } else {
-      return 'Something went wrong. Please try again.';
+      return l10n.somethingWentWrong;
     }
   }
 
@@ -335,6 +337,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   Widget _buildModernSearchBar() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
@@ -358,8 +361,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
         decoration: InputDecoration(
           filled: true,
           fillColor: context.colors.surfaceContainer.opaque(.5),
-          hintText:
-              'Search ${serviceHandler.serviceType.value == ServicesType.simkl ? 'movie or series' : widget.isManga ? 'manga' : 'anime'}...',
+          hintText: l10n.searchHint,
           hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: context.colors.onSurface.opaque(0.5),
               ),
@@ -412,6 +414,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   Widget _buildControlsSection() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -420,7 +423,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             if (!General.hideAdultContent.get(true)) ...[
               Obx(() {
                 return _buildToggleButton(
-                  label: 'Adult',
+                  label: l10n.adult,
                   isActive: isAdult.value,
                   onTap: () {
                     isAdult.value = !isAdult.value;
@@ -432,7 +435,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             ],
             _buildActionButton(
               icon: Iconsax.setting_4,
-              label: 'Filters',
+              label: l10n.filter,
               isActive: _activeFilters.isNotEmpty,
               onTap: _showFilterBottomSheet,
             ),
@@ -441,7 +444,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               const SizedBox(width: 12),
               _buildActionButton(
                 icon: Iconsax.eye,
-                label: 'Image',
+                label: l10n.image,
                 isActive: false,
                 onTap: () => navigate(() => const SauceFinderView()),
               ),
@@ -457,6 +460,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     required bool isActive,
     required VoidCallback onTap,
   }) {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
@@ -523,6 +527,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     required bool isActive,
     required VoidCallback onTap,
   }) {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
@@ -565,6 +570,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   Widget _buildViewModeToggle() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         color: context.colors.surface.opaque(0.5),
@@ -585,6 +591,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
 
   Widget _buildViewModeButton(ViewMode mode, IconData icon) {
     final isActive = _currentViewMode == mode;
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () => setState(() => _currentViewMode = mode),
       child: AnimatedContainer(
@@ -618,6 +625,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   List<Widget> _buildFilterChips() {
+    final l10n = AppLocalizations.of(context)!;
     List<Widget> chips = [];
     final isManga = widget.isManga;
 
@@ -665,13 +673,13 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
       }
     }
 
-    addRangeChip('year', 'Year');
+    addRangeChip('year', l10n.year);
     if (isManga) {
-      addRangeChip('chapter', 'Chapters');
-      addRangeChip('volume', 'Volumes');
+      addRangeChip('chapter', l10n.chapters);
+      addRangeChip('volume', l10n.volumes);
     } else {
-      addRangeChip('episode', 'Episodes');
-      addRangeChip('duration', 'Duration (mins)');
+      addRangeChip('episode', l10n.episodes);
+      addRangeChip('duration', '${l10n.duration} (mins)');
     }
 
     _activeFilters.forEach((key, value) {
@@ -709,6 +717,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   Widget _buildFilterChip(String text, VoidCallback onRemove) {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: onRemove,
       child: Container(
@@ -777,6 +786,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   Widget _buildLoadingState() {
+    final l10n = AppLocalizations.of(context)!;
     return Expanded(
       child: Center(
         child: Column(
@@ -792,7 +802,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             ),
             const SizedBox(height: 24),
             Text(
-              'Searching...',
+              l10n.searching,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -808,6 +818,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   Widget _buildErrorState() {
+    final l10n = AppLocalizations.of(context)!;
     return Expanded(
       child: Center(
         child: Column(
@@ -827,14 +838,14 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             ),
             const SizedBox(height: 24),
             Text(
-              'Oops! Something went wrong',
+              l10n.oopsSomethingWrong,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
             ),
             const SizedBox(height: 8),
             Text(
-              _errorMessage ?? 'Please try again later',
+              _errorMessage ?? l10n.pleaseTryAgainLater,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onSurface.opaque(0.7),
                   ),
@@ -844,7 +855,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             ElevatedButton.icon(
               onPressed: () => _performSearch(),
               icon: Icon(Iconsax.refresh, color: context.colors.onPrimary),
-              label: const Text('Try Again'),
+              label: Text(l10n.tryAgain),
               style: ElevatedButton.styleFrom(
                 backgroundColor: context.colors.primary,
                 foregroundColor: context.colors.onPrimary,
@@ -862,6 +873,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   Widget _buildEmptyState() {
+    final l10n = AppLocalizations.of(context)!;
     return Expanded(
       child: Center(
         child: Column(
@@ -881,14 +893,14 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             ),
             const SizedBox(height: 24),
             Text(
-              'No results found',
+              l10n.noResultsFound,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
             ),
             const SizedBox(height: 8),
             Text(
-              'Try adjusting your search terms or filters',
+              l10n.tryAdjustingSearch,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onSurface.opaque(0.7),
                   ),
@@ -1039,6 +1051,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   Widget _buildRatingChip(String rating) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
@@ -1070,6 +1083,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   void _showFilterBottomSheet() {
+    final l10n = AppLocalizations.of(context)!;
     showFilterBottomSheet(context, (filters) {
       _performSearch(filters: filters);
     },
@@ -1102,32 +1116,33 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   String _formatFilterValue(String key, dynamic value) {
+    final l10n = AppLocalizations.of(context)!;
     switch (key) {
       case 'onList':
         if (widget.isManga) {
-          return value == true ? "My Manga Only" : "Hide My Manga";
+          return value == true ? l10n.myMangaOnly : l10n.hideMyManga;
         }
-        return value == true ? "My Anime Only" : "Hide My Anime";
+        return value == true ? l10n.myAnimeOnly : l10n.hideMyAnime;
       case 'sort':
         final sortVal =
             value is List ? value.first.toString() : value.toString();
-        return "Sort: ${SearchFilterConstants.formatSort(sortVal)}";
+        return "${l10n.sort}: ${SearchFilterConstants.formatSort(sortVal)}";
       case 'season':
-        return "Season: ${value.toString().toLowerCase().capitalize}";
+        return "${l10n.season}: ${value.toString().toLowerCase().capitalize}";
       case 'status':
         return value.toString() != 'All'
-            ? "Status: ${SearchFilterConstants.formatStatus(value.toString(), isManga: widget.isManga)}"
+            ? "${l10n.status}: ${SearchFilterConstants.formatStatus(value.toString(), isManga: widget.isManga)}"
             : "";
       case 'format':
-        return "Format: ${SearchFilterConstants.formatFormat(value.toString(), isManga: widget.isManga)}";
+        return "${l10n.format}: ${SearchFilterConstants.formatFormat(value.toString(), isManga: widget.isManga)}";
       case 'isAdult':
-        return "18+ Content";
+        return l10n.adult;
       case 'source':
-        return "Source: ${value.toString().replaceAll('_', ' ').toLowerCase().split(' ').map((w) => w[0].toUpperCase() + w.substring(1)).join(' ')}";
+        return "${l10n.source}: ${value.toString().replaceAll('_', ' ').toLowerCase().split(' ').map((w) => w[0].toUpperCase() + w.substring(1)).join(' ')}";
       case 'countryOfOrigin':
-        return "Country: ${SearchFilterConstants.formatCountry(value.toString())}";
+        return "${l10n.country}: ${SearchFilterConstants.formatCountry(value.toString())}";
       case 'year':
-        return "Year: ${value.toString().replaceAll('%', '')}";
+        return "${l10n.year}: ${value.toString().replaceAll('%', '')}";
       default:
         return "$key: $value";
     }
@@ -1149,6 +1164,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Glow(
       child: SafeArea(
         child: Scaffold(
@@ -1191,7 +1207,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                   child: Row(
                     children: [
                       Text(
-                        'Search Results',
+                        l10n.searchResults,
                         style:
                             Theme.of(context).textTheme.headlineSmall?.copyWith(
                                   fontWeight: FontWeight.bold,
