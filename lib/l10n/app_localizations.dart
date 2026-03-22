@@ -13,6 +13,34 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'appearance': 'Appearance',
+    'defaultTheme': 'Default Theme',
+    'defaultThemeDesc': 'Play around with App theme',
+    'materialYou': 'Material You',
+    'materialYouDesc': 'Take color from your wallpaper (A12+)',
+    'liquidMode': 'Liquid Mode',
+    'liquidModeDesc': 'Make everything glassy & liquidy...',
+    'liquidBackground': 'Liquid Background',
+    'liquidBackgroundDesc': 'Choose a custom background for liquid mode.',
+    'retainOriginalColor': 'Retain Original Color',
+    'retainOriginalColorDesc': 'Enable this if you want to retain the original color of your wallpaper',
+    'usePosterColor': 'Use Poster Color',
+    'usePosterColorDesc': 'Applies anime/manga poster color on details page',
+    'resetToDefaultPicture': 'Reset to Default Picture',
+    'resetToDefaultPictureDesc': 'Reset to default wallpaper!',
+    'extras': 'Extras',
+    'bloom': 'Bloom',
+    'bloomDesc': 'Enables a soft, glowing gradient effect.',
+    'palette': 'Palette',
+    'paletteDesc': 'Choose your favourite palette!',
+    'oledMode': 'Oled Mode',
+    'oledModeDesc': 'Go Super Dark Mode!',
+    'customTheme': 'Custom Theme',
+    'customThemeDesc': 'Choose your favourite color!',
+    'logoAnimation': 'Logo Animation',
+    'logoAnimationDesc': 'Customize your logo animation style',
+    'customThemes': 'Custom Themes',
+    'palettes': 'Palettes',
     'common': 'Common',
     'universal': 'Universal',
     'askForTrackingPermission': 'Ask for tracking permission',
@@ -270,6 +298,34 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'appearance': '外观',
+    'defaultTheme': '默认主题',
+    'defaultThemeDesc': '随心改变应用主题',
+    'materialYou': 'Material You',
+    'materialYouDesc': '从壁纸取色 (Android 12+)',
+    'liquidMode': '液态模式',
+    'liquidModeDesc': '让界面变得晶莹剔透…',
+    'liquidBackground': '液态背景',
+    'liquidBackgroundDesc': '为液态模式选择自定义背景。',
+    'retainOriginalColor': '保留原色',
+    'retainOriginalColorDesc': '保留壁纸原始颜色',
+    'usePosterColor': '使用海报颜色',
+    'usePosterColorDesc': '在详情页应用动漫/漫画海报颜色',
+    'resetToDefaultPicture': '重置为默认图片',
+    'resetToDefaultPictureDesc': '重置为默认壁纸',
+    'extras': '额外',
+    'bloom': '绽放',
+    'bloomDesc': '启用柔和的光晕渐变效果。',
+    'palette': '调色板',
+    'paletteDesc': '选择你喜爱的调色板！',
+    'oledMode': 'OLED 模式',
+    'oledModeDesc': '进入超级暗黑模式！',
+    'customTheme': '自定义主题',
+    'customThemeDesc': '选择你喜爱的颜色！',
+    'logoAnimation': 'Logo 动画',
+    'logoAnimationDesc': '自定义 Logo 动画样式',
+    'customThemes': '自定义主题',
+    'palettes': '调色板',
     'common': '通用',
     'universal': '通用',
     'askForTrackingPermission': '询问跟踪权限',
@@ -535,6 +591,34 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  String get appearance => _strings['appearance']!;
+  String get defaultTheme => _strings['defaultTheme']!;
+  String get defaultThemeDesc => _strings['defaultThemeDesc']!;
+  String get materialYou => _strings['materialYou']!;
+  String get materialYouDesc => _strings['materialYouDesc']!;
+  String get liquidMode => _strings['liquidMode']!;
+  String get liquidModeDesc => _strings['liquidModeDesc']!;
+  String get liquidBackground => _strings['liquidBackground']!;
+  String get liquidBackgroundDesc => _strings['liquidBackgroundDesc']!;
+  String get retainOriginalColor => _strings['retainOriginalColor']!;
+  String get retainOriginalColorDesc => _strings['retainOriginalColorDesc']!;
+  String get usePosterColor => _strings['usePosterColor']!;
+  String get usePosterColorDesc => _strings['usePosterColorDesc']!;
+  String get resetToDefaultPicture => _strings['resetToDefaultPicture']!;
+  String get resetToDefaultPictureDesc => _strings['resetToDefaultPictureDesc']!;
+  String get extras => _strings['extras']!;
+  String get bloom => _strings['bloom']!;
+  String get bloomDesc => _strings['bloomDesc']!;
+  String get palette => _strings['palette']!;
+  String get paletteDesc => _strings['paletteDesc']!;
+  String get oledMode => _strings['oledMode']!;
+  String get oledModeDesc => _strings['oledModeDesc']!;
+  String get customTheme => _strings['customTheme']!;
+  String get customThemeDesc => _strings['customThemeDesc']!;
+  String get logoAnimation => _strings['logoAnimation']!;
+  String get logoAnimationDesc => _strings['logoAnimationDesc']!;
+  String get customThemes => _strings['customThemes']!;
+  String get palettes => _strings['palettes']!;
   String get common => _strings['common']!;
   String get universal => _strings['universal']!;
   String get askForTrackingPermission => _strings['askForTrackingPermission']!;
