@@ -4,6 +4,7 @@ import 'package:anymex/widgets/custom_widgets/anymex_animated_logo.dart';
 import 'package:anymex/widgets/non_widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:anymex/l10n/app_localizations.dart'; // 添加
 
 class ProfileInfo extends StatelessWidget {
   final String username;
@@ -20,6 +21,7 @@ class ProfileInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         Text(
@@ -33,7 +35,7 @@ class ProfileInfo extends StatelessWidget {
         GestureDetector(
           onLongPress: () {
             Clipboard.setData(ClipboardData(text: version));
-            snackBar('Version copied');
+            snackBar(l10n.versionCopied); // 本地化
           },
           child: Text(
             version,
@@ -90,6 +92,7 @@ class ProfileSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -118,7 +121,7 @@ class ProfileSection extends StatelessWidget {
           GestureDetector(
             onLongPress: () {
               Clipboard.setData(ClipboardData(text: version));
-              snackBar('Version copied');
+              snackBar(l10n.versionCopied); // 本地化
             },
             child: Text(
               version,
@@ -143,7 +146,7 @@ class ProfileSection extends StatelessWidget {
                 autoPlay: true,
               ),
             ),
-            title: "Developer",
+            title: l10n.developer, // 本地化
             subtitle: "RyanYuuki",
             trailing: IconButton(
                 onPressed: () async {
