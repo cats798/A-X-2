@@ -1,4 +1,5 @@
 import 'package:anymex/controllers/services/backup_restore/backup_restore_service.dart';
+import 'package:anymex/l10n/app_localizations.dart';
 import 'package:anymex/screens/other_features.dart';
 import 'package:anymex/screens/settings/sub_settings/widgets/backup_and_restore_widgets.dart';
 import 'package:anymex/utils/theme_extensions.dart';
@@ -43,7 +44,7 @@ class _BackupRestorePageState extends State<BackupRestorePage> {
       String? password;
       if (usePassword && passwordController.text.isNotEmpty) {
         if (passwordController.text != confirmPasswordController.text) {
-          snackBar("Passwords don't match!");
+          snackBar(AppLocalizations.of(context)!.passwordsDontMatch);
           return;
         }
         password = passwordController.text;
@@ -51,11 +52,11 @@ class _BackupRestorePageState extends State<BackupRestorePage> {
 
       final path = await controller.exportBackupToExternal(password: password);
       if (path != null && mounted) {
-        snackBar("Backup saved successfully!");
+        snackBar(AppLocalizations.of(context)!.backupSuccess);
       }
     } catch (e) {
       if (mounted) {
-        snackBar("Backup failed: ${e.toString()}");
+        snackBar('${AppLocalizations.of(context)!.backupFailed} ${e.toString()}');
       }
     }
   }
@@ -75,7 +76,7 @@ class _BackupRestorePageState extends State<BackupRestorePage> {
 
       final info = await controller.getBackupInfo(path, password: password);
       if (info == null) {
-        snackBar("Invalid backup file or incorrect password");
+        snackBar(AppLocalizations.of(context)!.invalidBackup);
         return;
       }
 
@@ -89,11 +90,11 @@ class _BackupRestorePageState extends State<BackupRestorePage> {
               await controller.restoreBackup(path,
                   password: password, merge: false);
               if (mounted) {
-                snackBar("Backup restored successfully!");
+                snackBar(AppLocalizations.of(context)!.restoreSuccess);
               }
             } catch (e) {
               if (mounted) {
-                snackBar("Restore failed: ${e.toString()}");
+                snackBar('${AppLocalizations.of(context)!.restoreFailed} ${e.toString()}');
               }
             }
           },
@@ -102,7 +103,7 @@ class _BackupRestorePageState extends State<BackupRestorePage> {
         backgroundColor: Colors.transparent,
       );
     } catch (e) {
-      snackBar("Error selecting file: ${e.toString()}");
+      snackBar('${AppLocalizations.of(context)!.errorSelectingFile} ${e.toString()}');
     }
   }
 
@@ -119,12 +120,13 @@ class _BackupRestorePageState extends State<BackupRestorePage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Glow(
       child: Scaffold(
         body: Column(
           children: [
-            const NestedHeader(title: 'Data Management'),
+            NestedHeader(title: l10n.dataManagement),
             Expanded(
               child: SingleChildScrollView(
                 padding:
@@ -132,7 +134,7 @@ class _BackupRestorePageState extends State<BackupRestorePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const _SectionHeader(title: "Current Library"),
+                    _SectionHeader(title: l10n.currentLibrary),
                     const SizedBox(height: 16),
                     Obx(() {
                       controller.isRestoring.value;
@@ -150,19 +152,19 @@ class _BackupRestorePageState extends State<BackupRestorePage> {
                       );
                     }),
                     const SizedBox(height: 32),
-                    const _SectionHeader(title: "Actions"),
+                    _SectionHeader(title: l10n.actions),
                     const SizedBox(height: 16),
                     ActionCard(
-                      title: "Create Backup",
-                      subtitle: "Secure your library to local storage",
+                      title: l10n.createBackup,
+                      subtitle: l10n.backupSubtitle,
                       icon: Icons.backup_rounded,
                       color: theme.colorScheme.primary,
                       onTap: _handleBackup,
                     ),
                     const SizedBox(height: 16),
                     ActionCard(
-                      title: "Restore Data",
-                      subtitle: "Import your .anymex backup file",
+                      title: l10n.restoreData,
+                      subtitle: l10n.restoreSubtitle,
                       icon: Icons.settings_backup_restore_rounded,
                       color: theme.colorScheme.tertiary,
                       onTap: () => _handleRestore(context),
@@ -184,6 +186,7 @@ class _SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Text(
       title.toUpperCase(),
       style: TextStyle(
