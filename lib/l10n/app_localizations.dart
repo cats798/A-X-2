@@ -13,6 +13,15 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    // 在 _en 映射的末尾添加以下键值对
+    'versionCopied': 'Version copied',
+    'developer': 'Developer',
+    'coreTeam': 'Core Team',
+    'specialThanks': 'Special Thanks',
+    'communityContributors': 'Community Contributors',
+    'staff': 'Staff',
+    'noContributors': 'No contributors found.',
+    'failedToLoadContributors': 'Failed to load contributors',
     // 卡片样式选择器
     'cardStyle': 'Card Style',
     'cardStyleSaikou': 'Saikou',
@@ -646,6 +655,15 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    // 在 _zh 映射的末尾添加以下键值对
+    'versionCopied': '版本已复制',
+    'developer': '开发者',
+    'coreTeam': '核心团队',
+    'specialThanks': '特别鸣谢',
+    'communityContributors': '社区贡献者',
+    'staff': '工作人员',
+    'noContributors': '暂无贡献者',
+    'failedToLoadContributors': '加载贡献者失败',
     // 卡片样式选择器
     'cardStyle': '卡片样式',
     'cardStyleSaikou': '简约',
@@ -1287,6 +1305,14 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  String get versionCopied => _strings['versionCopied']!;
+  String get developer => _strings['developer']!;
+  String get coreTeam => _strings['coreTeam']!;
+  String get specialThanks => _strings['specialThanks']!;
+  String get communityContributors => _strings['communityContributors']!;
+  String get staff => _strings['staff']!;
+  String get noContributors => _strings['noContributors']!;
+  String get failedToLoadContributors => _strings['failedToLoadContributors']!;
   // 卡片样式
   String get cardStyle => _strings['cardStyle']!;
   String get cardStyleSaikou => _strings['cardStyleSaikou']!;
