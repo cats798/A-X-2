@@ -9,6 +9,7 @@ import 'package:anymex/utils/theme_extensions.dart';
 import 'package:get/get.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 import 'package:anymex/screens/other_features.dart';
+import 'package:anymex/l10n/app_localizations.dart';  // 添加导入
 
 import 'settings_moderation.dart';
 
@@ -24,10 +25,11 @@ class _SettingsCommentsState extends State<SettingsComments> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;  // 获取本地化实例
     return Scaffold(
         body: Column(
       children: [
-        const NestedHeader(title: 'Comment System'),
+        const NestedHeader(title: 'Comment System'),  // 此标题由外部组件控制，暂不处理
         Expanded(
           child: SuperListView(
             padding: getResponsiveValue(context,
@@ -35,13 +37,12 @@ class _SettingsCommentsState extends State<SettingsComments> {
                 desktopValue:
                     const EdgeInsets.fromLTRB(20.0, 20.0, 25.0, 20.0)),
             children: [
-              const Row(
+              Row(
                 children: [
-                  CustomBackButton(),
-                  SizedBox(width: 10),
-                  Text("Comment System",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  const CustomBackButton(),
+                  const SizedBox(width: 10),
+                  Text(l10n.commentSystem,   // 新增键 'commentSystem'
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                 ],
               ),
               Container(
@@ -55,16 +56,15 @@ class _SettingsCommentsState extends State<SettingsComments> {
                   children: [
                     CustomTile(
                         icon: Icons.info_outline,
-                        title: "About Commentum v2",
-                        description:
-                            "Powered by Commentum v2 - Advanced comment system with moderation",
+                        title: l10n.aboutCommentum,  // 新增键 'aboutCommentum'
+                        description: l10n.aboutCommentumDesc,  // 新增键 'aboutCommentumDesc'
                         onTap: () {
-                          _showAboutDialog();
+                          _showAboutDialog(l10n);
                         }),
                     CustomTile(
                         icon: Icons.person_outline,
-                        title: "User Role",
-                        description: _getCurrentRoleDescription(),
+                        title: l10n.userRole,  // 新增键 'userRole'
+                        description: _getCurrentRoleDescription(l10n),
                         postFix: Obx(() => Text(
                               commentumService.currentUserRole.value
                                   .toUpperCase(),
@@ -74,52 +74,52 @@ class _SettingsCommentsState extends State<SettingsComments> {
                               ),
                             )),
                         onTap: () {
-                          _showRoleInfo();
+                          _showRoleInfo(l10n);
                         }),
                     const Divider(height: 1),
                     CustomTile(
                         icon: Icons.admin_panel_settings,
-                        title: "Moderation Panel",
-                        description: "Access moderation tools and reports",
+                        title: l10n.moderationPanel,  // 新增键 'moderationPanel'
+                        description: l10n.moderationPanelDesc,  // 新增键 'moderationPanelDesc'
                         onTap: () {
                           navigate(() => const SettingsModeration());
                         }),
                     CustomTile(
                         icon: Icons.report_outlined,
-                        title: "Reported Comments",
-                        description: "View and manage reported content",
+                        title: l10n.reportedComments,  // 新增键 'reportedComments'
+                        description: l10n.reportedCommentsDesc,  // 新增键 'reportedCommentsDesc'
                         onTap: () {
-                          _navigateToReportsPanel();
+                          _navigateToReportsPanel(l10n);
                         }),
                     const Divider(height: 1),
                     CustomTile(
                         icon: Icons.settings_outlined,
-                        title: "Comment Preferences",
-                        description: "Customize comment display and behavior",
+                        title: l10n.commentPreferences,  // 新增键 'commentPreferences'
+                        description: l10n.commentPreferencesDesc,  // 新增键 'commentPreferencesDesc'
                         onTap: () {
-                          _showCommentPreferences();
+                          _showCommentPreferences(l10n);
                         }),
                     CustomTile(
                         icon: Icons.notifications_outlined,
-                        title: "Notification Settings",
-                        description: "Configure comment notifications",
+                        title: l10n.notificationSettings,  // 新增键 'notificationSettings'
+                        description: l10n.notificationSettingsDesc,  // 新增键 'notificationSettingsDesc'
                         onTap: () {
-                          _showNotificationSettings();
+                          _showNotificationSettings(l10n);
                         }),
                     const Divider(height: 1),
                     CustomTile(
                         icon: Icons.help_outline,
-                        title: "Help & Support",
-                        description: "Get help with the comment system",
+                        title: l10n.helpAndSupport,  // 新增键 'helpAndSupport'
+                        description: l10n.helpAndSupportDesc,  // 新增键 'helpAndSupportDesc'
                         onTap: () {
-                          _showHelpDialog();
+                          _showHelpDialog(l10n);
                         }),
                     CustomTile(
                         icon: Icons.privacy_tip_outlined,
-                        title: "Privacy & Safety",
-                        description: "Privacy settings and safety features",
+                        title: l10n.privacyAndSafety,  // 新增键 'privacyAndSafety'
+                        description: l10n.privacyAndSafetyDesc,  // 新增键 'privacyAndSafetyDesc'
                         onTap: () {
-                          _showPrivacyDialog();
+                          _showPrivacyDialog(l10n);
                         }),
                   ],
                 ),
@@ -132,17 +132,17 @@ class _SettingsCommentsState extends State<SettingsComments> {
     ));
   }
 
-  String _getCurrentRoleDescription() {
+  String _getCurrentRoleDescription(AppLocalizations l10n) {
     final role = commentumService.currentUserRole.value;
     switch (role) {
       case 'super_admin':
-        return 'Full system access and control';
+        return l10n.superAdminDesc;  // 新增键 'superAdminDesc'
       case 'admin':
-        return 'Can moderate and manage users';
+        return l10n.adminDesc;       // 新增键 'adminDesc'
       case 'moderator':
-        return 'Can moderate content';
+        return l10n.moderatorDesc;   // 新增键 'moderatorDesc'
       default:
-        return 'Basic commenting privileges';
+        return l10n.userDesc;        // 新增键 'userDesc'
     }
   }
 
@@ -160,256 +160,210 @@ class _SettingsCommentsState extends State<SettingsComments> {
     }
   }
 
-  void _showAboutDialog() {
+  void _showAboutDialog(AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('About Commentum v2'),
-        content: const Column(
+        title: Text(l10n.aboutCommentum),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Commentum v2 is an advanced comment system that provides:'),
-            SizedBox(height: 8),
-            BulletPoint(text: 'Real-time commenting with nested replies'),
-            BulletPoint(text: 'Advanced moderation tools'),
-            BulletPoint(
-                text:
-                    'User role management (User, Moderator, Admin, Super Admin)'),
-            BulletPoint(text: 'Content reporting and safety features'),
-            BulletPoint(text: 'Voting system with upvotes/downvotes'),
-            BulletPoint(
-                text: 'Cross-platform support (AniList, MyAnimeList, SIMKL)'),
-            SizedBox(height: 8),
+            Text(l10n.commentumFeatures, style: const TextStyle(fontWeight: FontWeight.bold)),  // 新增键 'commentumFeatures'
+            const SizedBox(height: 8),
+            BulletPoint(text: l10n.feature1),   // 新增键 'feature1'~'feature6'
+            BulletPoint(text: l10n.feature2),
+            BulletPoint(text: l10n.feature3),
+            BulletPoint(text: l10n.feature4),
+            BulletPoint(text: l10n.feature5),
+            BulletPoint(text: l10n.feature6),
+            const SizedBox(height: 8),
             Text('Base URL: https://whzwmfxngelicmjyxwmr.supabase.co'),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  void _showRoleInfo() {
+  void _showRoleInfo(AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('User Roles & Permissions'),
-        content: const Column(
+        title: Text(l10n.userRolesPermissions),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Your current role and permissions:',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 12),
+            Text(l10n.currentRolePermissions, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 12),
             RoleDescription(
               role: 'User',
-              permissions: [
-                'Create comments',
-                'Edit own comments',
-                'Delete own comments',
-                'Vote on comments',
-                'Report inappropriate content',
-              ],
+              permissions: l10n.userPermissions.split('\n'),  // 使用换行分割字符串
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             RoleDescription(
               role: 'Moderator',
-              permissions: [
-                'All User permissions',
-                'Edit/delete any comment',
-                'Pin/unpin comments',
-                'Lock/unlock threads',
-                'Warn users',
-                'Mute users temporarily',
-                'Resolve reports',
-              ],
+              permissions: l10n.moderatorPermissions.split('\n'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             RoleDescription(
               role: 'Admin',
-              permissions: [
-                'All Moderator permissions',
-                'Ban/unban users permanently',
-                'Shadow ban users',
-                'Full user management',
-              ],
+              permissions: l10n.adminPermissions.split('\n'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             RoleDescription(
               role: 'Super Admin',
-              permissions: [
-                'All Admin permissions',
-                'System configuration',
-                'Role management',
-                'Discord bot management',
-              ],
+              permissions: l10n.superAdminPermissions.split('\n'),
             ),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  void _navigateToModerationPanel() {
+  void _navigateToModerationPanel(AppLocalizations l10n) {
     // Check if user has moderation permissions
     if (commentumService.currentUserRole.value == 'user') {
-      snackBar('You need moderator or admin permissions to access this panel');
+      snackBar(l10n.noModeratorPermission);
       return;
     }
-
     // Navigate to moderation panel (to be implemented)
-    snackBar('Moderation panel coming soon!');
+    snackBar(l10n.moderationPanelComingSoon);
   }
 
-  void _navigateToReportsPanel() {
-    // Check if user has moderation permissions
+  void _navigateToReportsPanel(AppLocalizations l10n) {
     if (commentumService.currentUserRole.value == 'user') {
-      snackBar('You need moderator or admin permissions to access this panel');
+      snackBar(l10n.noModeratorPermission);
       return;
     }
-
-    // Navigate to reports panel (to be implemented)
-    snackBar('Reports panel coming soon!');
+    snackBar(l10n.reportsPanelComingSoon);
   }
 
-  void _showCommentPreferences() {
+  void _showCommentPreferences(AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Comment Preferences'),
-        content: const Column(
+        title: Text(l10n.commentPreferences),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-                'Comment display preferences will be available in future updates.'),
-            SizedBox(height: 8),
-            Text('Planned features:',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            BulletPoint(text: 'Default sorting order'),
-            BulletPoint(text: 'Comment density settings'),
-            BulletPoint(text: 'Show/hide avatars'),
-            BulletPoint(text: 'Font size adjustment'),
-            BulletPoint(text: 'Auto-play videos in comments'),
+            Text(l10n.commentPrefFuture),
+            const SizedBox(height: 8),
+            Text(l10n.plannedFeatures, style: const TextStyle(fontWeight: FontWeight.bold)),
+            BulletPoint(text: l10n.sortDefault),
+            BulletPoint(text: l10n.commentDensity),
+            BulletPoint(text: l10n.showHideAvatars),
+            BulletPoint(text: l10n.fontSizeAdjust),
+            BulletPoint(text: l10n.autoPlayVideos),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  void _showNotificationSettings() {
+  void _showNotificationSettings(AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Notification Settings'),
-        content: const Column(
+        title: Text(l10n.notificationSettings),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-                'Comment notification preferences will be available in future updates.'),
-            SizedBox(height: 8),
-            Text('Planned features:',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            BulletPoint(text: 'Replies to your comments'),
-            BulletPoint(text: 'Mentions in comments'),
-            BulletPoint(text: 'Moderation notifications'),
-            BulletPoint(text: 'Report resolution updates'),
+            Text(l10n.notificationFuture),
+            const SizedBox(height: 8),
+            Text(l10n.plannedFeatures, style: const TextStyle(fontWeight: FontWeight.bold)),
+            BulletPoint(text: l10n.notifReplies),
+            BulletPoint(text: l10n.notifMentions),
+            BulletPoint(text: l10n.notifModeration),
+            BulletPoint(text: l10n.notifReportResolution),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  void _showHelpDialog() {
+  void _showHelpDialog(AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Help & Support'),
-        content: const Column(
+        title: Text(l10n.helpAndSupport),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('How to use the comment system:',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            BulletPoint(
-                text:
-                    'Log in with your AniList, MyAnimeList, or SIMKL account'),
-            BulletPoint(
-                text: 'Comments are automatically linked to your account'),
-            BulletPoint(text: 'You can edit or delete your own comments'),
-            BulletPoint(text: 'Vote on comments you like or dislike'),
-            BulletPoint(text: 'Report inappropriate content to moderators'),
-            SizedBox(height: 12),
-            Text('Need help?', style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(
-                '• Contact moderators for content issues\n• Report bugs through the app settings\n• Join our Discord community for support'),
+            Text(l10n.howToUse, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            BulletPoint(text: l10n.step1),
+            BulletPoint(text: l10n.step2),
+            BulletPoint(text: l10n.step3),
+            BulletPoint(text: l10n.step4),
+            BulletPoint(text: l10n.step5),
+            const SizedBox(height: 12),
+            Text(l10n.needHelp, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(l10n.helpText),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
     );
   }
 
-  void _showPrivacyDialog() {
+  void _showPrivacyDialog(AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Privacy & Safety'),
-        content: const Column(
+        title: Text(l10n.privacyAndSafety),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Your privacy is important:',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            BulletPoint(
-                text: 'Only your username and avatar are shown publicly'),
-            BulletPoint(text: 'Your personal information is never shared'),
-            BulletPoint(
-                text:
-                    'Comments can be deleted but may be retained for moderation'),
-            BulletPoint(text: 'Reported content is reviewed by moderators'),
-            SizedBox(height: 12),
-            Text('Safety features:',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            BulletPoint(text: 'Content filtering and moderation'),
-            BulletPoint(text: 'User reporting system'),
-            BulletPoint(text: 'Ban and warning system for violations'),
-            BulletPoint(text: 'Shadow banning for repeat offenders'),
+            Text(l10n.privacyImportant, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            BulletPoint(text: l10n.privacy1),
+            BulletPoint(text: l10n.privacy2),
+            BulletPoint(text: l10n.privacy3),
+            BulletPoint(text: l10n.privacy4),
+            const SizedBox(height: 12),
+            Text(l10n.safetyFeatures, style: const TextStyle(fontWeight: FontWeight.bold)),
+            BulletPoint(text: l10n.safety1),
+            BulletPoint(text: l10n.safety2),
+            BulletPoint(text: l10n.safety3),
+            BulletPoint(text: l10n.safety4),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(l10n.close),
           ),
         ],
       ),
@@ -446,6 +400,7 @@ class RoleDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
