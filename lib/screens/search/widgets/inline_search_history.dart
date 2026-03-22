@@ -5,6 +5,7 @@ import 'package:anymex/widgets/custom_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:anymex/l10n/app_localizations.dart';  // 添加本地化导入
 
 class InlineSearchHistory extends StatelessWidget {
   final RxList<String> searchTerms;
@@ -41,6 +42,7 @@ class InlineSearchHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;  // 获取本地化实例
     if (searchTerms.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -83,7 +85,7 @@ class InlineSearchHistory extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     AnymexText(
-                      text: 'Recent Searches',
+                      text: l10n.recentSearches,  // 替换
                       variant: TextVariant.semiBold,
                       size: 15,
                       color: Theme.of(context)
@@ -116,7 +118,7 @@ class InlineSearchHistory extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         AnymexText(
-                          text: "Clear",
+                          text: l10n.clear,  // 替换
                           size: 11,
                           color: Theme.of(context)
                               .colorScheme
