@@ -1,6 +1,7 @@
 import 'package:anymex/controllers/offline/offline_storage_controller.dart';
 import 'package:anymex/database/data_keys/keys.dart';
 import 'package:anymex/database/isar_models/offline_media.dart';
+import 'package:anymex/l10n/app_localizations.dart';  // 添加导入
 import 'package:anymex/utils/extension_utils.dart';
 import 'package:anymex/widgets/non_widgets/snackbar.dart';
 import 'package:anymex_extension_runtime_bridge/Models/Source.dart';
@@ -98,7 +99,14 @@ class LibraryController extends GetxController {
     savePreferences();
 
     if (index == -1) {
-      snackBar('Hold to access history editor');
+      // 使用本地化消息
+      final context = Get.context;
+      if (context != null) {
+        final l10n = AppLocalizations.of(context)!;
+        snackBar(l10n.holdToAccessHistoryEditor);
+      } else {
+        snackBar('Hold to access history editor');
+      }
     }
   }
 
