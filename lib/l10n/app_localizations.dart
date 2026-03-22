@@ -1827,7 +1827,6 @@ class AppLocalizations {
   String get producer => _strings['producer']!;
   String get licensor => _strings['licensor']!;
   String get cast => _strings['cast']!;
-  String get staff => _strings['staff']!;
   String get characters => _strings['characters']!;
   String get episodes => _strings['episodes']!;
   String get chapters => _strings['chapters']!;
