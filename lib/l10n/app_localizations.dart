@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 class AppLocalizations {
   final Locale locale;
   AppLocalizations(this.locale);
+  String get profile => _strings['profile']!;
+  String get extensions => _strings['extensions']!;
 
   static AppLocalizations? of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
