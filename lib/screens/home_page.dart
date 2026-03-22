@@ -24,7 +24,7 @@ import 'package:anymex_extension_runtime_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:anymex/l10n/app_localizations.dart';  // 新增
+import 'package:anymex/l10n/app_localizations.dart';  // 已添加
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: Text(
-                l10n.continueWatching,  // 替换
+                l10n.continueWatching,
                 style: TextStyle(
                   fontFamily: "Poppins-SemiBold",
                   fontSize: 17,
@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
     const appBarHeight = kToolbarHeight + 20;
     final double bottomNavBarHeight = MediaQuery.of(context).padding.bottom;
 
-    final l10n = AppLocalizations.of(context)!;  // 新增
+    final l10n = AppLocalizations.of(context)!;
 
     bool isMobile =
         getResponsiveValue(context, desktopValue: false, mobileValue: true);
@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage> {
     return RefreshIndicator(
       onRefresh: () {
         if (!serviceHandler.isLoggedIn.value) {
-          snackBar(l10n.loginPrompt, duration: 1200);  // 替换
+          snackBar(l10n.loginPrompt, duration: 1200);
         }
         return serviceHandler.refresh();
       },
@@ -222,17 +222,17 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 27,
                         spans: [
                           AnymexTextSpan(
-                              text: l10n.greetingHey,  // 替换
+                              text: l10n.greetingHey,
                               size: 30,
                               variant: TextVariant.bold),
                           AnymexTextSpan(
                               text:
-                                  '${serviceHandler.isLoggedIn.value ? serviceHandler.profileData.value.name : l10n.guest}',  // 替换
+                                  '${serviceHandler.isLoggedIn.value ? serviceHandler.profileData.value.name : l10n.guest}',
                               size: 30,
                               color: context.colors.primary,
                               variant: TextVariant.bold),
                           AnymexTextSpan(
-                              text: l10n.greetingQuestion,  // 替换
+                              text: l10n.greetingQuestion,
                               size: 30,
                               variant: TextVariant.bold),
                         ],
@@ -249,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          l10n.homeSubtitle,  // 替换
+                          l10n.homeSubtitle,
                           style: TextStyle(
                             color: Theme.of(context)
                                 .colorScheme
@@ -273,7 +273,7 @@ class _HomePageState extends State<HomePage> {
                       }),
                       if (novelData.isNotEmpty)
                         ReusableCarousel(
-                          title: l10n.recommendedNovels,  // 替换
+                          title: l10n.recommendedNovels,
                           data: novelData,
                           type: ItemType.novel,
                           source: sourceController.activeNovelSource.value,
