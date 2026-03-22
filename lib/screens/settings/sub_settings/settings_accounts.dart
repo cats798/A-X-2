@@ -18,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
+import 'package:anymex/l10n/app_localizations.dart'; // 添加导入
+
 class SettingsAccounts extends StatefulWidget {
   const SettingsAccounts({super.key});
 
@@ -40,6 +42,7 @@ class _SettingsAccountsState extends State<SettingsAccounts> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!; // 获取本地化实例
     final serviceHandler = Get.find<ServiceHandler>();
     final services = [
       {
@@ -80,12 +83,12 @@ class _SettingsAccountsState extends State<SettingsAccounts> {
                   if (!Platform.isWindows &&
                       !Platform.isLinux &&
                       !Platform.isMacOS) ...[
-                    _buildSectionHeader(context, "Social Presence"),
+                    _buildSectionHeader(context, l10n.socialPresence),
                     const SizedBox(height: 12),
                     const DiscordTile(),
                     const SizedBox(height: 24),
                   ],
-                  _buildSectionHeader(context, "Tracking Services"),
+                  _buildSectionHeader(context, l10n.trackingServices),
                   const SizedBox(height: 12),
                   ...services.map((s) => Padding(
                         padding: const EdgeInsets.only(bottom: 12.0),
@@ -125,6 +128,7 @@ class DiscordTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final colors = context.colors;
 
     return Obx(() {
@@ -180,15 +184,15 @@ class DiscordTile extends StatelessWidget {
                         AnymexText(
                           text: isLoggedIn
                               ? (userData?.displayName ?? 'Discord User')
-                              : 'Connect Discord',
+                              : l10n.connectDiscord,
                           variant: TextVariant.bold,
                           size: 16,
                         ),
                         const SizedBox(height: 4),
                         AnymexText(
                           text: isLoggedIn
-                              ? 'Rich Presence Active'
-                              : 'Show what you are watching',
+                              ? l10n.richPresenceActive
+                              : l10n.showWhatYouAreWatching,
                           color: isLoggedIn
                               ? colors.primary
                               : colors.onSurfaceVariant,
@@ -259,25 +263,25 @@ class DiscordTile extends StatelessWidget {
   }
 
   void _showLogoutDialog(BuildContext context, DiscordRPCController rpc) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: context.colors.surfaceContainer,
-        title: const AnymexText(
-            text: "Disconnect Discord?", variant: TextVariant.bold),
-        content: const AnymexText(
-            text: "Your rich presence activity will stop updating."),
+        title: AnymexText(
+            text: l10n.disconnectDiscord, variant: TextVariant.bold),
+        content: AnymexText(text: l10n.richPresenceStopUpdate),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () {
               rpc.logout();
               Navigator.pop(context);
             },
-            child: Text("Disconnect",
+            child: Text(l10n.disconnect,
                 style: TextStyle(color: context.colors.error)),
           ),
         ],
@@ -302,13 +306,14 @@ class TrackingServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final colors = context.colors;
 
     return Obx(() {
       final bool isLogged = service.isLoggedIn.value;
 
       final String username =
-          isLogged ? (service.profileData.value.name ?? "User") : "";
+          isLogged ? (service.profileData.value.name ?? l10n.user) : "";
       final String? avatar = isLogged ? service.profileData.value.avatar : null;
 
       return Container(
@@ -351,8 +356,8 @@ class TrackingServiceCard extends StatelessWidget {
                         const SizedBox(height: 2),
                         AnymexText(
                           text: isLogged
-                              ? 'Connected as $username'
-                              : 'Not connected',
+                              ? '${l10n.connectedAs} $username'
+                              : l10n.notConnected,
                           size: 12,
                           color: isLogged
                               ? colors.primary
@@ -372,7 +377,7 @@ class TrackingServiceCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: AnymexText(
-                      text: isLogged ? "Manage" : "Connect",
+                      text: isLogged ? l10n.manage : l10n.connect,
                       variant: TextVariant.bold,
                       size: 12,
                       color: isLogged
@@ -421,6 +426,7 @@ class TrackingServiceCard extends StatelessWidget {
   }
 
   void _showServiceOptions(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       backgroundColor: context.colors.surface,
@@ -430,11 +436,11 @@ class TrackingServiceCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             AnymexText(
-                text: "Manage $title", variant: TextVariant.bold, size: 18),
+                text: '${l10n.manage} $title', variant: TextVariant.bold, size: 18),
             const SizedBox(height: 20),
             ListTile(
               leading: const Icon(IconlyLight.logout),
-              title: const Text("Log Out"),
+              title: Text(l10n.logout),
               onTap: () {
                 service.logout();
                 Navigator.pop(context);
