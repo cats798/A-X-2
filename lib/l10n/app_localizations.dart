@@ -13,6 +13,24 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'extensions': 'Extensions',
+    'noExtensionManagers': 'No extension managers found.',
+    'failedToRemoveRepo': 'Failed to remove repo',
+    'repoAddedSingular': '1 repo added',
+    'repoAddedPlural': '$count repos added',
+    'notSupported': 'Not supported',
+    'animeNotSupported': 'Anime is not supported by this manager.',
+    'mangaNotSupported': 'Manga is not supported by this manager.',
+    'novelNotSupported': 'Novel is not supported by this manager.',
+    'noRepositoriesYet': 'No repositories yet',
+    'tapToAddRepo': 'Tap + to add a repository URL',
+    'urlCopied': 'URL copied to clipboard',
+    'remove': 'Remove',
+    'addRepo': 'Add Repo',
+    'addRepository': 'Add Repository',
+    'repositoryUrlLabel': 'REPOSITORY URL',
+    'repositoryUrlHint': 'https://raw.githubusercontent.com/...',
+    'adding': 'Adding…',
     'dataManagement': 'Data Management',
     'currentLibrary': 'Current Library',
     'actions': 'Actions',
@@ -430,6 +448,24 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'extensions': '扩展',
+    'noExtensionManagers': '未找到扩展管理器。',
+    'failedToRemoveRepo': '移除仓库失败',
+    'repoAddedSingular': '已添加 1 个仓库',
+    'repoAddedPlural': '已添加 $count 个仓库',
+    'notSupported': '不支持',
+    'animeNotSupported': '此管理器不支持动漫。',
+    'mangaNotSupported': '此管理器不支持漫画。',
+    'novelNotSupported': '此管理器不支持小说。',
+    'noRepositoriesYet': '暂无仓库',
+    'tapToAddRepo': '点击 + 添加仓库地址',
+    'urlCopied': '网址已复制到剪贴板',
+    'remove': '删除',
+    'addRepo': '添加仓库',
+    'addRepository': '添加仓库',
+    'repositoryUrlLabel': '仓库地址',
+    'repositoryUrlHint': 'https://raw.githubusercontent.com/...',
+    'adding': '添加中…',
     'dataManagement': '数据管理',
     'currentLibrary': '当前库',
     'actions': '操作',
@@ -855,6 +891,31 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  String get extensions => _strings['extensions']!;
+  String get noExtensionManagers => _strings['noExtensionManagers']!;
+  String get failedToRemoveRepo => _strings['failedToRemoveRepo']!;
+  
+  String reposAdded(int count) {
+    if (count == 1) {
+      return _strings['repoAddedSingular']!;
+    } else {
+      return _strings['repoAddedPlural']!.replaceFirst('\$count', count.toString());
+    }
+  }
+  
+  String get notSupported => _strings['notSupported']!;
+  String get animeNotSupported => _strings['animeNotSupported']!;
+  String get mangaNotSupported => _strings['mangaNotSupported']!;
+  String get novelNotSupported => _strings['novelNotSupported']!;
+  String get noRepositoriesYet => _strings['noRepositoriesYet']!;
+  String get tapToAddRepo => _strings['tapToAddRepo']!;
+  String get urlCopied => _strings['urlCopied']!;
+  String get remove => _strings['remove']!;
+  String get addRepo => _strings['addRepo']!;
+  String get addRepository => _strings['addRepository']!;
+  String get repositoryUrlLabel => _strings['repositoryUrlLabel']!;
+  String get repositoryUrlHint => _strings['repositoryUrlHint']!;
+  String get adding => _strings['adding']!;
   String get dataManagement => _strings['dataManagement']!;
   String get currentLibrary => _strings['currentLibrary']!;
   String get actions => _strings['actions']!;
