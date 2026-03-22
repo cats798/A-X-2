@@ -5,6 +5,7 @@ import 'package:anymex/screens/settings/sub_settings/contributors/models/contrib
 import 'package:anymex/utils/theme_extensions.dart';
 import 'package:anymex/widgets/animation/staggered_animations.dart';
 import 'package:anymex/widgets/common/glow.dart';
+import 'package:anymex/l10n/app_localizations.dart'; // 添加
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -373,7 +374,7 @@ class _ContributorsPageState extends State<ContributorsPage> {
       communityContributors.assignAll(communityList);
       staff.assignAll(staffList);
     } catch (error) {
-      errorMessage.value = 'Failed to load contributors';
+      errorMessage.value = '加载贡献者失败'; // 中文
       debugPrint('Contributors fetch error: $error');
     } finally {
       isLoading.value = false;
@@ -624,13 +625,9 @@ class _ContributorsPageState extends State<ContributorsPage> {
                           child: Text(
                             [
                               if (contributor.commitCount > 0)
-                                contributor.commitCount == 1
-                                    ? '1 commit'
-                                    : '${contributor.commitCount} commits',
+                                '${contributor.commitCount} 次提交',
                               if (contributor.prCount > 0)
-                                contributor.prCount == 1
-                                    ? '1 PR'
-                                    : '${contributor.prCount} PRs',
+                                '${contributor.prCount} 个 PR',
                             ].join(' • '),
                             style: TextStyle(
                               fontSize: 10,
@@ -748,7 +745,7 @@ class _ContributorsPageState extends State<ContributorsPage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        '${contributor.commitCount} commit${contributor.commitCount == 1 ? '' : 's'}',
+                        '${contributor.commitCount} 次提交',
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
@@ -767,9 +764,7 @@ class _ContributorsPageState extends State<ContributorsPage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        contributor.prCount == 1
-                            ? '1 PR'
-                            : '${contributor.prCount} PRs',
+                        '${contributor.prCount} 个 PR',
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
@@ -795,6 +790,7 @@ class _ContributorsPageState extends State<ContributorsPage> {
 
   Widget _buildStaffSection(BuildContext context) {
     final colors = context.colors;
+    final l10n = AppLocalizations.of(context)!;
     if (staff.isEmpty)
       return const SliverToBoxAdapter(child: SizedBox.shrink());
 
@@ -886,6 +882,7 @@ class _ContributorsPageState extends State<ContributorsPage> {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
+    final l10n = AppLocalizations.of(context)!;
 
     return Glow(
       child: Scaffold(
@@ -893,7 +890,7 @@ class _ContributorsPageState extends State<ContributorsPage> {
           () => CustomScrollView(
             slivers: [
               const SliverToBoxAdapter(
-                  child: NestedHeader(title: 'Contributors')),
+                  child: NestedHeader(title: '贡献者')), // 已本地化
               if (isLoading.value)
                 const SliverFillRemaining(
                   child: Center(child: CircularProgressIndicator()),
@@ -911,25 +908,24 @@ class _ContributorsPageState extends State<ContributorsPage> {
                   specialThanks.isEmpty &&
                   communityContributors.isEmpty)
                 const SliverFillRemaining(
-                  child: Center(child: Text('No contributors found.')),
+                  child: Center(child: Text('暂无贡献者')),
                 )
               else ...[
                 _buildFeaturedSection(
                   context,
-                  title: 'Core Team',
+                  title: '核心团队',
                   contributors: coreTeam,
                 ),
                 if (specialThanks.isNotEmpty)
                   _buildFeaturedSection(
                     context,
-                    title: 'Special Thanks',
-                    subtitle:
-                        'The extension system is available thanks to Aayush.',
+                    title: '特别鸣谢',
+                    subtitle: '扩展系统得益于 Aayush 的贡献。',
                     contributors: specialThanks,
                   ),
-                _buildSectionHeader(context, 'Community Contributors'),
+                _buildSectionHeader(context, '社区贡献者'),
                 _buildContributorsList(context, communityContributors),
-                _buildSectionHeader(context, 'Staff'),
+                _buildSectionHeader(context, '工作人员'),
                 _buildStaffSection(context),
                 const SliverToBoxAdapter(child: SizedBox(height: 48)),
               ],
