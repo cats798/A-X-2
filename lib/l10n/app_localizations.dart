@@ -1779,7 +1779,6 @@ class AppLocalizations {
   String get logout => _strings['logout']!;
   String get signUp => _strings['signUp']!;
   String get username => _strings['username']!;
-  String get password => _strings['password']!;
   String get email => _strings['email']!;
   String get forgotPassword => _strings['forgotPassword']!;
   String get resetPassword => _strings['resetPassword']!;
