@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:iconly/iconly.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
+import 'package:anymex/l10n/app_localizations.dart';  // 新增导入
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -31,10 +32,11 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;  // 获取本地化实例
     return Glow(
         child: Scaffold(
             body: Column(children: [
-      const NestedHeader(title: 'Settings'),
+      NestedHeader(title: l10n.settings),  // 替换标题
       Expanded(
           child: SuperListView(
         padding: getResponsiveValue(context,
@@ -51,76 +53,73 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 CustomTile(
                     icon: IconlyLight.profile,
-                    title: "Accounts",
-                    description:
-                        "Manage your MyAnimeList, Anilist, Simkl Accounts!",
+                    title: l10n.accounts,  // 替换
+                    description: l10n.accountsDescription,  // 替换
                     onTap: () {
                       navigate(() => const SettingsAccounts());
                     }),
                 CustomTile(
                     icon: HugeIcons.strokeRoundedBulb,
-                    title: "Common",
-                    description: "Tweak Settings",
+                    title: l10n.common,  // 替换
+                    description: l10n.tweakSettings,  // 替换
                     onTap: () {
                       navigate(() => const SettingsCommon());
                     }),
                 CustomTile(
                     icon: HugeIcons.strokeRoundedLibraries,
-                    title: "Backup & Restore",
-                    description: "Backup and restore your library",
+                    title: l10n.backupAndRestore,  // 替换
+                    description: l10n.backupRestoreDescription,  // 替换
                     onTap: () {
                       navigate(() => const BackupRestorePage());
                     }),
                 CustomTile(
                     icon: Icons.storage_rounded,
-                    title: "Storage Manager",
-                    description:
-                        "Manage cached images, thresholds, and reset app data",
+                    title: l10n.storageManager,  // 替换
+                    description: l10n.storageManagerDescription,  // 替换
                     onTap: () {
                       navigate(() => const SettingsStorageManager());
                     }),
                 CustomTile(
                     icon: HugeIcons.strokeRoundedPaintBoard,
-                    title: "UI",
-                    description: "Customize the interface to your liking",
+                    title: l10n.ui,  // 替换
+                    description: l10n.uiDescription,  // 替换
                     onTap: () {
                       navigate(() => const SettingsUi());
                     }),
                 CustomTile(
                     icon: HugeIcons.strokeRoundedPlay,
-                    title: "Player",
-                    description: "Play around with the video player",
+                    title: l10n.player,  // 替换
+                    description: l10n.playerDescription,  // 替换
                     onTap: () {
                       navigate(() => const SettingsPlayer());
                     }),
                 CustomTile(
                     icon: Icons.menu_book_rounded,
-                    title: "Reader",
-                    description: "Configure manga and novel reader defaults",
+                    title: l10n.reader,  // 替换
+                    description: l10n.readerDescription,  // 替换
                     onTap: () {
                       navigate(() => const SettingsReader());
                     }),
                 CustomTile(
                     icon: HugeIcons.strokeRoundedPaintBrush01,
-                    title: "Theme",
-                    description: "Personalize the look and make it yours",
+                    title: l10n.theme,  // 替换
+                    description: l10n.themeDescription,  // 替换
                     onTap: () {
                       navigate(() => const SettingsTheme());
                     }),
                 const SizedBox(height: 10),
                 CustomTile(
                     icon: Icons.extension_rounded,
-                    title: "Extensions",
-                    description: "Extensions tailored to your needs",
+                    title: l10n.extensions,  // 替换
+                    description: l10n.extensionsDescription,  // 替换
                     onTap: () {
                       navigate(() => const SettingsExtensions());
                     }),
                 const SizedBox(height: 10),
                 CustomTile(
                   icon: HugeIcons.strokeRoundedInformationCircle,
-                  title: "Experimental",
-                  description:
-                      "Experimental Settings that are still being tested",
+                  title: l10n.experimental,  // 替换
+                  description: l10n.experimentalDescription,  // 替换
                   onTap: () async {
                     navigate(() => const SettingsExperimental());
                   },
@@ -128,15 +127,15 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(height: 10),
                 CustomTile(
                   icon: HugeIcons.strokeRoundedFile01,
-                  title: "Share Logs",
-                  description: "Share Logs of the App",
+                  title: l10n.shareLogs,  // 替换
+                  description: l10n.shareLogsDescription,  // 替换
                   onTap: () async => await Logger.share(),
                 ),
                 const SizedBox(height: 10),
                 CustomTile(
                   icon: HugeIcons.strokeRoundedInformationCircle,
-                  title: "About",
-                  description: "About the App",
+                  title: l10n.about,  // 替换
+                  description: l10n.aboutDescription,  // 替换
                   onTap: () async {
                     navigate(() => const AboutPage());
                   },
