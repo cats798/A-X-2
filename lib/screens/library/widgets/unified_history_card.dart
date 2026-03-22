@@ -11,6 +11,7 @@ import 'package:anymex/widgets/helper/tv_wrapper.dart';
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:anymex/utils/theme_extensions.dart';
+import 'package:anymex/l10n/app_localizations.dart'; // 添加本地化导入
 
 class UnifiedHistoryCard extends StatelessWidget {
   final HistoryModel media;
@@ -20,6 +21,7 @@ class UnifiedHistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.colors;
+    final l10n = AppLocalizations.of(context)!; // 获取本地化实例
     final gradientColors = [
       context.colors.surface.opaque(0.3),
       context.colors.primaryContainer.opaque(0.3),
@@ -183,6 +185,8 @@ class UnifiedHistoryCardV3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.colors;
+    final l10n = AppLocalizations.of(context)!; // 获取本地化实例
+
     return AnymexCard(
       shape: RoundedRectangleBorder(
         side: BorderSide(
@@ -312,6 +316,8 @@ class UnifiedHistoryCardV2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.colors;
+    final l10n = AppLocalizations.of(context)!; // 获取本地化实例
+
     return AnymexCard(
       shape: RoundedRectangleBorder(
           side: BorderSide(
@@ -361,7 +367,8 @@ class UnifiedHistoryCardV2 extends StatelessWidget {
                           color: colorScheme.primary,
                         ),
                         child: AnymexText(
-                          text: media.formattedEpisodeTitle ?? 'Episode ??',
+                          // 修改默认占位符为本地化版本
+                          text: media.formattedEpisodeTitle ?? '${l10n.episode} ??',
                           size: 12,
                           variant: TextVariant.bold,
                           color: colorScheme.onPrimary,
