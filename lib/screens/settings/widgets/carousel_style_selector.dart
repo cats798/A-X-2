@@ -1,5 +1,6 @@
 import 'package:anymex/controllers/service_handler/service_handler.dart';
 import 'package:anymex/controllers/settings/settings.dart';
+import 'package:anymex/l10n/app_localizations.dart';
 import 'package:anymex/models/Media/media.dart';
 import 'package:anymex/utils/function.dart';
 import 'package:anymex/widgets/common/carousel/carousel_style_registry.dart';
@@ -18,18 +19,21 @@ void showCarouselStyleSelector(BuildContext context) {
     context: context,
     builder: (dialogContext) {
       return Obx(
-        () => AnymexDialog(
-          title: 'Carousel Style',
-          onConfirm: () {
-            settingsController.carouselStyle = selectedIndex.value;
-          },
-          contentWidget: CarouselStyleSelector(
-            initialIndex: selectedIndex.value,
-            onStyleChanged: (index) {
-              selectedIndex.value = index;
+        () {
+          final l10n = AppLocalizations.of(context)!;
+          return AnymexDialog(
+            title: l10n.carouselStyle,
+            onConfirm: () {
+              settingsController.carouselStyle = selectedIndex.value;
             },
-          ),
-        ),
+            contentWidget: CarouselStyleSelector(
+              initialIndex: selectedIndex.value,
+              onStyleChanged: (index) {
+                selectedIndex.value = index;
+              },
+            ),
+          );
+        },
       );
     },
   );
@@ -103,8 +107,28 @@ class _CarouselStyleSelectorState extends State<CarouselStyleSelector> {
     _selectedIndex = CarouselStyleRegistry.normalizeIndex(widget.initialIndex);
   }
 
+  String _getStyleDescription(int index) {
+    final l10n = AppLocalizations.of(context)!;
+    // 根据实际样式数量调整
+    switch (index) {
+      case 0: return l10n.carouselStyleDesc0;
+      case 1: return l10n.carouselStyleDesc1;
+      default: return '';
+    }
+  }
+
+  String _getStyleName(int index) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (index) {
+      case 0: return l10n.carouselStyleName0;
+      case 1: return l10n.carouselStyleName1;
+      default: return CarouselStyleRegistry.byIndex(index).name;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final style = CarouselStyleRegistry.byIndex(_selectedIndex);
 
     return ConstrainedBox(
@@ -127,7 +151,7 @@ class _CarouselStyleSelectorState extends State<CarouselStyleSelector> {
           ),
           10.height(),
           Text(
-            style.description,
+            _getStyleDescription(_selectedIndex),
             style: Theme.of(context).textTheme.bodySmall,
           ),
           12.height(),
@@ -155,7 +179,7 @@ class _CarouselStyleSelectorState extends State<CarouselStyleSelector> {
 
     return AnymexChip(
       isSelected: isSelected,
-      label: style.name,
+      label: _getStyleName(index),
       onSelected: (selected) {
         if (!selected) return;
         setState(() {
