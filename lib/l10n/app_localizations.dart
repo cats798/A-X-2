@@ -13,6 +13,7 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'accountsDescription': 'Manage your connected accounts',
     'accountsDescription': 'Manage your accounts',
     'accounts': 'Accounts',
     'versionCopied': 'Version copied',
@@ -638,6 +639,7 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'accountsDescription': '管理您的关联账户',
     'accountsDescription': '管理您的账户',
     'accounts': '账户',
     'versionCopied': '版本已复制',
