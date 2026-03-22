@@ -55,6 +55,7 @@ class AppLocalizations {
     'watch': 'Watch',
     'read': 'Read',
     'score': 'Score',
+    'status': 'Status',
     'addToList': 'Add to List',
     'removeFromList': 'Remove from List',
     'updateProgress': 'Update Progress',
@@ -70,6 +71,9 @@ class AppLocalizations {
     'install': 'Install',
     'uninstall': 'Uninstall',
     'update': 'Update',
+    'reset': 'Reset',
+    'apply': 'Apply',
+    'clear': 'Clear',
 
     // 播放器
     'play': 'Play',
@@ -94,7 +98,7 @@ class AppLocalizations {
     'logout': 'Logout',
     'signUp': 'Sign Up',
     'username': 'Username',
-    'password': 'Password',
+    'userPassword': 'Password',
     'email': 'Email',
     'forgotPassword': 'Forgot Password?',
     'resetPassword': 'Reset Password',
@@ -132,9 +136,6 @@ class AppLocalizations {
     'import': 'Import',
     'refresh': 'Refresh',
     'reload': 'Reload',
-    'reset': 'Reset',
-    'apply': 'Apply',
-    'clear': 'Clear',
 
     // 详情页
     'synopsis': 'Synopsis',
@@ -411,7 +412,7 @@ class AppLocalizations {
     'errorSelectingFile': 'Error selecting file:',
     'passwordRequired': 'Password Required',
     'passwordRequiredHint': 'This backup is encrypted. Please enter the password to continue.',
-    'password': 'Password',
+    'backupPassword': 'Password',
     'enterPassword': 'Enter password',
     'unlock': 'Unlock',
     'backupOptions': 'Backup Options',
@@ -681,6 +682,7 @@ class AppLocalizations {
     'watch': '观看',
     'read': '阅读',
     'score': '评分',
+    'status': '状态',
     'addToList': '添加到列表',
     'removeFromList': '从列表移除',
     'updateProgress': '更新进度',
@@ -696,6 +698,9 @@ class AppLocalizations {
     'install': '安装',
     'uninstall': '卸载',
     'update': '更新',
+    'reset': '重置',
+    'apply': '应用',
+    'clear': '清除',
 
     // 播放器
     'play': '播放',
@@ -720,7 +725,7 @@ class AppLocalizations {
     'logout': '退出登录',
     'signUp': '注册',
     'username': '用户名',
-    'password': '密码',
+    'userPassword': '密码',
     'email': '邮箱',
     'forgotPassword': '忘记密码？',
     'resetPassword': '重置密码',
@@ -758,9 +763,6 @@ class AppLocalizations {
     'import': '导入',
     'refresh': '刷新',
     'reload': '重新加载',
-    'reset': '重置',
-    'apply': '应用',
-    'clear': '清除',
 
     // 详情页
     'synopsis': '简介',
@@ -1037,7 +1039,7 @@ class AppLocalizations {
     'errorSelectingFile': '选择文件时出错：',
     'passwordRequired': '需要密码',
     'passwordRequiredHint': '此备份已加密。请输入密码以继续。',
-    'password': '密码',
+    'backupPassword': '密码',
     'enterPassword': '输入密码',
     'unlock': '解锁',
     'backupOptions': '备份选项',
@@ -1272,7 +1274,7 @@ class AppLocalizations {
     }
   }
 
-  // 基础 getter
+  // 基础 getter - 避免重复
   String get appTitle => _strings['appTitle']!;
   String get home => _strings['home']!;
   String get search => _strings['search']!;
@@ -1307,6 +1309,7 @@ class AppLocalizations {
   String get watch => _strings['watch']!;
   String get read => _strings['read']!;
   String get score => _strings['score']!;
+  String get status => _strings['status']!;
   String get addToList => _strings['addToList']!;
   String get removeFromList => _strings['removeFromList']!;
   String get updateProgress => _strings['updateProgress']!;
@@ -1322,6 +1325,9 @@ class AppLocalizations {
   String get install => _strings['install']!;
   String get uninstall => _strings['uninstall']!;
   String get update => _strings['update']!;
+  String get reset => _strings['reset']!;
+  String get apply => _strings['apply']!;
+  String get clear => _strings['clear']!;
   String get play => _strings['play']!;
   String get pause => _strings['pause']!;
   String get volume => _strings['volume']!;
@@ -1342,7 +1348,7 @@ class AppLocalizations {
   String get logout => _strings['logout']!;
   String get signUp => _strings['signUp']!;
   String get username => _strings['username']!;
-  String get password => _strings['password']!;
+  String get userPassword => _strings['userPassword']!;
   String get email => _strings['email']!;
   String get forgotPassword => _strings['forgotPassword']!;
   String get resetPassword => _strings['resetPassword']!;
@@ -1380,9 +1386,6 @@ class AppLocalizations {
   String get import => _strings['import']!;
   String get refresh => _strings['refresh']!;
   String get reload => _strings['reload']!;
-  String get reset => _strings['reset']!;
-  String get apply => _strings['apply']!;
-  String get clear => _strings['clear']!;
   String get synopsis => _strings['synopsis']!;
   String get background => _strings['background']!;
   String get relations => _strings['relations']!;
@@ -1651,7 +1654,7 @@ class AppLocalizations {
   String get errorSelectingFile => _strings['errorSelectingFile']!;
   String get passwordRequired => _strings['passwordRequired']!;
   String get passwordRequiredHint => _strings['passwordRequiredHint']!;
-  String get password => _strings['password']!;
+  String get backupPassword => _strings['backupPassword']!;
   String get enterPassword => _strings['enterPassword']!;
   String get unlock => _strings['unlock']!;
   String get backupOptions => _strings['backupOptions']!;
