@@ -13,6 +13,7 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'accounts': 'Accounts',
     'versionCopied': 'Version copied',
     'developer': 'Developer',
     'coreTeam': 'Core Team',
@@ -636,6 +637,7 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'accounts': '账户',
     'versionCopied': '版本已复制',
     'developer': '开发者',
     'coreTeam': '核心团队',
@@ -1267,7 +1269,8 @@ class AppLocalizations {
   }
 
   // 所有 getter 统一放在此处，每个键只定义一次
-    String get versionCopied => _strings['versionCopied']!;
+  String get accounts => _strings['accounts']!;
+  String get versionCopied => _strings['versionCopied']!;
   String get developer => _strings['developer']!;
   String get coreTeam => _strings['coreTeam']!;
   String get specialThanks => _strings['specialThanks']!;
