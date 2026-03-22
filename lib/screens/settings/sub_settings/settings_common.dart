@@ -10,6 +10,7 @@ import 'package:anymex/utils/theme_extensions.dart';
 import 'package:get/get.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 import 'package:anymex/screens/other_features.dart';
+import 'package:anymex/l10n/app_localizations.dart'; // 添加本地化导入
 
 class SettingsCommon extends StatefulWidget {
   const SettingsCommon({super.key});
@@ -37,11 +38,13 @@ class _SettingsCommonState extends State<SettingsCommon> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!; // 获取本地化实例
+
     return Glow(
       child: Scaffold(
         body: Column(
           children: [
-            const NestedHeader(title: 'Common'),
+            NestedHeader(title: l10n.common), // 替换
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -55,14 +58,14 @@ class _SettingsCommonState extends State<SettingsCommon> {
                     children: [
                       AnymexExpansionTile(
                         initialExpanded: true,
-                        title: 'Universal',
+                        title: l10n.universal, // 替换
                         content: Column(
                           children: [
                             CustomSwitchTile(
                                 icon: Icons.touch_app_rounded,
-                                title: 'Ask for tracking permission',
+                                title: l10n.askForTrackingPermission, // 替换
                                 description:
-                                    'If enabled, Anymex will ask for tracking permission if not then it will track by default.',
+                                    l10n.askForTrackingPermissionDesc, // 替换
                                 switchValue: shouldAskForPermission,
                                 onChanged: (e) {
                                   setState(() {
@@ -72,9 +75,9 @@ class _SettingsCommonState extends State<SettingsCommon> {
                                 }),
                             CustomSwitchTile(
                                 icon: Icons.play_disabled_rounded,
-                                title: 'Hide Adult Content',
+                                title: l10n.hideAdultContent, // 替换
                                 description:
-                                    'If enabled, you will not get a prompt for enabling adult content on Anilist/MyAnimeList.',
+                                    l10n.hideAdultContentDesc, // 替换
                                 switchValue: hideAdultContent,
                                 onChanged: (e) {
                                   setState(() {
@@ -85,9 +88,9 @@ class _SettingsCommonState extends State<SettingsCommon> {
                             Obx(
                               () => CustomSwitchTile(
                                 icon: Icons.play_circle_fill_rounded,
-                                title: 'Show Continue Watching Card',
+                                title: l10n.showContinueWatchingCard, // 替换
                                 description:
-                                    'Display Continue Watching cards on home page from offline progress.',
+                                    l10n.showContinueWatchingCardDesc, // 替换
                                 switchValue: settings.showContinueWatchingCard,
                                 onChanged: (e) =>
                                     settings.showContinueWatchingCard = e,
@@ -98,22 +101,22 @@ class _SettingsCommonState extends State<SettingsCommon> {
                       ),
                       AnymexExpansionTile(
                           initialExpanded: true,
-                          title: 'Anilist',
+                          title: l10n.anilist, // 替换
                           content: CustomTile(
                             icon: Icons.format_list_bulleted_sharp,
-                            title: 'Manage Anilist Lists',
+                            title: l10n.manageAnilistLists, // 替换
                             description:
-                                "Choose which list to show on home page",
+                                l10n.chooseListToShowOnHome, // 替换
                             onTap: () => _showHomePageCardsDialog(),
                           )),
                       AnymexExpansionTile(
                           initialExpanded: true,
-                          title: 'MyAnimeList',
+                          title: l10n.myAnimeList, // 替换
                           content: CustomTile(
                             icon: Icons.format_list_bulleted_sharp,
-                            title: 'Manage MyAnimeList Lists',
+                            title: l10n.manageMyAnimeListLists, // 替换
                             description:
-                                "Choose which list to show on home page",
+                                l10n.chooseListToShowOnHome, // 替换
                             onTap: () => _showHomePageCardsDialog(),
                           )),
                     ],
@@ -128,11 +131,13 @@ class _SettingsCommonState extends State<SettingsCommon> {
   }
 
   void _showHomePageCardsDialog() {
+    final l10n = AppLocalizations.of(context)!; // 在 dialog 中获取实例
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Manage Home Page Cards"),
+          title: Text(l10n.manageHomePageCards), // 替换
           content: SizedBox(
             width: double.maxFinite,
             child: Obx(() {
@@ -163,7 +168,7 @@ class _SettingsCommonState extends State<SettingsCommon> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text("Close"),
+              child: Text(l10n.close), // 替换
             ),
           ],
         );
