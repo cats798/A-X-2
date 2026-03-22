@@ -14,17 +14,12 @@ import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:anymex/utils/theme_extensions.dart';
 import 'package:get/get.dart';
+import 'package:anymex/l10n/app_localizations.dart'; // 添加本地化导入
 
 class MangaHistoryCard extends StatelessWidget {
   final OfflineMedia data;
 
   const MangaHistoryCard({super.key, required this.data});
-
-  String _formatEpisodeNumber() {
-    final episode = data.currentChapter;
-    if (episode == null) return 'Chapter ??';
-    return 'Chapter ${episode.number}';
-  }
 
   double calculateProgress() {
     return (data.currentChapter?.pageNumber ?? 0) /
@@ -33,12 +28,27 @@ class MangaHistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final colorScheme = context.colors;
     final gradientColors = [
       context.colors.surface.opaque(0.3),
       context.colors.primaryContainer.opaque(0.3),
       context.colors.primaryContainer.opaque(0.8),
     ];
+
+    // 格式化章节显示
+    String formatChapterNumber() {
+      final episode = data.currentChapter;
+      if (episode == null) return '${l10n.chapter} ${l10n.unknown}';
+      return '${l10n.chapter} ${episode.number}';
+    }
+
+    // 格式化页码显示
+    String formatPageInfo() {
+      final pageNum = data.currentChapter?.pageNumber ?? 0;
+      final totalPages = data.currentChapter?.totalPages ?? 0;
+      return '${l10n.page} $pageNum / $totalPages';
+    }
 
     return AnymexCard(
       shape: RoundedRectangleBorder(
@@ -51,18 +61,16 @@ class MangaHistoryCard extends StatelessWidget {
       child: AnymexOnTap(
         onTap: () {
           if (data.currentChapter == null) {
-            snackBar(
-                "Error: Missing required data. It seems you closed the app directly after reading the chapter!",
-                maxLines: 3);
+            snackBar(l10n.errorMissingData, maxLines: 3);
           } else {
             if (data.currentChapter?.sourceName == null) {
-              snackBar("Cant Play since user closed the app abruptly");
+              snackBar(l10n.cannotPlayAbruptClose);
             }
             final source = Get.find<SourceController>()
                 .getMangaExtensionByName(data.currentChapter!.sourceName!);
             if (source == null) {
-              snackBar(
-                  "Install ${data.currentChapter?.sourceName} First, Then Click");
+              snackBar(l10n.installExtensionFirst
+                  .replaceFirst('{sourceName}', data.currentChapter?.sourceName ?? '??'));
             } else {
               navigate(() => ReadingPage(
                     anilistData: convertOfflineToMedia(data),
@@ -128,7 +136,7 @@ class MangaHistoryCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Episode number
+                          // Chapter number
                           Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 4),
@@ -138,14 +146,14 @@ class MangaHistoryCard extends StatelessWidget {
                               color: colorScheme.primary,
                             ),
                             child: AnymexText(
-                              text: _formatEpisodeNumber(),
+                              text: formatChapterNumber(),
                               size: 12,
                               variant: TextVariant.bold,
                               color: colorScheme.onPrimary,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          // Episode title
+                          // Chapter title
                           AnymexText(
                             text:
                                 data.currentChapter?.title ?? data.name ?? '??',
@@ -172,8 +180,7 @@ class MangaHistoryCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               AnymexText(
-                                text:
-                                    'PAGE ${data.currentChapter?.pageNumber} / ${data.currentChapter?.totalPages}',
+                                text: formatPageInfo(),
                                 size: 12,
                                 color: colorScheme.primary,
                                 variant: TextVariant.bold,
@@ -204,172 +211,3 @@ class MangaHistoryCard extends StatelessWidget {
     );
   }
 }
-
-// class MangaHistoryCard extends StatelessWidget {
-//   final OfflineMedia data;
-
-//   const MangaHistoryCard({super.key, required this.data});
-
-//   String _formatEpisodeNumber() {
-//     final episode = data.currentChapter;
-//     if (episode == null) return 'Chapter ??';
-//     return 'Chapter ${episode.number}';
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final gradientColors = [
-//       context.colors.surface.opaque(0.3),
-//       context.colors.primaryContainer.opaque(0.3),
-//       context.colors.primaryContainer.opaque(0.8),
-//     ];
-
-//     return Container(
-//       clipBehavior: Clip.antiAlias,
-//       margin: const EdgeInsets.only(bottom: 16),
-//       decoration: BoxDecoration(
-//         border: Border(
-//             right: BorderSide(
-//                 width: 2, color: context.colors.primary)),
-//         borderRadius: BorderRadius.circular(12.multiplyRadius()),
-//         color: context.colors.surface.withAlpha(144),
-//       ),
-//       child: AnymexOnTap(
-//         onTap: () {
-//           if (data.currentChapter == null) {
-//             snackBar(
-//                 "Error: Missing required data. It seems you closed the app directly after reading the chapter!",
-//                 maxLines: 3);
-//           } else {
-//             if (data.currentChapter?.sourceName == null) {
-//               snackBar("Cant Play since user closed the app abruptly");
-//             }
-//             final source = Get.find<SourceController>()
-//                 .getMangaExtensionByName(data.currentChapter!.sourceName!);
-//             if (source == null) {
-//               snackBar(
-//                   "Install ${data.currentChapter?.sourceName} First, Then Click");
-//             } else {
-//               navigate(() => ReadingPage(
-//                     anilistData: convertOfflineToMedia(data),
-//                     chapterList: data.chapters!,
-//                     currentChapter: data.currentChapter!,
-//                   ));
-//             }
-//           }
-//         },
-//         child: ClipRRect(
-//           borderRadius: BorderRadius.circular(12.multiplyRadius()),
-//           child: Stack(children: [
-//             // Background image
-//             Positioned.fill(
-//               child: AnymeXImage(
-//                 imageUrl: data.cover ?? data.poster!,
-//                 radius: 0,
-//                 width: double.infinity,
-//               ),
-//             ),
-//             Positioned.fill(
-//               child: Blur(
-//                 blur: 4,
-//                 blurColor: Colors.transparent,
-//                 child: Container(),
-//               ),
-//             ),
-//             Positioned.fill(
-//               child: Container(
-//                 decoration: BoxDecoration(
-//                     gradient: LinearGradient(
-//                         begin: Alignment.centerLeft,
-//                         end: Alignment.centerRight,
-//                         colors: gradientColors)),
-//               ),
-//             ),
-//             Row(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 AnymeXImage(
-//                   width: getResponsiveSize(context,
-//                       mobileSize: 100, desktopSize: 130),
-//                   height: getResponsiveSize(context,
-//                       mobileSize: 130, desktopSize: 180),
-//                   radius: 0,
-//                   imageUrl: data.poster!,
-//                 ),
-//                 Expanded(
-//                   child: Padding(
-//                     padding: const EdgeInsets.all(12.0),
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         SizedBox(
-//                             height: getResponsiveSize(context,
-//                                 mobileSize: 05, desktopSize: 30)),
-//                         AnymexText(
-//                           text: _formatEpisodeNumber().toUpperCase(),
-//                           size: getResponsiveSize(context,
-//                               mobileSize: 18, desktopSize: 20),
-//                           variant: TextVariant.bold,
-//                           maxLines: 1,
-//                           color: context.colors.primary,
-//                           overflow: TextOverflow.ellipsis,
-//                         ),
-//                         const SizedBox(height: 4),
-//                         AnymexText(
-//                           text: data.currentChapter?.title ?? '??',
-//                           size: 14,
-//                           maxLines: 2,
-//                           variant: TextVariant.bold,
-//                           overflow: TextOverflow.ellipsis,
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             Positioned(
-//               right: 10,
-//               bottom: 10,
-//               child: Row(
-//                 children: [
-//                   Container(
-//                     padding:
-//                         const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-//                     decoration: BoxDecoration(
-//                       borderRadius: BorderRadius.circular((8.multiplyRadius())),
-//                       color: context.colors.primaryContainer,
-//                     ),
-//                     child: AnymexText(
-//                       text:
-//                           formatTimeAgo(data.currentChapter?.lastReadTime ?? 0),
-//                       size: 12,
-//                       color: context.colors.onPrimaryContainer,
-//                       variant: TextVariant.bold,
-//                     ),
-//                   ),
-//                   const SizedBox(width: 10),
-//                   Container(
-//                     padding:
-//                         const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-//                     decoration: BoxDecoration(
-//                       borderRadius: BorderRadius.circular((8.multiplyRadius())),
-//                       color: context.colors.primary,
-//                     ),
-//                     child: AnymexText(
-//                       text:
-//                           'PAGE ${data.currentChapter?.pageNumber} / ${data.currentChapter?.totalPages}',
-//                       size: 12,
-//                       color: context.colors.onPrimary,
-//                       variant: TextVariant.bold,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ]),
-//         ),
-//       ),
-//     );
-//   }
-// }
