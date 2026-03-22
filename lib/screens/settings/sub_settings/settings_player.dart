@@ -26,6 +26,8 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
+// 添加本地化导入
+import 'package:anymex/l10n/app_localizations.dart';
 
 const Map<String, List<String>> fontGroups = {
   'Default': ['Default'],
@@ -227,6 +229,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
     showDialog(
       context: context,
       builder: (context) {
+        final l10n = AppLocalizations.of(context)!;
         return Dialog(
             backgroundColor: context.colors.surface,
             shape: RoundedRectangleBorder(
@@ -240,9 +243,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'PlayBack Speeds',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Text(
+                    l10n.playbackSpeed, // 需要添加键 playbackSpeed
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
                   SizedBox(
@@ -277,8 +280,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
   }
 
   void showPlayerStyleDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<int>(
-        title: "Player Theme",
+        title: l10n.playerTheme, // 使用现有键 playerTheme
         items: [0, 1, 2],
         selectedItem: selectedStyleIndex,
         getTitle: (i) => numToPlayerStyle(i),
@@ -289,8 +293,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
   }
 
   void _showPlayerControlThemeDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<String>(
-      title: 'Control Theme',
+      title: l10n.controlTheme, // 需要添加键 controlTheme
       items: PlayerControlThemeRegistry.themes.map((e) => e.id).toList(),
       selectedItem: settings.playerControlThemeRx,
       getTitle: (id) => PlayerControlThemeRegistry.resolve(id).name,
@@ -303,8 +308,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
   }
 
   void _showMediaIndicatorThemeDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<String>(
-      title: 'Swipe Indicator Theme',
+      title: l10n.swipeIndicatorTheme, // 需要添加键 swipeIndicatorTheme
       items: MediaIndicatorThemeRegistry.themes.map((e) => e.id).toList(),
       selectedItem: settings.mediaIndicatorThemeRx,
       getTitle: (id) => MediaIndicatorThemeRegistry.resolve(id).name,
@@ -325,8 +331,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
       orElse: () => resizeModeList.first,
     );
 
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<String>(
-      title: 'Resize Modes',
+      title: l10n.resizeMode, // 现有键
       items: resizeModeList,
       selectedItem: selectedLabel.obs,
       getTitle: (item) => item,
@@ -361,6 +368,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final l10n = AppLocalizations.of(context)!;
         return AlertDialog(
           title: Text(
             title,
@@ -395,8 +403,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
   }
 
   void _showTranslationLanguageDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<String>(
-      title: "Translation Language",
+      title: l10n.translateTo, // 现有键
       items: SubtitleTranslator.languages.keys.toList(),
       selectedItem: settings.playerSettings.value.translateTo.obs,
       getTitle: (code) => SubtitleTranslator.languages[code]!,
@@ -409,10 +418,11 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
   }
 
   void _showFontSelectionDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Select Subtitle Font"),
+        title: Text(l10n.selectSubtitleFont), // 需要添加键 selectSubtitleFont
         content: SizedBox(
           width: double.maxFinite,
           child: ListView(
@@ -461,8 +471,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
       PlayerSettingsKeys.subtitleOutlineType.set(currentType);
     }
 
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<String>(
-      title: "Outline Type",
+      title: l10n.outlineType, // 现有键
       items: subtitleOutlineTypes,
       selectedItem: currentType.obs,
       getTitle: (v) => v,
@@ -502,10 +513,12 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Glow(
         child: Scaffold(
             body: Column(children: [
-      if (!widget.isModal) const NestedHeader(title: 'Player Settings'),
+      if (!widget.isModal)
+        NestedHeader(title: l10n.playerSettings), // 现有键 playerSettings
       Expanded(
         child: SingleChildScrollView(
           padding: getResponsiveValue(context,
@@ -515,10 +528,10 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (widget.isModal) ...[
-                const Center(
-                  child: Text("Player Settings",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                Center(
+                  child: Text(l10n.playerSettings,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20)),
                 )
               ],
               SizedBox(height: widget.isModal ? 30.0 : 0),
@@ -526,7 +539,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AnymexExpansionTile(
-                          title: 'Experimental',
+                          title: l10n.experimental, // 需要添加键 experimental
                           initialExpanded: false,
                           content: Builder(builder: (context) {
                             final experimentalEnabled =
@@ -543,9 +556,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.science_outlined,
-                                  title: 'Enable Experimental Settings',
+                                  title: l10n.enableExperimentalSettings, // 需要添加键
                                   description:
-                                      'Required for Core and Visual tuning. Keep off on low-end devices.',
+                                      l10n.experimentalDescription, // 需要添加键
                                   switchValue: experimentalEnabled,
                                   onChanged: (val) {
                                     PlayerUiKeys.playerExperimentalEnabled
@@ -555,14 +568,14 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 ),
                                 if (!experimentalEnabled)
                                   _buildExperimentalGateMessage(
-                                      'Core and Visual settings are disabled. Enable Experimental to use them.'),
+                                      l10n.experimentalGateMessage), // 需要添加键
                                 if (experimentalEnabled && usingMpv)
                                   Column(
                                 children: [
                                   CustomTile(
                                     padding: 10,
                                     icon: Icons.memory_rounded,
-                                    title: 'Decoder (HWDec)',
+                                    title: l10n.decoderHwdec, // 需要添加键
                                     isDescBold: true,
                                     descColor:
                                         Theme.of(context).colorScheme.primary,
@@ -570,7 +583,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                         (mpvCore['hwdec'] as String?) ??
                                             'auto-safe',
                                     onTap: () => _showMpvCoreSelectionDialog(
-                                      title: 'Mpv Decoder (HWDec)',
+                                      title: l10n.mpvDecoder,
                                       items: const [
                                         'no',
                                         'auto-safe',
@@ -589,7 +602,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                   CustomTile(
                                     padding: 10,
                                     icon: Icons.sync_rounded,
-                                    title: 'Video Sync',
+                                    title: l10n.videoSync, // 需要添加键
                                     isDescBold: true,
                                     descColor:
                                         Theme.of(context).colorScheme.primary,
@@ -597,7 +610,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                         (mpvCore['videoSync'] as String?) ??
                                             'audio',
                                     onTap: () => _showMpvCoreSelectionDialog(
-                                      title: 'Video Sync',
+                                      title: l10n.videoSync,
                                       items: const [
                                         'audio',
                                         'display-resample',
@@ -614,9 +627,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                   CustomSwitchTile(
                                     padding: const EdgeInsets.all(10),
                                     icon: Icons.movie_filter_rounded,
-                                    title: 'Frame Interpolation',
+                                    title: l10n.frameInterpolation, // 需要添加键
                                     description:
-                                        'Smoother motion, can increase GPU usage',
+                                        l10n.frameInterpolationDesc, // 需要添加键
                                     switchValue:
                                         (mpvCore['interpolation'] as bool?) ??
                                             false,
@@ -630,9 +643,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                   CustomSwitchTile(
                                     padding: const EdgeInsets.all(10),
                                     icon: Icons.graphic_eq_rounded,
-                                    title: 'Audio Pitch Correction',
+                                    title: l10n.audioPitchCorrection, // 需要添加键
                                     description:
-                                        'Keep voice pitch stable at higher speeds',
+                                        l10n.audioPitchCorrectionDesc, // 需要添加键
                                     switchValue:
                                         (mpvCore['audioPitchCorrection']
                                                 as bool?) ??
@@ -646,9 +659,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                   ),
                                   CustomSliderTile(
                                     icon: Icons.timer_outlined,
-                                    title: 'Cache Minutes',
+                                    title: l10n.cacheMinutes, // 需要添加键
                                     description:
-                                        'Read-ahead duration in Minutes',
+                                        l10n.cacheMinutesDesc, // 需要添加键
                                     sliderValue:
                                         ((mpvCore['cacheMinutes'] as num?) ?? 5)
                                             .toDouble(),
@@ -668,8 +681,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                   ),
                                   CustomSliderTile(
                                     icon: Icons.downloading_rounded,
-                                    title: 'Demuxer Readahead',
-                                    description: 'Readahead seconds',
+                                    title: l10n.demuxerReadahead, // 需要添加键
+                                    description:
+                                        l10n.demuxerReadaheadDesc, // 需要添加键
                                     sliderValue:
                                         ((mpvCore['demuxerReadaheadSeconds']
                                                     as num?) ??
@@ -693,8 +707,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                   ),
                                   CustomSliderTile(
                                     icon: Icons.storage_rounded,
-                                    title: 'Demuxer Max Buffer',
-                                    description: 'Maximum demuxer buffer (MB)',
+                                    title: l10n.demuxerMaxBuffer, // 需要添加键
+                                    description:
+                                        l10n.demuxerMaxBufferDesc, // 需要添加键
                                     sliderValue: ((mpvCore['demuxerMaxBytesMb']
                                                 as num?) ??
                                             64)
@@ -717,9 +732,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                   ),
                                   CustomSliderTile(
                                     icon: Icons.developer_board_rounded,
-                                    title: 'Decoder Threads',
+                                    title: l10n.decoderThreads, // 需要添加键
                                     description:
-                                        '0 means automatic thread count',
+                                        l10n.decoderThreadsDesc, // 需要添加键
                                     sliderValue:
                                         ((mpvCore['vdLavcThreads'] as num?) ??
                                                 0)
@@ -746,8 +761,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                     children: [
                                 CustomSliderTile(
                                   icon: Icons.storage_rounded,
-                                  title: 'Buffer Size',
-                                  description: 'Network buffer size in MB',
+                                  title: l10n.bufferSize, // 需要添加键
+                                  description:
+                                      l10n.bufferSizeDesc, // 需要添加键
                                   sliderValue:
                                       ((betterCore['bufferSizeMb'] as num?) ??
                                               32)
@@ -770,9 +786,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.play_arrow_rounded,
-                                  title: 'Auto Play',
+                                  title: l10n.autoPlay,
                                   description:
-                                      'Start playback automatically after load',
+                                      l10n.autoPlayDesc, // 需要添加键
                                   switchValue:
                                       (betterCore['autoPlay'] as bool?) ?? true,
                                   onChanged: (val) {
@@ -785,9 +801,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.network_check_rounded,
-                                  title: 'Use Buffering',
+                                  title: l10n.useBuffering, // 需要添加键
                                   description:
-                                      'Enable buffering strategy for unstable networks',
+                                      l10n.useBufferingDesc, // 需要添加键
                                   switchValue:
                                       (betterCore['useBuffering'] as bool?) ??
                                           true,
@@ -805,16 +821,16 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                           })),
                       AnymexExpansionTile(
                           initialExpanded: true,
-                          title: 'Common',
+                          title: l10n.common, // 现有键
                           content: Column(
                             children: [
                               if (Platform.isAndroid || Platform.isIOS)
                                 CustomSwitchTile(
                                     icon: Icons.subtitles,
                                     padding: const EdgeInsets.all(10),
-                                    title: "Use LibMpv for Playback",
+                                    title: l10n.useLibmpv, // 需要添加键
                                     description:
-                                        "Pick wisely! (LibMpv -> FEATURES, ExoPlayer -> PERFORMANCE)",
+                                        l10n.useLibmpvDesc, // 需要添加键
                                     switchValue:
                                         PlayerKeys.useMediaKit.get<bool>(false),
                                     onChanged: (val) {
@@ -824,9 +840,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                               CustomSwitchTile(
                                   icon: Icons.subtitles,
                                   padding: const EdgeInsets.all(10),
-                                  title: "Use Libass for Subtitles",
+                                  title: l10n.useLibass, // 需要添加键
                                   description:
-                                      "Better subtitle rendering using libass library",
+                                      l10n.useLibassDesc, // 需要添加键
                                   switchValue:
                                       PlayerKeys.useLibass.get<bool>(false),
                                   onChanged: (val) {
@@ -840,7 +856,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 isDescBold: true,
                                 icon: HugeIcons.strokeRoundedPlaySquare,
                                 onTap: _showPlayerControlThemeDialog,
-                                title: 'Player Theme',
+                                title: l10n.playerTheme, // 现有键
                                 description: PlayerControlThemeRegistry.resolve(
                                   settings.playerControlTheme,
                                 ).name,
@@ -853,7 +869,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 icon: Icons.data_object_rounded,
                                 onTap: () => showJsonPlayerThemesSheet(
                                     context, setState, settings),
-                                title: 'JSON Theme Manager',
+                                title: l10n.jsonThemeManager, // 需要添加键
                                 description:
                                     '${PlayerControlThemeRegistry.jsonThemes.length} imported theme(s)',
                               ),
@@ -864,7 +880,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 isDescBold: true,
                                 icon: Icons.tune_rounded,
                                 onTap: _showMediaIndicatorThemeDialog,
-                                title: 'Swipe Indicator Theme',
+                                title: l10n.swipeIndicatorTheme, // 需要添加键
                                 description:
                                     MediaIndicatorThemeRegistry.resolve(
                                   settings.mediaIndicatorTheme,
@@ -873,9 +889,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                               CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.stay_current_portrait,
-                                  title: "Default Portrait",
+                                  title: l10n.defaultPortrait, // 需要添加键
                                   description:
-                                      "For psychopaths who like watching in portrait",
+                                      l10n.defaultPortraitDesc, // 需要添加键
                                   switchValue: settings.defaultPortraitMode,
                                   onChanged: (val) =>
                                       settings.defaultPortraitMode = val),
@@ -886,14 +902,14 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 descColor:
                                     Theme.of(context).colorScheme.primary,
                                 onTap: _showPlaybackSpeedDialog,
-                                title: "Playback Speed",
+                                title: l10n.playbackSpeed, // 需要添加键
                                 description:
                                     '${settings.speed.toStringAsFixed(1)}x',
                               ),
                               CustomTile(
                                 padding: 10,
                                 icon: Icons.aspect_ratio,
-                                title: 'Resize Mode',
+                                title: l10n.resizeMode, // 现有键
                                 isDescBold: true,
                                 description:
                                     settings.resizeMode.capitalizeFirst!,
@@ -906,59 +922,59 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                               CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.fast_forward,
-                                  title: "Auto Skip OP",
-                                  description: "Auto skip the opening song",
+                                  title: l10n.autoSkipOp, // 需要添加键
+                                  description: l10n.autoSkipOpDesc, // 需要添加键
                                   switchValue: settings.autoSkipOP,
                                   onChanged: (val) =>
                                       settings.autoSkipOP = val),
                               CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.fast_forward_outlined,
-                                  title: "Auto Skip ED",
-                                  description: "Auto skip the ending song",
+                                  title: l10n.autoSkipEd, // 需要添加键
+                                  description: l10n.autoSkipEdDesc, // 需要添加键
                                   switchValue: settings.autoSkipED,
                                   onChanged: (val) =>
                                       settings.autoSkipED = val),
                               CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.fast_forward_outlined,
-                                  title: "Auto Skip Recap",
-                                  description: "Auto skip the recap section",
+                                  title: l10n.autoSkipRecap, // 需要添加键
+                                  description: l10n.autoSkipRecapDesc, // 需要添加键
                                   switchValue: settings.autoSkipRecap,
                                   onChanged: (val) =>
                                       settings.autoSkipRecap = val),
                               CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.all_inclusive,
-                                  title: "Auto Skip Once Only",
-                                  description: "Auto skip only once per watch",
+                                  title: l10n.autoSkipOnce, // 需要添加键
+                                  description: l10n.autoSkipOnceDesc, // 需要添加键
                                   switchValue: settings.autoSkipOnce,
                                   onChanged: (val) =>
                                       settings.autoSkipOnce = val),
                               CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.skip_next_rounded,
-                                  title: "Auto Skip Filler",
+                                  title: l10n.autoSkipFiller, // 需要添加键
                                   description:
-                                      "Automatically skip filler episodes when going to next episode",
+                                      l10n.autoSkipFillerDesc, // 需要添加键
                                   switchValue: settings.autoSkipFiller,
                                   onChanged: (val) =>
                                       settings.autoSkipFiller = val),
                               CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.play_disabled_rounded,
-                                  title: "Enable Swipe Controls",
+                                  title: l10n.enableSwipeControls, // 需要添加键
                                   description:
-                                      "Enable if you want to use brightness and volume controls",
+                                      l10n.enableSwipeControlsDesc, // 需要添加键
                                   switchValue: settings.enableSwipeControls,
                                   onChanged: (val) =>
                                       settings.enableSwipeControls = val),
                               CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.screenshot_rounded,
-                                  title: "Save Last Frame",
+                                  title: l10n.saveLastFrame, // 需要添加键
                                   description:
-                                      "Saves a screenshot of the last frame you watched. Disabling this significantly reduces storage usage",
+                                      l10n.saveLastFrameDesc, // 需要添加键
                                   switchValue: settings.enableScreenshot,
                                   onChanged: (val) =>
                                       settings.enableScreenshot = val),
@@ -972,9 +988,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                   });
                                 },
                                 label: settings.seekDuration.toString(),
-                                title: 'DoubleTap to Seek',
+                                title: l10n.doubleTapSeek, // 需要添加键
                                 description:
-                                    'Adjust Double Tap To Seek Duration',
+                                    l10n.doubleTapSeekDesc, // 需要添加键
                                 icon: Iconsax.forward5,
                               ),
                               CustomSliderTile(
@@ -987,8 +1003,8 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                     settings.skipDuration = value.toInt();
                                   });
                                 },
-                                title: 'MegaSkip Duration',
-                                description: 'Adjust MegaSkip Duration',
+                                title: l10n.megaSkipDuration, // 需要添加键
+                                description: l10n.megaSkipDurationDesc, // 需要添加键
                                 icon: Iconsax.forward5,
                               ),
                               CustomSliderTile(
@@ -1002,23 +1018,23 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                     settings.markAsCompleted = value.toInt();
                                   });
                                 },
-                                title: 'Mark As Watched',
+                                title: l10n.markAsWatched, // 现有键
                                 description:
-                                    'How much in percentage to mark episode as watched',
+                                    l10n.markAsWatchedDesc, // 需要添加键
                                 icon: Iconsax.tick_circle,
                               ),
                             ],
                           )),
                       AnymexExpansionTile(
-                          title: 'Subtitles',
+                          title: l10n.subtitles, // 现有键
                           content: Column(
                             children: [
                               CustomSwitchTile(
                                   padding: const EdgeInsets.all(10),
                                   icon: Icons.lightbulb,
-                                  title: 'Transition Subtitle',
+                                  title: l10n.transitionSubtitle, // 需要添加键
                                   description:
-                                      'By disabling this you can avoid the transition between subtitles.',
+                                      l10n.transitionSubtitleDesc, // 需要添加键
                                   switchValue: settings.transitionSubtitle,
                                   onChanged: (e) {
                                     settings.transitionSubtitle = e;
@@ -1026,9 +1042,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                               CustomSwitchTile(
                                 padding: const EdgeInsets.all(10),
                                 icon: HugeIcons.strokeRoundedTranslate,
-                                title: 'Auto Translate Subtitles',
+                                title: l10n.autoTranslateSubtitles, // 需要添加键
                                 description:
-                                    'Use AI to translate soft-subtitles live',
+                                    l10n.autoTranslateSubtitlesDesc, // 需要添加键
                                 switchValue:
                                     settings.playerSettings.value.autoTranslate,
                                 onChanged: (val) {
@@ -1043,7 +1059,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 CustomTile(
                                   padding: 10.0,
                                   icon: Icons.language,
-                                  title: 'Translate To',
+                                  title: l10n.translateTo, // 现有键
                                   description: SubtitleTranslator.languages[
                                           settings.playerSettings.value
                                               .translateTo] ??
@@ -1055,7 +1071,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                               CustomTile(
                                 padding: 10,
                                 icon: Icons.font_download_rounded,
-                                title: 'Subtitle Font',
+                                title: l10n.subtitleFont, // 需要添加键
                                 description:
                                     settings.playerSettings.value.subtitleFont,
                                 onTap: _showFontSelectionDialog,
@@ -1063,7 +1079,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                               CustomTile(
                                 padding: 10,
                                 icon: Icons.format_paint_rounded,
-                                title: 'Outline Type',
+                                title: l10n.outlineType, // 现有键
                                 description: normalizeSubtitleOutlineType(
                                     settings.playerSettings.value
                                         .subtitleOutlineType),
@@ -1081,8 +1097,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                   PlayerSettingsKeys.subtitleOpacity.set(val);
                                   settings.playerSettings.refresh();
                                 },
-                                title: 'Subtitle Transparency',
-                                description: 'Adjust text visibility',
+                                title: l10n.subtitleTransparency, // 需要添加键
+                                description:
+                                    l10n.subtitleTransparencyDesc, // 需要添加键
                                 icon: Icons.opacity,
                               ),
                               CustomSliderTile(
@@ -1098,18 +1115,19 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                       .set(val);
                                   settings.playerSettings.refresh();
                                 },
-                                title: 'Bottom Margin',
-                                description: 'Distance from bottom of screen',
+                                title: l10n.bottomMargin, // 需要添加键
+                                description:
+                                    l10n.bottomMarginDesc, // 需要添加键
                                 icon: Icons.vertical_align_bottom,
                               ),
                               CustomTile(
                                 padding: 10,
-                                description: 'Change subtitle colors',
+                                description: l10n.changeSubtitleColor, // 需要添加键
                                 icon: Icons.palette,
-                                title: 'Subtitle Color',
+                                title: l10n.subtitleColor, // 需要添加键
                                 onTap: () {
                                   _showColorSelectionDialog(
-                                      'Select Subtitle Color',
+                                      l10n.selectSubtitleColor, // 需要添加键
                                       fontColorOptions[
                                               settings.subtitleColor] ??
                                           fontColorOptions['Default']!,
@@ -1121,11 +1139,12 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                               CustomTile(
                                 padding: 10,
                                 icon: Icons.palette,
-                                title: 'Subtitle Outline Color',
-                                description: 'Change subtitle outline color',
+                                title: l10n.subtitleOutlineColor, // 需要添加键
+                                description:
+                                    l10n.changeSubtitleOutlineColor, // 需要添加键
                                 onTap: () {
                                   _showColorSelectionDialog(
-                                      'Select Subtitle Outline Color',
+                                      l10n.selectSubtitleOutlineColor, // 需要添加键
                                       colorOptions[
                                               settings.subtitleOutlineColor] ??
                                           colorOptions['None']!, (color) {
@@ -1135,12 +1154,13 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                               ),
                               CustomTile(
                                 padding: 10,
-                                description: 'Change subtitle background color',
+                                description:
+                                    l10n.changeSubtitleBackgroundColor, // 需要添加键
                                 icon: Icons.palette,
-                                title: 'Subtitle Background Color',
+                                title: l10n.subtitleBackgroundColor, // 需要添加键
                                 onTap: () {
                                   _showColorSelectionDialog(
-                                      'Select Subtitle Background Color',
+                                      l10n.selectSubtitleBackgroundColor, // 需要添加键
                                       colorOptions[settings
                                               .subtitleBackgroundColor] ??
                                           colorOptions['None']!, (color) {
@@ -1156,8 +1176,8 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 onChanged: (double value) {
                                   settings.subtitleSize = value.toInt();
                                 },
-                                title: 'Subtitle Size',
-                                description: 'Adjust Sub Size',
+                                title: l10n.subtitleSize, // 现有键
+                                description: l10n.adjustSubtitleSize, // 需要添加键
                                 icon: Iconsax.subtitle5,
                               ),
                               CustomSliderTile(
@@ -1169,8 +1189,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 onChanged: (double value) {
                                   settings.subtitleOutlineWidth = value.toInt();
                                 },
-                                title: 'Subtitle Outline Width',
-                                description: 'Adjust Subtitle Outline Width',
+                                title: l10n.subtitleOutlineWidth, // 需要添加键
+                                description:
+                                    l10n.adjustSubtitleOutlineWidth, // 需要添加键
                                 icon: Iconsax.subtitle5,
                               ),
                               const SizedBox(height: 20),
@@ -1180,9 +1201,9 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      'Subtitle Preview',
-                                      style: TextStyle(
+                                    Text(
+                                      l10n.subtitlePreview, // 需要添加键
+                                      style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600),
                                     ),
@@ -1196,7 +1217,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                                       ),
                                       padding: const EdgeInsets.all(10),
                                       child: buildStyledSubtitleText(
-                                        text: 'Subtitle Preview Text',
+                                        text: l10n.subtitlePreviewText, // 需要添加键
                                         textColor: fontColorOptions[
                                                 settings.subtitleColor] ??
                                             fontColorOptions['Default']!,
@@ -1221,12 +1242,12 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                             ],
                           )),
                       AnymexExpansionTile(
-                        title: 'Bottom Controls',
+                        title: l10n.bottomControls, // 需要添加键
                         content: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _buildJsonThemeInfoCard(),
-                            _buildSectionLabel('Left Side'),
+                            _buildSectionLabel(l10n.leftSide), // 需要添加键
                             ReorderableListView.builder(
                               key: const Key('left_list'),
                               shrinkWrap: true,
@@ -1252,7 +1273,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                               },
                             ),
                             const SizedBox(height: 16),
-                            _buildSectionLabel('Right Side'),
+                            _buildSectionLabel(l10n.rightSide), // 需要添加键
                             ReorderableListView.builder(
                               key: const Key('right_list'),
                               shrinkWrap: true,
@@ -1284,7 +1305,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
                             ),
                             if (_hiddenButtonIds.isNotEmpty) ...[
                               const SizedBox(height: 16),
-                              _buildSectionLabel('Hidden'),
+                              _buildSectionLabel(l10n.hidden), // 需要添加键
                               ListView.builder(
                                 key: const Key('hidden_list'),
                                 shrinkWrap: true,
@@ -1355,6 +1376,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
 
   Widget _buildJsonThemeInfoCard() {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -1376,7 +1398,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              'If you are using a JSON theme, changes here will not affect player controls. Switch to a built-in theme to apply these settings.',
+              l10n.jsonThemeInfo, // 需要添加键
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: colorScheme.onSurface,
                     height: 1.35,
@@ -1390,6 +1412,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
 
   Widget _buildControlTile(_BottomControl control, String position,
       {required Key key}) {
+    final l10n = AppLocalizations.of(context)!;
     return ListTile(
       key: key,
       leading: Icon(control.icon, size: 22),
@@ -1405,15 +1428,16 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
   }
 
   List<Widget> _buildTrailingButtons(_BottomControl control, String position) {
+    final l10n = AppLocalizations.of(context)!;
     if (position == 'hidden') {
       return [
         IconButton(
-          tooltip: 'Show on left',
+          tooltip: l10n.showOnLeft, // 需要添加键
           icon: const Icon(Icons.visibility_outlined, size: 20),
           onPressed: () => _showButton(control.id, 'left'),
         ),
         IconButton(
-          tooltip: 'Show on right',
+          tooltip: l10n.showOnRight, // 需要添加键
           icon: const Icon(
             Icons.keyboard_arrow_right_rounded,
           ),
@@ -1423,7 +1447,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
     } else {
       return [
         IconButton(
-          tooltip: 'Hide button',
+          tooltip: l10n.hideButton, // 需要添加键
           icon: const Icon(
             Icons.visibility_off_outlined,
             size: 20,
@@ -1432,7 +1456,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
         ),
         if (position == 'left')
           IconButton(
-            tooltip: 'Move to right',
+            tooltip: l10n.moveToRight, // 需要添加键
             icon: const Icon(
               Icons.keyboard_arrow_right_rounded,
             ),
@@ -1440,7 +1464,7 @@ class _SettingsPlayerState extends State<SettingsPlayer> {
           )
         else
           IconButton(
-            tooltip: 'Move to left',
+            tooltip: l10n.moveToLeft, // 需要添加键
             icon: const Icon(Icons.keyboard_arrow_left_rounded,
                 color: Colors.white),
             onPressed: () => _moveButton(control.id, 'left'),
