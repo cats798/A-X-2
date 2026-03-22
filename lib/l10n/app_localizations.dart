@@ -13,6 +13,7 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'storageManager': 'Storage Manager',
     'backupRestoreDescription': 'Backup and restore your data',
     'backupAndRestore': 'Backup & Restore',
     'tweakSettings': 'Tweak Settings',
@@ -642,6 +643,7 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'storageManager': '存储管理',
     'backupRestoreDescription': '备份和恢复您的数据',
     'backupAndRestore': '备份与恢复',
     'tweakSettings': '微调设置',
@@ -1279,6 +1281,7 @@ class AppLocalizations {
   }
 
   // 所有 getter 统一放在此处，每个键只定义一次
+  String get storageManager => _strings['storageManager']!;
   String get backupRestoreDescription => _strings['backupRestoreDescription']!;
   String get backupAndRestore => _strings['backupAndRestore']!;
   String get tweakSettings => _strings['tweakSettings']!;
