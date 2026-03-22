@@ -239,7 +239,8 @@ class _MainAppState extends State<MainApp> {
         supportedLocales: AppLocalizations.supportedLocales,
         scrollBehavior: MyCustomScrollBehavior(),
         debugShowCheckedModeBanner: false,
-        title: "AnymeX",
+        onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+        // title: "AnymeX",
         theme: theme.lightTheme,
         darkTheme: theme.darkTheme,
         themeMode: theme.isSystemMode
@@ -342,17 +343,18 @@ class _FilterScreenState extends State<FilterScreen> {
     final authService = Get.put(ServiceHandler());
     final isSimkl =
         Get.find<ServiceHandler>().serviceType.value == ServicesType.simkl;
+    final l10n = AppLocalizations.of(context)!; // 新增
     return Glow(
       child: PlatformBuilder(
         strictMode: false,
-        desktopBuilder: _buildDesktopLayout(context, authService, isSimkl),
-        androidBuilder: _buildAndroidLayout(isSimkl),
+        desktopBuilder: _buildDesktopLayout(context, authService, isSimkl, l10n),
+        androidBuilder: _buildAndroidLayout(isSimkl, l10n),
       ),
     );
   }
 
   Scaffold _buildDesktopLayout(
-      BuildContext context, ServiceHandler authService, bool isSimkl) {
+      BuildContext context, ServiceHandler authService, bool isSimkl, AppLocalizations l10n) {
     return Scaffold(
       extendBody: true,
       backgroundColor: Provider.of<ThemeProvider>(context).isOled
@@ -376,7 +378,7 @@ class _FilterScreenState extends State<FilterScreen> {
                           onTap: (index) {
                             return SettingsSheet.show(context);
                           },
-                          label: 'Profile',
+                          label: l10n.profile,
                           altIcon: CircleAvatar(
                               radius: 24,
                               backgroundColor: Theme.of(context)
@@ -400,33 +402,33 @@ class _FilterScreenState extends State<FilterScreen> {
                         unselectedIcon: IconlyLight.home,
                         selectedIcon: IconlyBold.home,
                         onTap: _onItemTapped,
-                        label: 'Home',
+                        label: l10n.home,
                       ),
                       NavItem(
                         unselectedIcon: Icons.movie_filter_outlined,
                         selectedIcon: Icons.movie_filter_rounded,
                         onTap: _onItemTapped,
-                        label: 'Anime',
+                        label: l10n.anime,
                       ),
                       NavItem(
                         unselectedIcon:
                             isSimkl ? Iconsax.monitor : Iconsax.book,
                         selectedIcon: isSimkl ? Iconsax.monitor5 : Iconsax.book,
                         onTap: _onItemTapped,
-                        label: 'Manga',
+                        label: l10n.manga,
                       ),
                       NavItem(
                         unselectedIcon: HugeIcons.strokeRoundedLibrary,
                         selectedIcon: HugeIcons.strokeRoundedLibrary,
                         onTap: _onItemTapped,
-                        label: 'Library',
+                        label: l10n.library,
                       ),
                       if (sourceController.shouldShowExtensions.value)
                         NavItem(
                           unselectedIcon: Icons.extension_outlined,
                           selectedIcon: Icons.extension_rounded,
                           onTap: _onItemTapped,
-                          label: "Extensions",
+                          label: l10n.extensions,
                         ),
                     ],
                   ),
@@ -442,7 +444,7 @@ class _FilterScreenState extends State<FilterScreen> {
     );
   }
 
-  Scaffold _buildAndroidLayout(bool isSimkl) {
+  Scaffold _buildAndroidLayout(bool isSimkl, AppLocalizations l10n) {
     return Scaffold(
         body: SmoothPageEntrance(
             style: PageEntranceStyle.slideUpGentle,
@@ -458,25 +460,25 @@ class _FilterScreenState extends State<FilterScreen> {
               unselectedIcon: IconlyBold.home,
               selectedIcon: IconlyBold.home,
               onTap: _onMobileItemTapped,
-              label: 'Home',
+              label: l10n.home,
             ),
             NavItem(
               unselectedIcon: Icons.movie_filter_rounded,
               selectedIcon: Icons.movie_filter_rounded,
               onTap: _onMobileItemTapped,
-              label: 'Anime',
+              label: l10n.anime,
             ),
             NavItem(
               unselectedIcon: isSimkl ? Iconsax.monitor : Iconsax.book,
               selectedIcon: isSimkl ? Iconsax.monitor5 : Iconsax.book,
               onTap: _onMobileItemTapped,
-              label: 'Manga',
+              label: l10n.manga,
             ),
             NavItem(
               unselectedIcon: HugeIcons.strokeRoundedLibrary,
               selectedIcon: HugeIcons.strokeRoundedLibrary,
               onTap: _onMobileItemTapped,
-              label: 'Library',
+              label: l10n.library,
             ),
           ],
         ));
