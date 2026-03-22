@@ -1712,6 +1712,7 @@ class AppLocalizations {
   String get options => _strings['options']!;
   String get applyFilters => _strings['applyFilters']!;
   String get appTitle => _strings['appTitle']!;
+  String get profile => _strings['profile']!;
 
   // 带参数的方法
   String installExtensionFirst(String sourceName) => _strings['installExtensionFirst']!.replaceAll('{sourceName}', sourceName);
