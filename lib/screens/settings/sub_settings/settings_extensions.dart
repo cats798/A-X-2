@@ -9,6 +9,7 @@ import 'package:anymex_extension_runtime_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:anymex/l10n/app_localizations.dart'; // 导入本地化
 
 class SettingsExtensions extends StatefulWidget {
   final Function()? onSave;
@@ -31,11 +32,15 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
   ItemType _tab = ItemType.anime;
   final Map<String, bool> _deleting = {};
 
-  static const _typeTabs = [
-    (label: 'Anime', icon: Icons.movie_creation_outlined, type: ItemType.anime),
-    (label: 'Manga', icon: Icons.menu_book_outlined, type: ItemType.manga),
-    (label: 'Novel', icon: Icons.auto_stories_outlined, type: ItemType.novel),
-  ];
+  // 本地化类型标签（用于类型栏）
+  List<({String label, IconData icon, ItemType type})> get _typeTabs {
+    final l10n = AppLocalizations.of(context)!;
+    return [
+      (label: l10n.anime, icon: Icons.movie_creation_outlined, type: ItemType.anime),
+      (label: l10n.manga, icon: Icons.menu_book_outlined, type: ItemType.manga),
+      (label: l10n.novel, icon: Icons.auto_stories_outlined, type: ItemType.novel),
+    ];
+  }
 
   Extension get _manager => em.managers[_managerIndex];
 
@@ -51,7 +56,8 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
       await em.removeRepo(repo, type);
       widget.onSave?.call();
     } catch (_) {
-      snackBar('Failed to remove repo');
+      final l10n = AppLocalizations.of(context)!;
+      snackBar(l10n.failedToRemoveRepo);
     } finally {
       if (mounted) setState(() => _deleting.remove(key));
     }
@@ -67,7 +73,8 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
         onAdd: (urls) async {
           await _addRepos(_tab, urls);
           if (mounted) {
-            snackBar('${urls.length} repo${urls.length > 1 ? 's' : ''} added');
+            final l10n = AppLocalizations.of(context)!;
+            snackBar(l10n.reposAdded(urls.length));
           }
         },
       ),
@@ -76,14 +83,16 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (em.managers.isEmpty) {
       return Glow(
         child: Scaffold(
           body: Column(children: [
-            const NestedHeader(title: 'Extensions'),
+            NestedHeader(title: l10n.extensions),
             Expanded(
               child: Center(
-                child: Text('No extension managers found.',
+                child: Text(l10n.noExtensionManagers,
                     style: TextStyle(color: context.colors.onSurfaceVariant)),
               ),
             ),
@@ -95,7 +104,7 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
     return Glow(
       child: Scaffold(
         body: Column(children: [
-          const NestedHeader(title: 'Extensions'),
+          NestedHeader(title: l10n.extensions),
           const SizedBox(height: 10),
           if (em.managers.length > 1) ...[
             Padding(
@@ -224,7 +233,7 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
 
   Widget _buildTypeBar() {
     final colors = context.colors;
-    const tabs = _typeTabs;
+    final tabs = _typeTabs;
     final total = tabs.length;
     final currentIndex = tabs.indexWhere((t) => t.type == _tab);
     final alignX = -1.0 + (2.0 * currentIndex / (total - 1));
@@ -354,6 +363,12 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
 
   Widget _buildUnsupported() {
     final colors = context.colors;
+    final l10n = AppLocalizations.of(context)!;
+    final message = switch (_tab) {
+      ItemType.anime => l10n.animeNotSupported,
+      ItemType.manga => l10n.mangaNotSupported,
+      ItemType.novel => l10n.novelNotSupported,
+    };
     return Center(
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Container(
@@ -366,13 +381,13 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
               size: 28, color: colors.onSurfaceVariant),
         ),
         const SizedBox(height: 14),
-        Text('Not supported',
+        Text(l10n.notSupported,
             style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
                 color: colors.onSurface)),
         const SizedBox(height: 4),
-        Text('${_tab.name.capitalizeFirst} is not supported\nby this manager',
+        Text(message,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant)),
       ]),
@@ -381,6 +396,7 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
 
   Widget _buildEmpty({Key? key}) {
     final colors = context.colors;
+    final l10n = AppLocalizations.of(context)!;
     final icon = _typeTabs.firstWhere((t) => t.type == _tab).icon;
     return Center(
       key: key,
@@ -394,13 +410,13 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
           child: Icon(icon, size: 30, color: colors.onSurfaceVariant),
         ),
         const SizedBox(height: 16),
-        Text('No repositories yet',
+        Text(l10n.noRepositoriesYet,
             style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
                 color: colors.onSurface)),
         const SizedBox(height: 5),
-        Text('Tap + to add a repository URL',
+        Text(l10n.tapToAddRepo,
             style: TextStyle(fontSize: 13, color: colors.onSurfaceVariant)),
       ]),
     );
@@ -422,6 +438,7 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
 
   Widget _buildRepoCard(Repo repo, {required bool isDeleting}) {
     final colors = context.colors;
+    final l10n = AppLocalizations.of(context)!;
     final host = _host(repo.url);
 
     return AnimatedOpacity(
@@ -468,9 +485,9 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
                     ],
                   ]),
             ),
-            _iconBtn(Icons.copy_outlined, colors.onSurfaceVariant, 'Copy', () {
+            _iconBtn(Icons.copy_outlined, colors.onSurfaceVariant, l10n.copy, () {
               Clipboard.setData(ClipboardData(text: repo.url));
-              snackBar('URL copied to clipboard');
+              snackBar(l10n.urlCopied);
             }),
             const SizedBox(width: 2),
             if (isDeleting)
@@ -483,7 +500,7 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
                         strokeWidth: 2, color: colors.error)),
               )
             else
-              _iconBtn(Icons.delete_outline_rounded, colors.error, 'Remove',
+              _iconBtn(Icons.delete_outline_rounded, colors.error, l10n.remove,
                   () => _removeRepo(repo, _tab)),
           ]),
         ),
@@ -499,11 +516,12 @@ class _SettingsExtensionsState extends State<SettingsExtensions> {
             : _manager.supportsNovel;
     if (!supported) return null;
     final colors = context.colors;
+    final l10n = AppLocalizations.of(context)!;
     return FloatingActionButton.extended(
       onPressed: _openAddDialog,
       icon: const Icon(Icons.add, size: 20),
-      label: const Text('Add Repo',
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+      label: Text(l10n.addRepo,
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
       backgroundColor: colors.primary,
       foregroundColor: colors.onPrimary,
       elevation: 2,
@@ -586,12 +604,17 @@ class _AddRepoDialogState extends State<_AddRepoDialog> {
   @override
   Widget build(BuildContext context) {
     final c = widget.colors;
+    final l10n = AppLocalizations.of(context)!;
     final icon = switch (widget.type) {
       ItemType.anime => Icons.movie_creation_outlined,
       ItemType.manga => Icons.menu_book_outlined,
       _ => Icons.auto_stories_outlined,
     };
-    final label = widget.type.name.capitalizeFirst!;
+    final typeLabel = switch (widget.type) {
+      ItemType.anime => l10n.anime,
+      ItemType.manga => l10n.manga,
+      ItemType.novel => l10n.novel,
+    };
 
     return Dialog(
       backgroundColor: c.surface,
@@ -618,12 +641,12 @@ class _AddRepoDialogState extends State<_AddRepoDialog> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Add Repository',
+                        Text(l10n.addRepository,
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700,
                                 color: c.onSurface)),
-                        Text(label,
+                        Text(typeLabel,
                             style: TextStyle(
                                 fontSize: 12, color: c.onSurfaceVariant)),
                       ]),
@@ -639,7 +662,7 @@ class _AddRepoDialogState extends State<_AddRepoDialog> {
                 ),
               ]),
               const SizedBox(height: 18),
-              Text('REPOSITORY URL',
+              Text(l10n.repositoryUrlLabel,
                   style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
@@ -657,7 +680,7 @@ class _AddRepoDialogState extends State<_AddRepoDialog> {
                     color: c.onSurface,
                     height: 1.5),
                 decoration: InputDecoration(
-                  hintText: 'https://raw.githubusercontent.com/...',
+                  hintText: l10n.repositoryUrlHint,
                   hintStyle: TextStyle(
                       fontSize: 12,
                       color: c.onSurfaceVariant.withOpacity(0.6),
@@ -690,8 +713,8 @@ class _AddRepoDialogState extends State<_AddRepoDialog> {
                           borderRadius: BorderRadius.circular(12),
                           side: BorderSide(color: c.outlineVariant)),
                     ),
-                    child: const Text('Cancel',
-                        style: TextStyle(
+                    child: Text(l10n.cancel,
+                        style: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 14)),
                   ),
                 ),
@@ -716,7 +739,7 @@ class _AddRepoDialogState extends State<_AddRepoDialog> {
                                       child: CircularProgressIndicator(
                                           strokeWidth: 2, color: c.primary)),
                                   const SizedBox(width: 10),
-                                  Text('Adding…',
+                                  Text(l10n.adding,
                                       style: TextStyle(
                                           color: c.primary,
                                           fontWeight: FontWeight.w500,
@@ -727,8 +750,8 @@ class _AddRepoDialogState extends State<_AddRepoDialog> {
                             key: const ValueKey('add'),
                             onPressed: _submit,
                             icon: const Icon(Icons.add, size: 18),
-                            label: const Text('Add Repository',
-                                style: TextStyle(
+                            label: Text(l10n.addRepository,
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w600, fontSize: 14)),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: c.primary,
