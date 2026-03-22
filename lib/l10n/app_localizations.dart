@@ -1310,7 +1310,6 @@ class AppLocalizations {
   String get coreTeam => _strings['coreTeam']!;
   String get specialThanks => _strings['specialThanks']!;
   String get communityContributors => _strings['communityContributors']!;
-  String get staff => _strings['staff']!;
   String get noContributors => _strings['noContributors']!;
   String get failedToLoadContributors => _strings['failedToLoadContributors']!;
   // 卡片样式
