@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:anymex/l10n/app_localizations.dart';  // 添加导入
 
 class SettingsReader extends StatefulWidget {
   const SettingsReader({super.key});
@@ -96,12 +97,13 @@ class _SettingsReaderState extends State<SettingsReader> {
     });
   }
 
-  void _showMangaLayoutDialog() {
+  void _showMangaLayoutDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<int>(
-      title: 'Reading Layout',
+      title: l10n.layout, // 'Reading Layout' → l10n.layout
       items: const [0, 1],
       selectedItem: _mangaLayout.obs,
-      getTitle: (value) => value == 0 ? 'Continuous' : 'Paged',
+      getTitle: (value) => value == 0 ? l10n.continuous : l10n.paged,
       onItemSelected: (value) {
         setState(() {
           _mangaLayout = value;
@@ -112,21 +114,22 @@ class _SettingsReaderState extends State<SettingsReader> {
     );
   }
 
-  void _showMangaDirectionDialog() {
+  void _showMangaDirectionDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<int>(
-      title: 'Reading Direction',
+      title: l10n.direction,
       items: const [0, 1, 2, 3],
       selectedItem: _mangaDirection.obs,
       getTitle: (value) {
         switch (value) {
           case 0:
-            return 'Bottom-Up';
+            return l10n.bottomUp;
           case 1:
-            return 'Top-Down';
+            return l10n.topDown;
           case 2:
-            return 'RTL';
+            return l10n.rtl;
           default:
-            return 'LTR';
+            return l10n.ltr;
         }
       },
       onItemSelected: (value) {
@@ -139,19 +142,20 @@ class _SettingsReaderState extends State<SettingsReader> {
     );
   }
 
-  void _showMangaDualPageDialog() {
+  void _showMangaDualPageDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<int>(
-      title: 'Dual Page Mode',
+      title: l10n.dualPageMode,
       items: const [0, 1, 2],
       selectedItem: _mangaDualPageMode.obs,
       getTitle: (value) {
         switch (value) {
           case 1:
-            return 'Auto (Laptop/Tab)';
+            return l10n.autoLaptopTab;
           case 2:
-            return 'Force (Dual)';
+            return l10n.forceDual;
           default:
-            return 'Standard (Single)';
+            return l10n.standardSingle;
         }
       },
       onItemSelected: (value) {
@@ -164,21 +168,22 @@ class _SettingsReaderState extends State<SettingsReader> {
     );
   }
 
-  void _showNovelThemeDialog() {
+  void _showNovelThemeDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<int>(
-      title: 'Novel Theme',
+      title: l10n.theme,
       items: const [0, 1, 2, 3],
       selectedItem: _novelThemeMode.obs,
       getTitle: (value) {
         switch (value) {
           case 0:
-            return 'Light';
+            return l10n.light;
           case 1:
-            return 'Dark';
+            return l10n.dark;
           case 2:
-            return 'Sepia';
+            return l10n.sepia;
           default:
-            return 'System';
+            return l10n.system;
         }
       },
       onItemSelected: (value) {
@@ -191,9 +196,10 @@ class _SettingsReaderState extends State<SettingsReader> {
     );
   }
 
-  void _showNovelFontDialog() {
+  void _showNovelFontDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<String>(
-      title: 'Novel Font Family',
+      title: l10n.fontFamily,
       items: _novelFonts,
       selectedItem: _novelFontFamily.obs,
       getTitle: (value) => value,
@@ -207,9 +213,10 @@ class _SettingsReaderState extends State<SettingsReader> {
     );
   }
 
-  void _showReaderControlThemeDialog() {
+  void _showReaderControlThemeDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showSelectionDialog<String>(
-      title: 'Reader Control Theme',
+      title: l10n.controlTheme,
       items: ReaderControlThemeRegistry.themes.map((e) => e.id).toList(),
       selectedItem: settings.readerControlThemeRx,
       getTitle: (id) => ReaderControlThemeRegistry.resolve(id).name,
@@ -271,11 +278,12 @@ class _SettingsReaderState extends State<SettingsReader> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Glow(
       child: Scaffold(
         body: Column(
           children: [
-            const NestedHeader(title: 'Reader'),
+            NestedHeader(title: l10n.reader),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -283,51 +291,51 @@ class _SettingsReaderState extends State<SettingsReader> {
                   child: Column(
                     children: [
                       AnymexExpansionTile(
-                        title: 'Manga',
+                        title: l10n.manga,
                         initialExpanded: true,
                         content: Column(
                           children: [
                             CustomTile(
                               icon: Icons.style_rounded,
-                              title: 'Control Theme',
+                              title: l10n.controlTheme,
                               description: ReaderControlThemeRegistry.resolve(
                                       settings.readerControlTheme)
                                   .name,
-                              onTap: _showReaderControlThemeDialog,
+                              onTap: () => _showReaderControlThemeDialog(context),
                             ),
                             CustomTile(
                               icon: Iconsax.card,
-                              title: 'Layout',
+                              title: l10n.layout,
                               description: _mangaLayout == 0
-                                  ? 'Continuous'
-                                  : 'Paged',
-                              onTap: _showMangaLayoutDialog,
+                                  ? l10n.continuous
+                                  : l10n.paged,
+                              onTap: () => _showMangaLayoutDialog(context),
                             ),
                             CustomTile(
                               icon: Iconsax.direct_right,
-                              title: 'Direction',
+                              title: l10n.direction,
                               description: switch (_mangaDirection) {
-                                0 => 'Bottom-Up',
-                                1 => 'Top-Down',
-                                2 => 'RTL',
-                                _ => 'LTR',
+                                0 => l10n.bottomUp,
+                                1 => l10n.topDown,
+                                2 => l10n.rtl,
+                                _ => l10n.ltr,
                               },
-                              onTap: _showMangaDirectionDialog,
+                              onTap: () => _showMangaDirectionDialog(context),
                             ),
                             CustomTile(
                               icon: Iconsax.book_1,
-                              title: 'Dual Page Mode',
+                              title: l10n.dualPageMode,
                               description: switch (_mangaDualPageMode) {
-                                1 => 'Auto (Laptop/Tab)',
-                                2 => 'Force (Dual)',
-                                _ => 'Standard (Single)',
+                                1 => l10n.autoLaptopTab,
+                                2 => l10n.forceDual,
+                                _ => l10n.standardSingle,
                               },
-                              onTap: _showMangaDualPageDialog,
+                              onTap: () => _showMangaDualPageDialog(context),
                             ),
                             CustomSwitchTile(
                               icon: Iconsax.pharagraphspacing,
-                              title: 'Spaced Pages',
-                              description: 'Continuous mode only',
+                              title: l10n.spacedPages,
+                              description: l10n.continuousModeOnly,
                               switchValue: _mangaSpacedPages,
                               onChanged: (value) => _setReaderBool(
                                 ReaderKeys.spacedPages,
@@ -337,8 +345,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Iconsax.arrow,
-                              title: 'Overscroll',
-                              description: 'Overscroll to prev/next chapter',
+                              title: l10n.overscroll,
+                              description: l10n.overscrollToChapter,
                               switchValue: _mangaOverscroll,
                               onChanged: (value) => _setReaderBool(
                                 ReaderKeys.overscrollToChapter,
@@ -348,8 +356,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Iconsax.eye,
-                              title: 'Persistent Page Indicator',
-                              description: 'Always show page indicator',
+                              title: l10n.persistentPageIndicator,
+                              description: l10n.alwaysShowPageIndicator,
                               switchValue: _mangaPageIndicator,
                               onChanged: (value) => _setReaderBool(
                                 ReaderKeys.showPageIndicator,
@@ -359,8 +367,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.crop_rounded,
-                              title: 'Crop Borders',
-                              description: 'Remove white/black borders',
+                              title: l10n.cropBorders,
+                              description: l10n.removeWhiteBlackBorders,
                               switchValue: _mangaCropBorders,
                               onChanged: (value) => _setReaderBool(
                                 ReaderKeys.cropImages,
@@ -370,8 +378,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.play_arrow_rounded,
-                              title: 'Auto Scroll',
-                              description: 'Automatically scroll pages',
+                              title: l10n.autoScroll,
+                              description: l10n.automaticallyScrollPages,
                               switchValue: _mangaAutoScroll,
                               onChanged: (value) => _setReaderBool(
                                 ReaderKeys.autoScrollEnabled,
@@ -382,9 +390,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             if (_mangaAutoScroll)
                               CustomSliderTile(
                                 icon: Icons.speed_rounded,
-                                title: 'Auto Scroll Speed',
-                                description:
-                                    'Seconds per screen/page (lower is faster)',
+                                title: l10n.autoScrollSpeed,
+                                description: l10n.secondsPerScreenPage,
                                 sliderValue: _mangaAutoScrollSpeed,
                                 min: 1.0,
                                 max: 10.0,
@@ -397,8 +404,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             if (Platform.isAndroid)
                               CustomSwitchTile(
                                 icon: Iconsax.volume_high,
-                                title: 'Volume Keys Navigation',
-                                description: 'Use volume keys to change pages',
+                                title: l10n.volumeKeysNavigation,
+                                description: l10n.useVolumeKeysToChangePages,
                                 switchValue: _mangaVolumeKeys,
                                 onChanged: (value) => _setReaderBool(
                                   ReaderKeys.volumeKeysEnabled,
@@ -409,8 +416,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             if (Platform.isAndroid)
                               CustomSwitchTile(
                                 icon: Iconsax.arrow_swap_horizontal,
-                                title: 'Invert Volume Keys',
-                                description: 'Swap up/down actions',
+                                title: l10n.invertVolumeKeys,
+                                description: l10n.swapUpDownActions,
                                 switchValue: _mangaInvertVolumeKeys,
                                 onChanged: (value) => _setReaderBool(
                                   ReaderKeys.invertVolumeKeys,
@@ -420,8 +427,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                               ),
                             CustomSwitchTile(
                               icon: Icons.lock_clock_rounded,
-                              title: 'Keep Screen On',
-                              description: 'Prevent screen from sleeping',
+                              title: l10n.keepScreenOn,
+                              description: l10n.preventScreenFromSleeping,
                               switchValue: _mangaKeepScreenOn,
                               onChanged: (value) => _setReaderBool(
                                 ReaderKeys.keepScreenOn,
@@ -431,8 +438,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.swap_vert_rounded,
-                              title: 'Auto Webtoon Mode',
-                              description: 'Auto switch to vertical mode',
+                              title: l10n.autoWebtoonMode,
+                              description: l10n.autoSwitchToVerticalMode,
                               switchValue: _mangaAutoWebtoon,
                               onChanged: (value) => _setReaderBool(
                                 ReaderKeys.autoWebtoonMode,
@@ -442,9 +449,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.swap_horiz_rounded,
-                              title: 'Always Show Chapter Transition',
-                              description:
-                                  'Show chapter transition even without gaps',
+                              title: l10n.alwaysShowChapterTransition,
+                              description: l10n.showChapterTransitionEvenWithoutGaps,
                               switchValue: _mangaChapterTransition,
                               onChanged: (value) => _setReaderBool(
                                 ReaderKeys.alwaysShowChapterTransition,
@@ -454,8 +460,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.touch_app_rounded,
-                              title: 'Long Press Page Actions',
-                              description: 'Enable long press quick actions',
+                              title: l10n.longPressPageActions,
+                              description: l10n.enableLongPressQuickActions,
                               switchValue: _mangaLongPressActions,
                               onChanged: (value) => _setReaderBool(
                                 ReaderKeys.longPressPageActionsEnabled,
@@ -467,31 +473,31 @@ class _SettingsReaderState extends State<SettingsReader> {
                         ),
                       ),
                       AnymexExpansionTile(
-                        title: 'Novel',
+                        title: l10n.novel,
                         initialExpanded: true,
                         content: Column(
                           children: [
                             CustomTile(
                               icon: Icons.palette_rounded,
-                              title: 'Theme',
+                              title: l10n.theme,
                               description: switch (_novelThemeMode) {
-                                0 => 'Light',
-                                1 => 'Dark',
-                                2 => 'Sepia',
-                                _ => 'System',
+                                0 => l10n.light,
+                                1 => l10n.dark,
+                                2 => l10n.sepia,
+                                _ => l10n.system,
                               },
-                              onTap: _showNovelThemeDialog,
+                              onTap: () => _showNovelThemeDialog(context),
                             ),
                             CustomTile(
                               icon: HugeIcons.strokeRoundedTextFont,
-                              title: 'Font Family',
+                              title: l10n.fontFamily,
                               description: _novelFontFamily,
-                              onTap: _showNovelFontDialog,
+                              onTap: () => _showNovelFontDialog(context),
                             ),
                             CustomSliderTile(
                               icon: Icons.format_size_rounded,
-                              title: 'Font Size',
-                              description: 'Text size',
+                              title: l10n.fontSize,
+                              description: l10n.textSize,
                               sliderValue: _novelFontSize,
                               min: 12,
                               max: 24,
@@ -504,8 +510,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSliderTile(
                               icon: Icons.height_rounded,
-                              title: 'Line Height',
-                              description: 'Distance between lines',
+                              title: l10n.lineHeight,
+                              description: l10n.distanceBetweenLines,
                               sliderValue: _novelLineHeight,
                               min: 1.0,
                               max: 3.0,
@@ -518,8 +524,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSliderTile(
                               icon: Icons.opacity_rounded,
-                              title: 'Background Opacity',
-                              description: 'Reader background opacity',
+                              title: l10n.backgroundOpacity,
+                              description: l10n.readerBackgroundOpacity,
                               sliderValue: _novelBackgroundOpacity,
                               min: 0.3,
                               max: 1.0,
@@ -533,8 +539,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSliderTile(
                               icon: Icons.text_fields_rounded,
-                              title: 'Letter Spacing',
-                              description: 'Space between letters',
+                              title: l10n.letterSpacing,
+                              description: l10n.spaceBetweenLetters,
                               sliderValue: _novelLetterSpacing,
                               min: -1.0,
                               max: 2.0,
@@ -548,8 +554,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSliderTile(
                               icon: Icons.text_rotation_none_rounded,
-                              title: 'Word Spacing',
-                              description: 'Space between words',
+                              title: l10n.wordSpacing,
+                              description: l10n.spaceBetweenWords,
                               sliderValue: _novelWordSpacing,
                               min: 0.0,
                               max: 5.0,
@@ -562,8 +568,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSliderTile(
                               icon: Icons.format_line_spacing_rounded,
-                              title: 'Paragraph Spacing',
-                              description: 'Space between paragraphs',
+                              title: l10n.paragraphSpacing,
+                              description: l10n.spaceBetweenParagraphs,
                               sliderValue: _novelParagraphSpacing,
                               min: 8.0,
                               max: 32.0,
@@ -577,8 +583,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.chrome_reader_mode_rounded,
-                              title: 'Page Reader Mode',
-                              description: 'Read one page at a time',
+                              title: l10n.pageReaderMode,
+                              description: l10n.readOnePageAtATime,
                               switchValue: _novelPageReaderMode,
                               onChanged: (value) => _setNovelBool(
                                 NovelReaderKeys.pageReader,
@@ -588,8 +594,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.play_arrow_rounded,
-                              title: 'Auto Scroll',
-                              description: 'Automatically scroll content',
+                              title: l10n.autoScroll,
+                              description: l10n.autoScrollContent,
                               switchValue: _novelAutoScroll,
                               onChanged: (value) => _setNovelBool(
                                 NovelReaderKeys.autoScroll,
@@ -600,9 +606,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             if (_novelAutoScroll)
                               CustomSliderTile(
                                 icon: Icons.speed_rounded,
-                                title: 'Auto Scroll Speed',
-                                description:
-                                    'Seconds per screen (lower is faster)',
+                                title: l10n.autoScrollSpeed,
+                                description: l10n.autoScrollSpeedSeconds,
                                 sliderValue: _novelAutoScrollSpeed,
                                 min: 1.0,
                                 max: 10.0,
@@ -616,8 +621,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                               ),
                             CustomSwitchTile(
                               icon: Iconsax.volume_high,
-                              title: 'Volume Button Scrolling',
-                              description: 'Use volume buttons to scroll',
+                              title: l10n.volumeButtonScrolling,
+                              description: l10n.useVolumeButtonsToScroll,
                               switchValue: _novelVolumeScrolling,
                               onChanged: (value) => _setNovelBool(
                                 NovelReaderKeys.volumeScrolling,
@@ -627,8 +632,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.touch_app_rounded,
-                              title: 'Tap to Scroll',
-                              description: 'Tap top/bottom to scroll',
+                              title: l10n.tapToScroll,
+                              description: l10n.tapTopBottomToScroll,
                               switchValue: _novelTapToScroll,
                               onChanged: (value) => _setNovelBool(
                                 NovelReaderKeys.tapToScroll,
@@ -638,8 +643,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.swipe_rounded,
-                              title: 'Swipe Between Chapters',
-                              description: 'Enable chapter swipe navigation',
+                              title: l10n.swipeBetweenChapters,
+                              description: l10n.enableChapterSwipeNavigation,
                               switchValue: _novelSwipeGestures,
                               onChanged: (value) => _setNovelBool(
                                 NovelReaderKeys.swipeGestures,
@@ -649,8 +654,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.lock_clock_rounded,
-                              title: 'Keep Screen On',
-                              description: 'Prevent screen from sleeping',
+                              title: l10n.keepScreenOn,
+                              description: l10n.preventScreenFromSleeping,
                               switchValue: _novelKeepScreenOn,
                               onChanged: (value) => _setNovelBool(
                                 NovelReaderKeys.keepScreenOn,
@@ -660,8 +665,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.pie_chart_rounded,
-                              title: 'Show Reading Progress',
-                              description: 'Show current reading progress',
+                              title: l10n.showReadingProgress,
+                              description: l10n.showCurrentReadingProgress,
                               switchValue: _novelReadingProgress,
                               onChanged: (value) => _setNovelBool(
                                 NovelReaderKeys.showReadingProgress,
@@ -671,8 +676,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.schedule_rounded,
-                              title: 'Show Battery & Time',
-                              description: 'Show status info while reading',
+                              title: l10n.showBatteryTime,
+                              description: l10n.showStatusInfoWhileReading,
                               switchValue: _novelBatteryTime,
                               onChanged: (value) => _setNovelBool(
                                 NovelReaderKeys.showBatteryTime,
@@ -682,8 +687,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             ),
                             CustomSwitchTile(
                               icon: Icons.record_voice_over_rounded,
-                              title: 'Enable TTS',
-                              description: 'Read text aloud',
+                              title: l10n.enableTTS,
+                              description: l10n.readTextAloud,
                               switchValue: _novelTtsEnabled,
                               onChanged: (value) => _setNovelBool(
                                 NovelReaderKeys.ttsEnabled,
@@ -694,8 +699,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             if (_novelTtsEnabled)
                               CustomSliderTile(
                                 icon: Icons.slow_motion_video_rounded,
-                                title: 'TTS Speed',
-                                description: 'Speech speed',
+                                title: l10n.ttsSpeed,
+                                description: l10n.speechSpeed,
                                 sliderValue: _novelTtsSpeed,
                                 min: 0.1,
                                 max: 1.0,
@@ -709,8 +714,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             if (_novelTtsEnabled)
                               CustomSliderTile(
                                 icon: Icons.graphic_eq_rounded,
-                                title: 'TTS Pitch',
-                                description: 'Speech pitch',
+                                title: l10n.ttsPitch,
+                                description: l10n.speechPitch,
                                 sliderValue: _novelTtsPitch,
                                 min: 0.5,
                                 max: 2.0,
@@ -724,9 +729,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                             if (_novelTtsEnabled)
                               CustomSwitchTile(
                                 icon: Icons.skip_next_rounded,
-                                title: 'TTS Auto Advance',
-                                description:
-                                    'Automatically move to next text segment',
+                                title: l10n.ttsAutoAdvance,
+                                description: l10n.automaticallyMoveToNextTextSegment,
                                 switchValue: _novelTtsAutoAdvance,
                                 onChanged: (value) => _setNovelBool(
                                   NovelReaderKeys.ttsAutoAdvance,
@@ -736,9 +740,8 @@ class _SettingsReaderState extends State<SettingsReader> {
                               ),
                             CustomTile(
                               icon: Icons.restart_alt_rounded,
-                              title: 'Reset Novel Reader Settings',
-                              description:
-                                  'Restore all novel reader defaults',
+                              title: l10n.resetNovelReaderSettings,
+                              description: l10n.restoreAllNovelReaderDefaults,
                               onTap: _resetNovelDefaults,
                             ),
                           ],
