@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:anymex/l10n/app_localizations.dart';
 import 'package:anymex/utils/theme_extensions.dart';
 import 'package:anymex/widgets/custom_widgets/anymex_image.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class PasswordInputDialogState extends State<PasswordInputDialog> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Dialog(
       backgroundColor: theme.colorScheme.surfaceContainer,
@@ -33,14 +35,14 @@ class PasswordInputDialogState extends State<PasswordInputDialog> {
             ),
             const SizedBox(height: 16),
             Text(
-              "Password Required",
+              l10n.passwordRequired,
               style: theme.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              "This backup is encrypted. Please enter the password to continue.",
+              l10n.passwordRequiredHint,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: theme.colorScheme.onSurfaceVariant,
@@ -53,8 +55,8 @@ class PasswordInputDialogState extends State<PasswordInputDialog> {
               obscureText: _obscurePassword,
               autofocus: true,
               decoration: InputDecoration(
-                labelText: "Password",
-                hintText: "Enter password",
+                labelText: l10n.password,
+                hintText: l10n.enterPassword,
                 prefixIcon: const Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
                   icon: Icon(_obscurePassword
@@ -84,7 +86,7 @@ class PasswordInputDialogState extends State<PasswordInputDialog> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text("Cancel"),
+                    child: Text(l10n.cancel),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -104,9 +106,9 @@ class PasswordInputDialogState extends State<PasswordInputDialog> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
-                      "Unlock",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    child: Text(
+                      l10n.unlock,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -176,6 +178,7 @@ class RestorePreviewSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final date = info['date'] as String? ?? 'Unknown Date';
 
     return DraggableScrollableSheet(
@@ -207,7 +210,7 @@ class RestorePreviewSheet extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 children: [
                   Text(
-                    "Restore Preview",
+                    l10n.restorePreview,
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -223,7 +226,7 @@ class RestorePreviewSheet extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          "Encrypted • ",
+                          "${l10n.encrypted} • ",
                           style: TextStyle(
                             color: theme.colorScheme.primary,
                             fontSize: 13,
@@ -280,7 +283,7 @@ class RestorePreviewSheet extends StatelessWidget {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            "This will completely replace your current library. All existing data will be overwritten.",
+                            l10n.restoreWarning,
                             style: TextStyle(
                               color: theme.colorScheme.error,
                               fontSize: 13,
@@ -302,9 +305,9 @@ class RestorePreviewSheet extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
-                    child: const Text(
-                      "CONFIRM & RESTORE",
-                      style: TextStyle(
+                    child: Text(
+                      l10n.confirmRestore,
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.1,
                       ),
@@ -335,6 +338,7 @@ class UserInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return GlassContainer(
       child: Padding(
@@ -359,7 +363,7 @@ class UserInfoCard extends StatelessWidget {
                         fit: BoxFit.cover,
                         radius: 0,
                       )
-                    : DefaultAvatar(),
+                    : const DefaultAvatar(),
               ),
             ),
             const SizedBox(width: 16),
@@ -368,7 +372,7 @@ class UserInfoCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Backup Owner",
+                    l10n.backupOwner,
                     style: TextStyle(
                       color: theme.colorScheme.onSurfaceVariant,
                       fontSize: 12,
@@ -450,6 +454,7 @@ class LibraryStatsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final totalItems = animeCount + mangaCount + novelCount;
     final totalLists =
         animeCustomListsCount + mangaCustomListsCount + novelCustomListsCount;
@@ -469,7 +474,7 @@ class LibraryStatsCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  "Library Statistics",
+                  l10n.libraryStatistics,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -489,7 +494,7 @@ class LibraryStatsCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TotalStat(
-                    label: "Total Items",
+                    label: l10n.totalItems,
                     value: totalItems.toString(),
                   ),
                   Container(
@@ -498,7 +503,7 @@ class LibraryStatsCard extends StatelessWidget {
                     color: theme.colorScheme.outline.opaque(0.2),
                   ),
                   TotalStat(
-                    label: "Custom Lists",
+                    label: l10n.customLists,
                     value: totalLists.toString(),
                   ),
                 ],
@@ -507,7 +512,7 @@ class LibraryStatsCard extends StatelessWidget {
             const SizedBox(height: 16),
             CategoryRow(
               icon: Icons.movie_filter,
-              label: "Anime",
+              label: l10n.anime,
               itemCount: animeCount,
               listCount: animeCustomListsCount,
               color: theme.colorScheme.primary,
@@ -515,7 +520,7 @@ class LibraryStatsCard extends StatelessWidget {
             const SizedBox(height: 12),
             CategoryRow(
               icon: Icons.menu_book,
-              label: "Manga",
+              label: l10n.manga,
               itemCount: mangaCount,
               listCount: mangaCustomListsCount,
               color: theme.colorScheme.secondary,
@@ -523,7 +528,7 @@ class LibraryStatsCard extends StatelessWidget {
             const SizedBox(height: 12),
             CategoryRow(
               icon: Icons.auto_stories,
-              label: "Novel",
+              label: l10n.novel,
               itemCount: novelCount,
               listCount: novelCustomListsCount,
               color: theme.colorScheme.tertiary,
@@ -589,6 +594,7 @@ class CategoryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -627,7 +633,7 @@ class CategoryRow extends StatelessWidget {
                 ),
               ),
               Text(
-                "$listCount lists",
+                "$listCount ${l10n.lists}",
                 style: TextStyle(
                   fontSize: 11,
                   color: theme.colorScheme.onSurfaceVariant,
@@ -689,15 +695,16 @@ class LibraryDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
-        _buildStat(context, "Anime", stats['animeCount'],
+        _buildStat(context, l10n.anime, stats['animeCount'],
             theme.colorScheme.primary, Icons.movie_filter),
         const SizedBox(width: 12),
-        _buildStat(context, "Manga", stats['mangaCount'],
+        _buildStat(context, l10n.manga, stats['mangaCount'],
             theme.colorScheme.secondary, Icons.menu_book),
         const SizedBox(width: 12),
-        _buildStat(context, "Novel", stats['novelCount'],
+        _buildStat(context, l10n.novel, stats['novelCount'],
             theme.colorScheme.tertiary, Icons.auto_stories),
       ],
     );
@@ -753,6 +760,7 @@ class BackupPasswordDialogState extends State<BackupPasswordDialog> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Dialog(
       backgroundColor: theme.colorScheme.surfaceContainer,
@@ -779,13 +787,13 @@ class BackupPasswordDialogState extends State<BackupPasswordDialog> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Backup Options",
+                        l10n.backupOptions,
                         style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        "Protect your backup",
+                        l10n.protectBackup,
                         style: TextStyle(
                           color: theme.colorScheme.onSurfaceVariant,
                           fontSize: 13,
@@ -812,14 +820,14 @@ class BackupPasswordDialogState extends State<BackupPasswordDialog> {
                   });
                 },
                 title: Text(
-                  "Password Protect",
+                  l10n.passwordProtect,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: theme.colorScheme.onSurface,
                   ),
                 ),
                 subtitle: Text(
-                  "Add extra security to your backup",
+                  l10n.passwordProtectHint,
                   style: TextStyle(
                     fontSize: 12,
                     color: theme.colorScheme.onSurfaceVariant,
@@ -837,8 +845,8 @@ class BackupPasswordDialogState extends State<BackupPasswordDialog> {
                 controller: widget.passwordController,
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
-                  labelText: "Password",
-                  hintText: "Enter password",
+                  labelText: l10n.password,
+                  hintText: l10n.enterPassword,
                   prefixIcon: const Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
                     icon: Icon(_obscurePassword
@@ -861,8 +869,8 @@ class BackupPasswordDialogState extends State<BackupPasswordDialog> {
                 controller: widget.confirmPasswordController,
                 obscureText: _obscureConfirm,
                 decoration: InputDecoration(
-                  labelText: "Confirm Password",
-                  hintText: "Re-enter password",
+                  labelText: l10n.confirmPassword,
+                  hintText: l10n.reenterPassword,
                   prefixIcon: const Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
                     icon: Icon(_obscureConfirm
@@ -893,7 +901,7 @@ class BackupPasswordDialogState extends State<BackupPasswordDialog> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text("Cancel"),
+                    child: Text(l10n.cancel),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -909,9 +917,9 @@ class BackupPasswordDialogState extends State<BackupPasswordDialog> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
-                      "Create Backup",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    child: Text(
+                      l10n.createBackup,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
