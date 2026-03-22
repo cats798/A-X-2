@@ -433,6 +433,35 @@ class AppLocalizations {
   }
 
   // 所有 getter
+  String get adult => _strings['adult']!;
+  String get filter => _strings['filter']!;
+  String get image => _strings['image']!;
+  String get searchResults => _strings['searchResults']!;
+  String get tryAgain => _strings['tryAgain']!;
+  String get searching => _strings['searching']!;
+  String get oopsSomethingWrong => _strings['oopsSomethingWrong']!;
+  String get pleaseTryAgainLater => _strings['pleaseTryAgainLater']!;
+  String get noResultsFound => _strings['noResultsFound']!;
+  String get tryAdjustingSearch => _strings['tryAdjustingSearch']!;
+  String get networkError => _strings['networkError']!;
+  String get timeoutError => _strings['timeoutError']!;
+  String get serviceUnavailable => _strings['serviceUnavailable']!;
+  String get somethingWentWrong => _strings['somethingWentWrong']!;
+  String get myAnimeOnly => _strings['myAnimeOnly']!;
+  String get hideMyAnime => _strings['hideMyAnime']!;
+  String get myMangaOnly => _strings['myMangaOnly']!;
+  String get hideMyManga => _strings['hideMyManga']!;
+  String get season => _strings['season']!;
+  String get country => _strings['country']!;
+  String get year => _strings['year']!;
+  String get duration => _strings['duration']!;
+  String get chapters => _strings['chapters']!;
+  String get volumes => _strings['volumes']!;
+  String get episodes => _strings['episodes']!;
+  String get format => _strings['format']!;
+  String get source => _strings['source']!;
+  String get status => _strings['status']!;
+  String get sort => _strings['sort']!;
   String get appTitle => _strings['appTitle']!;
   String get home => _strings['home']!;
   String get search => _strings['search']!;
