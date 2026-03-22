@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:anymex/controllers/settings/settings.dart';
 import 'package:anymex/database/data_keys/keys.dart';
-import 'package:anymex/database/data_keys/keys.dart';
 import 'package:anymex/screens/other_features.dart';
 import 'package:anymex/utils/logger.dart';
 import 'package:anymex/utils/shaders.dart';
@@ -18,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:anymex/l10n/app_localizations.dart'; // 添加
 
 class SettingsExperimental extends StatefulWidget {
   const SettingsExperimental({super.key});
@@ -94,10 +94,10 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
   Future<void> _downloadShaders() async {
     _isDownloading.value = true;
     _downloadProgress.value = 0.0;
-    _currentStatus.value = 'Initializing download...';
+    _currentStatus.value = AppLocalizations.of(context)!.initDownload;
 
     try {
-      await _updateStatus('Connecting to server...', 0.05);
+      await _updateStatus(AppLocalizations.of(context)!.connecting, 0.05);
       await Future.delayed(const Duration(milliseconds: 500));
 
       final shadersPath = PlayerShaders.getShaderBasePath();
@@ -107,7 +107,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
       final tempFilePath = '${tempDir.path}/anime4k_shaders.zip';
       final tempFile = File(tempFilePath);
 
-      await _updateStatus('Downloading shaders...', 0.1);
+      await _updateStatus(AppLocalizations.of(context)!.downloadingShaders, 0.1);
 
       final dio = Dio();
       await dio.download(
@@ -116,18 +116,18 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
         onReceiveProgress: (received, total) {
           if (total != -1) {
             final progress = 0.1 + (received / total) * 0.6;
-            _updateStatus('Downloading shaders...', progress);
+            _updateStatus(AppLocalizations.of(context)!.downloadingShaders, progress);
           }
         },
       );
 
-      await _updateStatus('Download complete, extracting...', 0.75);
+      await _updateStatus(AppLocalizations.of(context)!.downloadCompleteExtracting, 0.75);
       await Future.delayed(const Duration(milliseconds: 500));
 
       final bytes = await tempFile.readAsBytes();
       final archive = ZipDecoder().decodeBytes(bytes);
 
-      await _updateStatus('Extracting shader files...', 0.8);
+      await _updateStatus(AppLocalizations.of(context)!.extractingShaders, 0.8);
 
       for (final file in archive) {
         if (file.isFile) {
@@ -143,17 +143,17 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
         await tempFile.delete();
       }
 
-      await _updateStatus('Finalizing installation...', 0.98);
+      await _updateStatus(AppLocalizations.of(context)!.finalizingInstall, 0.98);
       await Future.delayed(const Duration(milliseconds: 300));
 
-      await _updateStatus('Installation complete!', 1.0);
+      await _updateStatus(AppLocalizations.of(context)!.installComplete, 1.0);
 
       _isDownloading.value = false;
       _shadersDownloaded.value = true;
-      _currentStatus.value = 'Shaders installed successfully!';
+      _currentStatus.value = AppLocalizations.of(context)!.shadersInstalledSuccess;
     } catch (e) {
       _isDownloading.value = false;
-      _currentStatus.value = 'Download failed: $e';
+      _currentStatus.value = '${AppLocalizations.of(context)!.downloadFailed}: $e';
 
       try {
         final tempDir = await getTemporaryDirectory();
@@ -236,11 +236,11 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Glow(
         child: Scaffold(
-            //	backgroundColor: Colors.transparent,
             body: Column(children: [
-      const NestedHeader(title: 'Experimental Settings'),
+      const NestedHeader(title: 'Experimental Settings'), // 该组件内部文本未替换，可后续处理
       Expanded(
         child: SingleChildScrollView(
           child: Padding(
@@ -272,16 +272,15 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
               //       ],
               //     )),
               Obx(() => AnymexExpansionTile(
-                    title: "Reader",
+                    title: l10n.reader,
                     initialExpanded: true,
                     content: Column(
                       children: [
                         CustomSliderTile(
                             icon: Icons.extension,
-                            title: "Cache Duration",
-                            label: "${_cacheDays.value} days",
-                            description:
-                                "When should the image cache be cleared?",
+                            title: l10n.cacheDuration,
+                            label: "${_cacheDays.value} ${l10n.days}",
+                            description: l10n.cacheDurationDesc,
                             sliderValue: _cacheDays.value.toDouble(),
                             divisions: 30,
                             onChanged: (double value) {
@@ -295,7 +294,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
               Obx(() {
                 settings.animationDuration;
                 return AnymexExpansionTile(
-                  title: 'Player',
+                  title: l10n.player,
                   initialExpanded: true,
                   content: Container(
                       margin: const EdgeInsets.only(bottom: 16),
@@ -339,7 +338,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Anime 4K Enhancement',
+                                      l10n.anime4kEnhancement,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 16,
@@ -349,7 +348,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                       ),
                                     ),
                                     Text(
-                                      'Real-time 4K upscaling for anime content',
+                                      l10n.anime4kDesc,
                                       style: TextStyle(
                                         color: Theme.of(context)
                                             .colorScheme
@@ -475,7 +474,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Enable Shaders',
+                                                      l10n.enableShaders,
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -488,9 +487,9 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                       getResponsiveValue(
                                                           context,
                                                           mobileValue:
-                                                              'if Enabled the Shaders will be applied to the player through hdr menu',
+                                                              l10n.shadersDescMobile,
                                                           desktopValue:
-                                                              'if Enabled the Shaders will be applied to the player through keybindings'),
+                                                              l10n.shadersDescDesktop),
                                                       style: TextStyle(
                                                         color: Theme.of(context)
                                                             .colorScheme
@@ -552,7 +551,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'Choose Shader Profile',
+                                                          l10n.chooseShaderProfile,
                                                           style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w600,
@@ -563,7 +562,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                           ),
                                                         ),
                                                         Text(
-                                                          'Choose accordingly to your system specs.\nMid End = Eg. GTX 980, GTX 1060, RX 570\nHigh End = Eg. GTX 1080, RTX 2070, RTX 3060, RX 590, Vega 56',
+                                                          l10n.shaderProfileDesc,
                                                           style: TextStyle(
                                                             color: Theme.of(
                                                                     context)
@@ -581,8 +580,8 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                               ),
                                               Obx(() {
                                                 List<String> availProfiles = [
-                                                  'MID-END',
-                                                  'HIGH-END'
+                                                  l10n.midEnd,
+                                                  l10n.highEnd
                                                 ];
 
                                                 return Container(
@@ -600,7 +599,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                               .selectedProfile,
                                                           value: settingsController
                                                               .selectedProfile),
-                                                      label: "SELECT PROFILE",
+                                                      label: l10n.selectProfile,
                                                       icon: Iconsax.play,
                                                       onChanged: (e) =>
                                                           settingsController
@@ -654,7 +653,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Warning',
+                                                      l10n.warning,
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -667,9 +666,9 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                       getResponsiveValue(
                                                           context,
                                                           mobileValue:
-                                                              'you might get black screen or it may not work.',
+                                                              l10n.warningBlackScreen,
                                                           desktopValue:
-                                                              'will lag like hell on older gpus'),
+                                                              l10n.warningLag),
                                                       style: TextStyle(
                                                         color: Theme.of(context)
                                                             .colorScheme
@@ -736,7 +735,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                                     .start,
                                                             children: [
                                                               Text(
-                                                                'Shader Profiles Initialized',
+                                                                l10n.shaderProfilesInit,
                                                                 style:
                                                                     TextStyle(
                                                                   fontWeight:
@@ -748,7 +747,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                                 ),
                                                               ),
                                                               Text(
-                                                                'Use keyboard shortcuts during playback to switch profiles',
+                                                                l10n.shaderShortcuts,
                                                                 style:
                                                                     TextStyle(
                                                                   color: context
@@ -767,7 +766,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                                     ),
                                                     const SizedBox(height: 16),
                                                     Text(
-                                                      'Available Keybindings:',
+                                                      l10n.keybindings,
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -814,8 +813,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                         onPressed: _downloadShaders,
                                         icon: const Icon(
                                             Iconsax.document_download),
-                                        label:
-                                            const Text('Download 4K Shaders'),
+                                        label: Text(l10n.downloadShaders),
                                         style: FilledButton.styleFrom(
                                           backgroundColor: Theme.of(context)
                                               .colorScheme
@@ -831,7 +829,7 @@ class _SettingsExperimentalState extends State<SettingsExperimental>
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      'Download size: ~4MB',
+                                      l10n.downloadSize,
                                       style: TextStyle(
                                         color: Theme.of(context)
                                             .colorScheme
