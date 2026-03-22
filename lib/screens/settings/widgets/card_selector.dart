@@ -1,4 +1,5 @@
 import 'package:anymex/controllers/settings/settings.dart';
+import 'package:anymex/l10n/app_localizations.dart';
 import 'package:anymex/models/models_convertor/carousel/carousel_data.dart';
 import 'package:anymex/utils/fallback/fallback_anime.dart';
 import 'package:anymex/utils/function.dart';
@@ -21,8 +22,9 @@ void showCardStyleSwitcher(BuildContext context) {
     builder: (dialogContext) {
       return Obx(
         () {
+          final l10n = AppLocalizations.of(context)!;
           return AnymexDialog(
-              title: 'Card Style',
+              title: l10n.cardStyle,
               onConfirm: () {
                 settingsController.cardStyle = selectedStyle.value.index;
               },
@@ -56,14 +58,34 @@ class CardStyleSelector extends StatefulWidget {
 
 class _CardStyleSelectorState extends State<CardStyleSelector> {
   late CardStyle _selectedStyle;
-  final Map<CardStyle, String> styleDescriptions = {
-    CardStyle.saikou:
-        'A minimalist design focused on efficiency with less visual elements.',
-    CardStyle.modern:
-        'Clean, contemporary design with balanced proportions and subtle shadows.',
-    CardStyle.exotic:
-        'Traditional card layout with familiar elements and standard formatting.',
-  };
+
+  String _getStyleDescription(CardStyle style) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (style) {
+      case CardStyle.saikou:
+        return l10n.cardStyleSaikouDesc;
+      case CardStyle.modern:
+        return l10n.cardStyleModernDesc;
+      case CardStyle.exotic:
+        return l10n.cardStyleExoticDesc;
+      default:
+        return '';
+    }
+  }
+
+  String _getStyleName(CardStyle style) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (style) {
+      case CardStyle.saikou:
+        return l10n.cardStyleSaikou;
+      case CardStyle.modern:
+        return l10n.cardStyleModern;
+      case CardStyle.exotic:
+        return l10n.cardStyleExotic;
+      default:
+        return style.name.capitalize!;
+    }
+  }
 
   @override
   void initState() {
@@ -73,6 +95,7 @@ class _CardStyleSelectorState extends State<CardStyleSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -114,6 +137,12 @@ class _CardStyleSelectorState extends State<CardStyleSelector> {
             ),
           ),
         ),
+        const SizedBox(height: 8),
+        Text(
+          _getStyleDescription(_selectedStyle),
+          style: Theme.of(context).textTheme.bodySmall,
+          textAlign: TextAlign.center,
+        ),
       ],
     );
   }
@@ -123,7 +152,7 @@ class _CardStyleSelectorState extends State<CardStyleSelector> {
 
     return AnymexChip(
       isSelected: isSelected,
-      label: style.name.capitalize!,
+      label: _getStyleName(style),
       onSelected: (bool selected) {
         if (selected) {
           setState(() {
