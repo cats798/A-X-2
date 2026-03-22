@@ -13,6 +13,12 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'chapter': 'Chapter',
+    'unknown': '??',
+    'errorMissingData': 'Error: Missing required data. It seems you closed the app directly after reading the chapter!',
+    'cannotPlayAbruptClose': "Can't play because you closed the app abruptly.",
+    'installExtensionFirst': 'Install {sourceName} first, then click.',
+    'page': 'Page',
     'holdToAccessHistoryEditor': 'Hold to access history editor',
     'installExtension': 'Install',
     'adult': 'Adult',
@@ -249,6 +255,12 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'chapter': '章',
+    'unknown': '??',
+    'errorMissingData': '错误：缺少必要数据。您可能在阅读章节后直接关闭了应用！',
+    'cannotPlayAbruptClose': '无法播放，因为您突然关闭了应用。',
+    'installExtensionFirst': '请先安装 {sourceName}，再点击。',
+    'page': '页',
     'holdToAccessHistoryEditor': '长按以访问历史编辑器',
     'installExtension': '安装',
     'adult': '成人内容',
@@ -493,6 +505,12 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  String get chapter => _strings['chapter']!;
+  String get unknown => _strings['unknown']!;
+  String get errorMissingData => _strings['errorMissingData']!;
+  String get cannotPlayAbruptClose => _strings['cannotPlayAbruptClose']!;
+  String get installExtensionFirst => _strings['installExtensionFirst']!;
+  String get page => _strings['page']!;
   String get holdToAccessHistoryEditor => _strings['holdToAccessHistoryEditor']!;
   String get installExtension => _strings['installExtension']!;
   String get adult => _strings['adult']!;
