@@ -9,6 +9,7 @@ import 'package:anymex_extension_runtime_bridge/anymex_extension_runtime_bridge.
 import 'package:flutter/material.dart';
 import 'package:anymex/utils/theme_extensions.dart';
 import 'package:get/get.dart';
+import 'package:anymex/l10n/app_localizations.dart';  // 添加本地化导入
 
 class SourceSearchPage extends StatefulWidget {
   final String? initialTerm;
@@ -47,6 +48,7 @@ class _SourceSearchPageState extends State<SourceSearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!; // 获取本地化实例
     return Glow(
       child: Scaffold(
         body: SafeArea(
@@ -65,8 +67,7 @@ class _SourceSearchPageState extends State<SourceSearchPage> {
                         onSubmitted: (v) => _search(),
                         controller: textController,
                         disableIcons: true,
-                        hintText:
-                            "Search ${widget.type.name.capitalizeFirst}...",
+                        hintText: l10n.searchHint, // 替换为本地化字符串
                       ),
                     ),
                   ],
