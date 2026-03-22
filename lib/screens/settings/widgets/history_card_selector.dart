@@ -1,4 +1,5 @@
 import 'package:anymex/controllers/settings/settings.dart';
+import 'package:anymex/l10n/app_localizations.dart';
 import 'package:anymex/screens/library/widgets/history_model.dart';
 import 'package:anymex/screens/settings/widgets/history_card_gate.dart';
 import 'package:anymex/utils/function.dart';
@@ -31,9 +32,10 @@ void showHistoryCardStyleSelector(BuildContext context) {
     builder: (dialogContext) {
       return Obx(
         () {
+          final l10n = AppLocalizations.of(context)!;
           return AnymexDialog(
               padding: const EdgeInsets.all(10),
-              title: 'Card Style',
+              title: l10n.historyCardStyle,
               onConfirm: () {
                 settingsController.historyCardStyle = selectedStyle.value.index;
               },
@@ -80,6 +82,20 @@ class _HistoryCardSelectorState extends State<HistoryCardSelector> {
       progressText: '19:37 left',
       date: '2025-03-13');
 
+  String _getStyleName(HistoryCardStyle style) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (style) {
+      case HistoryCardStyle.regular:
+        return l10n.historyCardStyleRegular;
+      case HistoryCardStyle.blurred:
+        return l10n.historyCardStyleBlurred;
+      case HistoryCardStyle.bootiful:
+        return l10n.historyCardStyleBootiful;
+      default:
+        return style.name.capitalize!;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -88,6 +104,7 @@ class _HistoryCardSelectorState extends State<HistoryCardSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -133,7 +150,7 @@ class _HistoryCardSelectorState extends State<HistoryCardSelector> {
 
     return AnymexChip(
       isSelected: isSelected,
-      label: style.name.capitalize!,
+      label: _getStyleName(style),
       onSelected: (bool selected) {
         if (selected) {
           setState(() {
