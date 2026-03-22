@@ -13,6 +13,27 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    // 卡片样式选择器
+    'cardStyle': 'Card Style',
+    'cardStyleSaikou': 'Saikou',
+    'cardStyleSaikouDesc': 'A minimalist design focused on efficiency with less visual elements.',
+    'cardStyleModern': 'Modern',
+    'cardStyleModernDesc': 'Clean, contemporary design with balanced proportions and subtle shadows.',
+    'cardStyleExotic': 'Exotic',
+    'cardStyleExoticDesc': 'Traditional card layout with familiar elements and standard formatting.',
+
+    // 轮播样式选择器
+    'carouselStyle': 'Carousel Style',
+    'carouselStyleName0': 'Style 1',
+    'carouselStyleDesc0': 'Description for style 1',
+    'carouselStyleName1': 'Style 2',
+    'carouselStyleDesc1': 'Description for style 2',
+
+    // 历史卡片样式选择器
+    'historyCardStyle': 'Card Style',
+    'historyCardStyleRegular': 'Regular',
+    'historyCardStyleBlurred': 'Blurred',
+    'historyCardStyleBootiful': 'Bootiful',
     // settings_comments.dart
     'commentSystem': 'Comment System',
     'aboutCommentum': 'About Commentum v2',
@@ -625,6 +646,27 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    // 卡片样式选择器
+    'cardStyle': '卡片样式',
+    'cardStyleSaikou': '简约',
+    'cardStyleSaikouDesc': '极简设计，注重效率，减少视觉元素。',
+    'cardStyleModern': '现代',
+    'cardStyleModernDesc': '干净、现代的设计，比例均衡，阴影柔和。',
+    'cardStyleExotic': '经典',
+    'cardStyleExoticDesc': '传统卡片布局，带有熟悉的元素和标准格式。',
+
+    // 轮播样式选择器
+    'carouselStyle': '轮播样式',
+    'carouselStyleName0': '样式 1',
+    'carouselStyleDesc0': '样式 1 的描述',
+    'carouselStyleName1': '样式 2',
+    'carouselStyleDesc1': '样式 2 的描述',
+
+    // 历史卡片样式选择器
+    'historyCardStyle': '卡片样式',
+    'historyCardStyleRegular': '常规',
+    'historyCardStyleBlurred': '模糊',
+    'historyCardStyleBootiful': '美观',
     // settings_comments.dart
     'commentSystem': '评论系统',
     'aboutCommentum': '关于 Commentum v2',
@@ -1245,6 +1287,27 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  // 卡片样式
+  String get cardStyle => _strings['cardStyle']!;
+  String get cardStyleSaikou => _strings['cardStyleSaikou']!;
+  String get cardStyleSaikouDesc => _strings['cardStyleSaikouDesc']!;
+  String get cardStyleModern => _strings['cardStyleModern']!;
+  String get cardStyleModernDesc => _strings['cardStyleModernDesc']!;
+  String get cardStyleExotic => _strings['cardStyleExotic']!;
+  String get cardStyleExoticDesc => _strings['cardStyleExoticDesc']!;
+
+  // 轮播样式
+  String get carouselStyle => _strings['carouselStyle']!;
+  String get carouselStyleName0 => _strings['carouselStyleName0']!;
+  String get carouselStyleDesc0 => _strings['carouselStyleDesc0']!;
+  String get carouselStyleName1 => _strings['carouselStyleName1']!;
+  String get carouselStyleDesc1 => _strings['carouselStyleDesc1']!;
+
+  // 历史卡片样式
+  String get historyCardStyle => _strings['historyCardStyle']!;
+  String get historyCardStyleRegular => _strings['historyCardStyleRegular']!;
+  String get historyCardStyleBlurred => _strings['historyCardStyleBlurred']!;
+  String get historyCardStyleBootiful => _strings['historyCardStyleBootiful']!;
   // settings_comments.dart
   String get commentSystem => _strings['commentSystem']!;
   String get aboutCommentum => _strings['aboutCommentum']!;
