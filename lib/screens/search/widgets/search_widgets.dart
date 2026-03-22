@@ -3,6 +3,7 @@ import 'package:anymex/screens/search/widgets/search_filter_selector.dart';
 import 'package:anymex/utils/theme_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
+import 'package:anymex/l10n/app_localizations.dart'; // 添加本地化导入
 
 class SearchFilterConstants {
   static Map<String, int> animeStreamingServices = {};
@@ -285,7 +286,6 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
       .map((p) => p[0] + p.substring(1).toLowerCase())
       .join(' ');
 
-  
   static const _sortAllowlist = {
     'TITLE_ROMAJI',
     'POPULARITY',
@@ -294,7 +294,6 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     'START_DATE',
   };
 
- 
   static const _sortLabelOverrides = {
     'TITLE_ROMAJI': 'Title',
     'POPULARITY': 'Popularity',
@@ -660,6 +659,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context)!; // 获取本地化实例
 
     return AnimatedBuilder(
       animation: _slideAnimation,
@@ -692,7 +692,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                       SingleChildScrollView(
                         controller: scrollController,
                         physics: const ClampingScrollPhysics(),
-                        child: _buildHeader(),
+                        child: _buildHeader(l10n),
                       ),
                       Expanded(
                         child: _isFilterDataLoaded
@@ -704,36 +704,36 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     if (sortOptions.isNotEmpty) ...[
-                                      _buildSortSection(),
+                                      _buildSortSection(l10n),
                                       const SizedBox(height: 24),
                                     ],
-                                    _buildFiltersSection(),
+                                    _buildFiltersSection(l10n),
                                     const SizedBox(height: 24),
                                     if (cfg.supportsYear) ...[
-                                      _buildYearSection(),
+                                      _buildYearSection(l10n),
                                       const SizedBox(height: 24),
                                     ],
                                     if (cfg.supportsRanges && !isManga)
-                                      _buildAnimeRangeSection(),
+                                      _buildAnimeRangeSection(l10n),
                                     if (cfg.supportsRanges && isManga)
-                                      _buildMangaRangeSection(),
+                                      _buildMangaRangeSection(l10n),
                                     if (cfg.supportsRanges)
                                       const SizedBox(height: 24),
                                     if (cfg.supportsGenres) ...[
-                                      _buildGenresSection(),
+                                      _buildGenresSection(l10n),
                                       const SizedBox(height: 24),
                                     ],
                                     if (cfg.supportsTags) ...[
-                                      _buildTagsSection(),
+                                      _buildTagsSection(l10n),
                                       const SizedBox(height: 24),
                                     ],
                                     if (cfg.supportsStreaming) ...[
-                                      _buildStreamingSection(),
+                                      _buildStreamingSection(l10n),
                                       const SizedBox(height: 24),
                                     ],
                                     if (cfg.supportsAdult ||
                                         cfg.supportsOnList) ...[
-                                      _buildTogglesSection(),
+                                      _buildTogglesSection(l10n),
                                       const SizedBox(height: 20),
                                     ],
                                   ],
@@ -743,7 +743,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-                        child: _buildActionButtons(),
+                        child: _buildActionButtons(l10n),
                       ),
                     ],
                   ),
@@ -785,7 +785,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     return count;
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(AppLocalizations l10n) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -820,7 +820,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
               ),
               const SizedBox(width: 8),
               Text(
-                'FILTERS',
+                l10n.filter.toUpperCase(),
                 style: theme.textTheme.headlineSmall?.copyWith(
                   color: colorScheme.onSurface,
                   fontWeight: FontWeight.w800,
@@ -899,30 +899,30 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildSortSection() {
+  Widget _buildSortSection(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionHeader('SORT', Icons.sort_rounded),
+        _buildSectionHeader(l10n.sort.toUpperCase(), Icons.sort_rounded),
         Row(
           children: [
-            Expanded(flex: 3, child: _buildSortSelector()),
+            Expanded(flex: 3, child: _buildSortSelector(l10n)),
             const SizedBox(width: 12),
-            _buildSortDirectionToggle(),
+            _buildSortDirectionToggle(l10n),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildFiltersSection() {
+  Widget _buildFiltersSection(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionHeader('FILTERS', Icons.filter_list_rounded),
+        _buildSectionHeader(l10n.filter.toUpperCase(), Icons.filter_list_rounded),
         if (cfg.supportsSeason) ...[
           _buildNeonSelector(
-            hint: 'Season',
+            hint: l10n.season,
             value: selectedSeason,
             options: seasons,
             optionLabels: {
@@ -937,7 +937,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
           const SizedBox(height: 12),
         ],
         _buildNeonSelector(
-          hint: isManga ? 'Publishing Status' : 'Airing Status',
+          hint: isManga ? l10n.publishingStatus : l10n.airingStatus,
           value: selectedStatus,
           options: statuses,
           optionLabels: statusLabels,
@@ -947,7 +947,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
         if (cfg.supportsCountry) ...[
           const SizedBox(height: 12),
           _buildNeonSelector(
-            hint: 'Country of Origin',
+            hint: l10n.countryOfOrigin,
             value: selectedCountry,
             options: countries,
             optionLabels: _countryLabels,
@@ -957,7 +957,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
         ],
         const SizedBox(height: 12),
         _buildNeonSelector(
-          hint: 'Format',
+          hint: l10n.format,
           value: selectedFormat,
           options: formats,
           optionLabels: formatLabels,
@@ -967,7 +967,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
         if (cfg.supportsSource) ...[
           const SizedBox(height: 12),
           _buildNeonSelector(
-            hint: 'Source',
+            hint: l10n.source,
             value: selectedSource,
             options: isManga ? mangaSources : animeSources,
             optionLabels: isManga ? mangaSourceLabels : animeSourceLabels,
@@ -979,16 +979,16 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildYearSection() {
+  Widget _buildYearSection(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionHeader('YEAR', Icons.date_range_rounded),
+        _buildSectionHeader(l10n.year, Icons.date_range_rounded),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Use Year Range',
+              l10n.useYearRange,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium
@@ -1007,7 +1007,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
         const SizedBox(height: 8),
         if (!useYearRange)
           _buildNeonSelector(
-            hint: 'Year',
+            hint: l10n.year,
             value: selectedYear?.toString(),
             options: List.generate(DateTime.now().year + 1 - _minYear + 1,
                 (i) => (_minYear + i).toString()).reversed.toList(),
@@ -1030,14 +1030,14 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildAnimeRangeSection() {
+  Widget _buildAnimeRangeSection(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-            'EPISODES & DURATION', Icons.play_circle_outline_rounded),
+            l10n.episodesAndDuration, Icons.play_circle_outline_rounded),
         _buildSwitchRow(
-          label: 'Filter by Episode Count',
+          label: l10n.filterByEpisodeCount,
           value: useEpisodeRange,
           onChanged: (v) => setState(() => useEpisodeRange = v),
         ),
@@ -1045,7 +1045,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
           const SizedBox(height: 8),
           _buildRangeSlider(
             label:
-                '${episodeRange.start.toInt()} – ${episodeRange.end.toInt() >= _maxEpisodes.toInt() ? "${_maxEpisodes.toInt()}+" : episodeRange.end.toInt()} eps',
+                '${episodeRange.start.toInt()} – ${episodeRange.end.toInt() >= _maxEpisodes.toInt() ? "${_maxEpisodes.toInt()}+" : episodeRange.end.toInt()} ${l10n.episodesShort}',
             values: episodeRange,
             min: 0,
             max: _maxEpisodes,
@@ -1055,7 +1055,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
         ],
         const SizedBox(height: 12),
         _buildSwitchRow(
-          label: 'Filter by Duration (min)',
+          label: l10n.filterByDuration,
           value: useDurationRange,
           onChanged: (v) => setState(() => useDurationRange = v),
         ),
@@ -1063,7 +1063,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
           const SizedBox(height: 8),
           _buildRangeSlider(
             label:
-                '${durationRange.start.toInt()} – ${durationRange.end.toInt() >= _maxDuration.toInt() ? "${_maxDuration.toInt()}+" : durationRange.end.toInt()} min',
+                '${durationRange.start.toInt()} – ${durationRange.end.toInt() >= _maxDuration.toInt() ? "${_maxDuration.toInt()}+" : durationRange.end.toInt()} ${l10n.minutesShort}',
             values: durationRange,
             min: 0,
             max: _maxDuration,
@@ -1075,13 +1075,13 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildMangaRangeSection() {
+  Widget _buildMangaRangeSection(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionHeader('CHAPTERS & VOLUMES', Icons.menu_book_rounded),
+        _buildSectionHeader(l10n.chaptersAndVolumes, Icons.menu_book_rounded),
         _buildSwitchRow(
-          label: 'Filter by Chapter Count',
+          label: l10n.filterByChapterCount,
           value: useChaptersRange,
           onChanged: (v) => setState(() => useChaptersRange = v),
         ),
@@ -1089,7 +1089,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
           const SizedBox(height: 8),
           _buildRangeSlider(
             label:
-                '${chaptersRange.start.toInt()} – ${chaptersRange.end.toInt() >= _maxChapters.toInt() ? "${_maxChapters.toInt()}+" : chaptersRange.end.toInt()} chapters',
+                '${chaptersRange.start.toInt()} – ${chaptersRange.end.toInt() >= _maxChapters.toInt() ? "${_maxChapters.toInt()}+" : chaptersRange.end.toInt()} ${l10n.chaptersShort}',
             values: chaptersRange,
             min: 0,
             max: _maxChapters,
@@ -1099,7 +1099,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
         ],
         const SizedBox(height: 12),
         _buildSwitchRow(
-          label: 'Filter by Volume Count',
+          label: l10n.filterByVolumeCount,
           value: useVolumesRange,
           onChanged: (v) => setState(() => useVolumesRange = v),
         ),
@@ -1107,7 +1107,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
           const SizedBox(height: 8),
           _buildRangeSlider(
             label:
-                '${volumesRange.start.toInt()} – ${volumesRange.end.toInt() >= _maxVolumes.toInt() ? "${_maxVolumes.toInt()}+" : volumesRange.end.toInt()} volumes',
+                '${volumesRange.start.toInt()} – ${volumesRange.end.toInt() >= _maxVolumes.toInt() ? "${_maxVolumes.toInt()}+" : volumesRange.end.toInt()} ${l10n.volumesShort}',
             values: volumesRange,
             min: 0,
             max: _maxVolumes,
@@ -1119,7 +1119,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildGenresSection() {
+  Widget _buildGenresSection(AppLocalizations l10n) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -1127,7 +1127,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-          'GENRES',
+          l10n.genres.toUpperCase(),
           Icons.category_rounded,
           IconButton(
             onPressed: () => setState(() => _isGenreGrid = !_isGenreGrid),
@@ -1157,7 +1157,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
             child: Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: genres.map((genre) => _buildGenreChip(genre)).toList(),
+              children: genres.map((genre) => _buildGenreChip(genre, l10n)).toList(),
             ),
           )
         else
@@ -1177,7 +1177,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 children:
-                    genres.map((genre) => _buildGenreChip(genre)).toList(),
+                    genres.map((genre) => _buildGenreChip(genre, l10n)).toList(),
               ),
             ),
           ),
@@ -1185,7 +1185,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildGenreChip(String genre) {
+  Widget _buildGenreChip(String genre, AppLocalizations l10n) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final isSelected = selectedGenres.contains(genre);
@@ -1219,7 +1219,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildTagsSection() {
+  Widget _buildTagsSection(AppLocalizations l10n) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final hasSelected = selectedTags.isNotEmpty;
@@ -1227,7 +1227,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionHeader('TAGS', Icons.label_rounded),
+        _buildSectionHeader(l10n.tags.toUpperCase(), Icons.label_rounded),
         if (hasSelected) ...[
           Wrap(
             spacing: 8,
@@ -1250,7 +1250,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
           width: double.infinity,
           child: _buildTappableBox(
             isActive: hasSelected,
-            onTap: _showTagsSheet,
+            onTap: () => _showTagsSheet(l10n),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -1263,8 +1263,8 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                 const SizedBox(width: 8),
                 Text(
                   hasSelected
-                      ? 'Edit Tags (${selectedTags.length})'
-                      : 'Add Tags',
+                      ? l10n.editTags(selectedTags.length)
+                      : l10n.addTags,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: hasSelected
@@ -1281,7 +1281,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildStreamingSection() {
+  Widget _buildStreamingSection(AppLocalizations l10n) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final hasSelected = selectedStreamingOn.isNotEmpty;
@@ -1299,7 +1299,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
-            isManga ? 'READABLE ON' : 'STREAMING ON', Icons.live_tv_rounded),
+            isManga ? l10n.readableOn : l10n.streamingOn, Icons.live_tv_rounded),
         if (hasSelected) ...[
           Wrap(
             spacing: 8,
@@ -1331,7 +1331,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
           width: double.infinity,
           child: _buildTappableBox(
             isActive: hasSelected,
-            onTap: _showStreamingSheet,
+            onTap: () => _showStreamingSheet(l10n),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -1345,11 +1345,11 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                 Text(
                   hasSelected
                       ? (isManga
-                          ? 'Edit Platforms (${selectedStreamingOn.length})'
-                          : 'Edit Services (${selectedStreamingOn.length})')
+                          ? l10n.editPlatforms(selectedStreamingOn.length)
+                          : l10n.editServices(selectedStreamingOn.length))
                       : (isManga
-                          ? 'Select Reading Platform'
-                          : 'Select Streaming Service'),
+                          ? l10n.selectReadingPlatform
+                          : l10n.selectStreamingService),
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: hasSelected
@@ -1366,24 +1366,24 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildTogglesSection() {
+  Widget _buildTogglesSection(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionHeader('OPTIONS', Icons.toggle_on_rounded),
+        _buildSectionHeader(l10n.options, Icons.toggle_on_rounded),
         Wrap(
           spacing: 12,
           runSpacing: 12,
           children: [
             _buildToggleChip(
-                label: isManga ? '📖 My Manga Only' : '📺 My Anime Only',
+                label: isManga ? l10n.myMangaOnly : l10n.myAnimeOnly,
                 value: onlyShowMine,
                 onTap: () => setState(() {
                       onlyShowMine = !onlyShowMine;
                       if (onlyShowMine) hideMine = false;
                     })),
             _buildToggleChip(
-                label: isManga ? '🚫 Hide My Manga' : '🚫 Hide My Anime',
+                label: isManga ? l10n.hideMyManga : l10n.hideMyAnime,
                 value: hideMine,
                 onTap: () => setState(() {
                       hideMine = !hideMine;
@@ -1615,11 +1615,11 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildSortSelector() {
+  Widget _buildSortSelector(AppLocalizations l10n) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final hasValue = selectedSortBy != null;
-    final displayText = hasValue ? selectedSortBy! : 'Select Sort';
+    final displayText = hasValue ? selectedSortBy! : l10n.selectSort;
 
     return Container(
       decoration: BoxDecoration(
@@ -1638,7 +1638,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: _showSortBottomSheet,
+          onTap: () => _showSortBottomSheet(l10n),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
@@ -1656,7 +1656,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'SORT BY',
+                        l10n.sortBy.toUpperCase(),
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurface.opaque(0.7),
                           fontWeight: FontWeight.w600,
@@ -1689,7 +1689,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  Widget _buildSortDirectionToggle() {
+  Widget _buildSortDirectionToggle(AppLocalizations l10n) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final isDescending = selectedSortType == 'desc';
@@ -1721,7 +1721,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
             child: Column(
               children: [
                 Text(
-                  'ORDER',
+                  l10n.order.toUpperCase(),
                   style: theme.textTheme.bodySmall?.copyWith(
                     color:
                         colorScheme.onSurface.opaque(0.7, iReallyMeanIt: true),
@@ -1779,12 +1779,12 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     }
   }
 
-  Widget _buildActionButtons() {
+  Widget _buildActionButtons(AppLocalizations l10n) {
     return Row(
       children: [
         Expanded(
           child: _buildNeonButton(
-            text: 'RESET',
+            text: l10n.reset.toUpperCase(),
             icon: Icons.refresh_rounded,
             isPrimary: false,
             onTap: _resetFilters,
@@ -1795,8 +1795,8 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
           flex: 2,
           child: _buildNeonButton(
             text: _getActiveFilterCount() > 0
-                ? 'APPLY FILTERS (${_getActiveFilterCount()})'
-                : 'APPLY FILTERS',
+                ? '${l10n.applyFilters} (${_getActiveFilterCount()})'
+                : l10n.applyFilters,
             icon: Icons.check_rounded,
             isPrimary: true,
             onTap: _applyFilters,
@@ -1861,9 +1861,9 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  void _showSortBottomSheet() {
+  void _showSortBottomSheet(AppLocalizations l10n) {
     _showNeonBottomSheet(
-      title: 'Sort By',
+      title: l10n.sortBy,
       options: sortOptions.keys.toList(),
       optionLabels: {},
       selectedValue: selectedSortBy,
@@ -1877,7 +1877,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     );
   }
 
-  void _showTagsSheet() {
+  void _showTagsSheet(AppLocalizations l10n) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final TextEditingController searchCtrl = TextEditingController();
@@ -1927,7 +1927,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                             Icon(Icons.label_rounded,
                                 color: colorScheme.primary, size: 24),
                             const SizedBox(width: 8),
-                            Text('SELECT TAGS',
+                            Text(l10n.selectTags.toUpperCase(),
                                 style: theme.textTheme.titleLarge?.copyWith(
                                     fontWeight: FontWeight.w800,
                                     letterSpacing: 1.5,
@@ -1944,7 +1944,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                                 .toList();
                           }),
                           decoration: InputDecoration(
-                            hintText: 'Search tags...',
+                            hintText: l10n.searchTagsHint,
                             prefixIcon: const Icon(Icons.search),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12)),
@@ -1981,7 +1981,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: _buildNeonButton(
-                    text: 'DONE (${selectedTags.length} selected)',
+                    text: l10n.doneWithCount(selectedTags.length),
                     icon: Icons.check_rounded,
                     isPrimary: true,
                     onTap: () => Navigator.pop(ctx),
@@ -2048,7 +2048,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
     return list;
   }
 
-  void _showStreamingSheet() {
+  void _showStreamingSheet(AppLocalizations l10n) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -2096,11 +2096,13 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                             Icon(Icons.live_tv_rounded,
                                 color: colorScheme.primary, size: 24),
                             const SizedBox(width: 8),
-                            Text(isManga ? 'READABLE ON' : 'STREAMING ON',
-                                style: theme.textTheme.titleLarge?.copyWith(
-                                    fontWeight: FontWeight.w800,
-                                    letterSpacing: 1.5,
-                                    color: colorScheme.onSurface)),
+                            Text(
+                              isManga ? l10n.readableOn : l10n.streamingOn,
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 1.5,
+                                  color: colorScheme.onSurface),
+                            ),
                           ],
                         ),
                       ],
@@ -2123,7 +2125,7 @@ class _FuturisticFilterSheetState extends State<FuturisticFilterSheet>
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: _buildNeonButton(
-                    text: 'DONE',
+                    text: l10n.done,
                     icon: Icons.check_rounded,
                     isPrimary: true,
                     onTap: () => Navigator.pop(ctx),
