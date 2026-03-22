@@ -13,6 +13,19 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'socialPresence': 'Social Presence',
+    'trackingServices': 'Tracking Services',
+    'connectDiscord': 'Connect Discord',
+    'richPresenceActive': 'Rich Presence Active',
+    'showWhatYouAreWatching': 'Show what you are watching',
+    'disconnectDiscord': 'Disconnect Discord?',
+    'richPresenceStopUpdate': 'Your rich presence activity will stop updating.',
+    'disconnect': 'Disconnect',
+    'notConnected': 'Not connected',
+    'connectedAs': 'Connected as',
+    'manage': 'Manage',
+    'connect': 'Connect',
+    'user': 'User',
     'experimental': 'Experimental',
     'enableExperimentalSettings': 'Enable Experimental Settings',
     'experimentalDescription': 'Required for Core and Visual tuning. Keep off on low-end devices.',
@@ -383,6 +396,19 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'socialPresence': '社交状态',
+    'trackingServices': '追踪服务',
+    'connectDiscord': '连接 Discord',
+    'richPresenceActive': '丰富状态已启用',
+    'showWhatYouAreWatching': '显示您正在观看的内容',
+    'disconnectDiscord': '断开 Discord 连接？',
+    'richPresenceStopUpdate': '您的丰富状态活动将停止更新。',
+    'disconnect': '断开连接',
+    'notConnected': '未连接',
+    'connectedAs': '已连接为',
+    'manage': '管理',
+    'connect': '连接',
+    'user': '用户',
     'experimental': '实验性',
     'enableExperimentalSettings': '启用实验性设置',
     'experimentalDescription': '核心和视觉调整所需。在低端设备上保持关闭。',
@@ -761,6 +787,19 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  String get socialPresence => _strings['socialPresence']!;
+  String get trackingServices => _strings['trackingServices']!;
+  String get connectDiscord => _strings['connectDiscord']!;
+  String get richPresenceActive => _strings['richPresenceActive']!;
+  String get showWhatYouAreWatching => _strings['showWhatYouAreWatching']!;
+  String get disconnectDiscord => _strings['disconnectDiscord']!;
+  String get richPresenceStopUpdate => _strings['richPresenceStopUpdate']!;
+  String get disconnect => _strings['disconnect']!;
+  String get notConnected => _strings['notConnected']!;
+  String get connectedAs => _strings['connectedAs']!;
+  String get manage => _strings['manage']!;
+  String get connect => _strings['connect']!;
+  String get user => _strings['user']!;
   String get experimental => _strings['experimental']!;
   String get enableExperimentalSettings => _strings['enableExperimentalSettings']!;
   String get experimentalDescription => _strings['experimentalDescription']!;
