@@ -5,6 +5,7 @@ import 'package:anymex/widgets/common/custom_tiles.dart';
 import 'package:anymex/widgets/common/glow.dart';
 import 'package:anymex/widgets/non_widgets/snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:anymex/l10n/app_localizations.dart';
 
 class SettingsStorageManager extends StatefulWidget {
   const SettingsStorageManager({super.key});
@@ -45,9 +46,9 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
       await _service.clearImageCache();
       await Future.delayed(const Duration(milliseconds: 150));
       await _refresh();
-      snackBar('Image cache cleared');
+      snackBar(AppLocalizations.of(context)!.imageCacheCleared);  // 新增键 'imageCacheCleared'
     } catch (e) {
-      snackBar('Failed to clear cache: $e');
+      snackBar(AppLocalizations.of(context)!.clearCacheFailed);
     } finally {
       if (mounted) setState(() => _isRunningAction = false);
     }
@@ -55,22 +56,21 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
 
   Future<void> _factoryResetIsar() async {
     if (_isRunningAction) return;
+    final l10n = AppLocalizations.of(context)!;
 
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Factory Reset'),
-        content: const Text(
-          'This will permanently delete all data stored of AnymeX. This cannot be undone.',
-        ),
+        title: Text(l10n.factoryReset),
+        content: Text(l10n.factoryResetWarning),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Delete All'),
+            child: Text(l10n.deleteAll),
           ),
         ],
       ),
@@ -81,9 +81,9 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
     setState(() => _isRunningAction = true);
     try {
       await _service.factoryResetIsar();
-      snackBar('Isar data deleted');
+      snackBar(l10n.isarDataDeleted);
     } catch (e) {
-      snackBar('Factory reset failed: $e');
+      snackBar(l10n.factoryResetFailed);
     } finally {
       if (mounted) setState(() => _isRunningAction = false);
     }
@@ -91,6 +91,7 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final thresholdBytes = (_thresholdGb * 1024 * 1024 * 1024).round();
     final usageRatio = thresholdBytes == 0
         ? 0.0
@@ -100,7 +101,7 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
       child: Scaffold(
         body: Column(
           children: [
-            const NestedHeader(title: 'Storage Manager'),
+            const NestedHeader(title: 'Storage Manager'),  // 外部组件，暂不处理
             Expanded(
               child: SingleChildScrollView(
                 padding:
@@ -125,7 +126,7 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Cached Images',
+                                  l10n.cachedImages,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -151,7 +152,7 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  'Threshold: ${_thresholdGb.toStringAsFixed(1)} GB',
+                                  '${l10n.threshold}: ${_thresholdGb.toStringAsFixed(1)} GB',
                                   style: TextStyle(
                                     color: context.colors.onSurfaceVariant,
                                   ),
@@ -169,9 +170,8 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
                         children: [
                           CustomSliderTile(
                             icon: Icons.storage_rounded,
-                            title: 'Auto-clear threshold',
-                            description:
-                                'If image cache reaches this size, it will be cleared automatically.',
+                            title: l10n.autoClearThreshold,
+                            description: l10n.autoClearDesc,
                             sliderValue: _thresholdGb,
                             min: StorageManagerService.minThresholdGb,
                             max: StorageManagerService.maxThresholdGb,
@@ -186,17 +186,15 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
                                   .enforceImageCacheLimit()
                                   .then((wasCleared) {
                                 if (!mounted || !wasCleared) return;
-                                snackBar(
-                                    'Image cache exceeded threshold and was cleared');
+                                snackBar(l10n.cacheExceededCleared);
                                 _refresh();
                               });
                             },
                           ),
                           CustomTile(
                             icon: Icons.delete_sweep_rounded,
-                            title: 'Clear image cache now',
-                            description:
-                                'Delete all currently cached network images.',
+                            title: l10n.clearImageCacheNow,
+                            description: l10n.clearImageCacheDesc,
                             onTap: _clearCacheNow,
                             postFix: _isRunningAction
                                 ? const SizedBox(
@@ -210,9 +208,8 @@ class _SettingsStorageManagerState extends State<SettingsStorageManager> {
                           ),
                           CustomTile(
                             icon: Icons.warning_rounded,
-                            title: 'Factory reset',
-                            description:
-                                'Delete everything stored of AnymeX permanently.',
+                            title: l10n.factoryReset,
+                            description: l10n.factoryResetDesc,
                             descColor: context.colors.error,
                             onTap: _factoryResetIsar,
                           ),
