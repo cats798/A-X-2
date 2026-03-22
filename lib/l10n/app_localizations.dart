@@ -1647,90 +1647,7 @@ class AppLocalizations {
   String get manageMyAnimeListLists => _strings['manageMyAnimeListLists']!;
   String get chooseListToShowOnHome => _strings['chooseListToShowOnHome']!;
   String get manageHomePageCards => _strings['manageHomePageCards']!;
-  String get close => _strings['close']!;
-  String get chapter => _strings['chapter']!;
-  String get unknown => _strings['unknown']!;
-  String get errorMissingData => _strings['errorMissingData']!;
-  String get cannotPlayAbruptClose => _strings['cannotPlayAbruptClose']!;
-  String get page => _strings['page']!;
-  String get holdToAccessHistoryEditor => _strings['holdToAccessHistoryEditor']!;
-  String get installExtension => _strings['installExtension']!;
-  String get adult => _strings['adult']!;
-  String get filter => _strings['filter']!;
-  String get image => _strings['image']!;
-  String get searchResults => _strings['searchResults']!;
-  String get tryAgain => _strings['tryAgain']!;
-  String get searching => _strings['searching']!;
-  String get oopsSomethingWrong => _strings['oopsSomethingWrong']!;
-  String get pleaseTryAgainLater => _strings['pleaseTryAgainLater']!;
-  String get noResultsFound => _strings['noResultsFound']!;
-  String get tryAdjustingSearch => _strings['tryAdjustingSearch']!;
-  String get networkError => _strings['networkError']!;
-  String get timeoutError => _strings['timeoutError']!;
-  String get serviceUnavailable => _strings['serviceUnavailable']!;
-  String get somethingWentWrong => _strings['somethingWentWrong']!;
-  String get myAnimeOnly => _strings['myAnimeOnly']!;
-  String get hideMyAnime => _strings['hideMyAnime']!;
-  String get myMangaOnly => _strings['myMangaOnly']!;
-  String get hideMyManga => _strings['hideMyManga']!;
-  String get season => _strings['season']!;
-  String get country => _strings['country']!;
-  String get countryOfOrigin => _strings['countryOfOrigin']!;
-  String get year => _strings['year']!;
-  String get duration => _strings['duration']!;
-  String get chapters => _strings['chapters']!;
-  String get volumes => _strings['volumes']!;
-  String get episodes => _strings['episodes']!;
-  String get format => _strings['format']!;
-  String get source => _strings['source']!;
-  String get status => _strings['status']!;
-  String get sort => _strings['sort']!;
-  String get airingStatus => _strings['airingStatus']!;
-  String get publishingStatus => _strings['publishingStatus']!;
-  String get useYearRange => _strings['useYearRange']!;
-  String get episodesAndDuration => _strings['episodesAndDuration']!;
-  String get filterByEpisodeCount => _strings['filterByEpisodeCount']!;
-  String get filterByDuration => _strings['filterByDuration']!;
-  String get minutesShort => _strings['minutesShort']!;
-  String get episodesShort => _strings['episodesShort']!;
-  String get chaptersAndVolumes => _strings['chaptersAndVolumes']!;
-  String get filterByChapterCount => _strings['filterByChapterCount']!;
-  String get filterByVolumeCount => _strings['filterByVolumeCount']!;
-  String get chaptersShort => _strings['chaptersShort']!;
-  String get volumesShort => _strings['volumesShort']!;
-  String get selectSort => _strings['selectSort']!;
-  String get sortBy => _strings['sortBy']!;
-  String get order => _strings['order']!;
-  String get addTags => _strings['addTags']!;
-  String get selectTags => _strings['selectTags']!;
-  String get searchTagsHint => _strings['searchTagsHint']!;
-  String get done => _strings['done']!;
-  String get streamingOn => _strings['streamingOn']!;
-  String get readableOn => _strings['readableOn']!;
-  String get selectStreamingService => _strings['selectStreamingService']!;
-  String get selectReadingPlatform => _strings['selectReadingPlatform']!;
-  String get options => _strings['options']!;
-  String get applyFilters => _strings['applyFilters']!;
-  String get appTitle => _strings['appTitle']!;
-  String get profile => _strings['profile']!;
-  String get home => _strings['home']!;
-  String get search => _strings['search']!;
-  String get library => _strings['library']!;
-  String get settings => _strings['settings']!;
-  String get cancel => _strings['cancel']!;
-  String get ok => _strings['ok']!;
-  String get save => _strings['save']!;
-  String get delete => _strings['delete']!;
-  String get confirm => _strings['confirm']!;
-  String get loading => _strings['loading']!;
-  String get error => _strings['error']!;
-  String get retry => _strings['retry']!;
-  String get noData => _strings['noData']!;
-  String get back => _strings['back']!;
-  String get next => _strings['next']!;
-  String get previous => _strings['previous']!;
-  String get close => _strings['close']!;
-  String get done => _strings['done']!;
+
   String get continueWatching => _strings['continueWatching']!;
   String get loginPrompt => _strings['loginPrompt']!;
   String get greetingHey => _strings['greetingHey']!;
@@ -1870,9 +1787,10 @@ class AppLocalizations {
     if (count == 1) {
       return _strings['repoAddedSingular']!;
     } else {
-      return _strings['repoAddedPlural']!.replaceFirst('\$count', count.toString());
+      return _strings['repoAddedPlural']!.replaceFirst('$count', count.toString());
     }
   }
+
 
   // 以下是原有 getter（保留，但已经合并到上面，避免重复）
   // 注意：以下 getter 已全部包含在上面的合并列表中，此处不再重复定义。
