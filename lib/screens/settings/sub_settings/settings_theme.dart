@@ -2,6 +2,7 @@ import 'package:anymex/constants/contants.dart';
 import 'package:anymex/controllers/settings/settings.dart';
 import 'package:anymex/controllers/theme.dart';
 import 'package:anymex/database/data_keys/keys.dart';
+import 'package:anymex/l10n/app_localizations.dart'; // 添加导入
 import 'package:anymex/models/logo_animation_type.dart';
 import 'package:anymex/utils/function.dart';
 import 'package:anymex/utils/liquid.dart';
@@ -20,7 +21,6 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:iconly/iconly.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 import 'package:anymex/screens/other_features.dart';
-
 import 'package:provider/provider.dart';
 
 class SettingsTheme extends StatefulWidget {
@@ -179,10 +179,12 @@ class _SettingsThemeState extends State<SettingsTheme> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!; // 获取本地化实例
+
     return Glow(
       child: Scaffold(
         body: Column(children: [
-          const NestedHeader(title: 'Theme'),
+          NestedHeader(title: l10n.theme), // 主题标题
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -191,24 +193,23 @@ class _SettingsThemeState extends State<SettingsTheme> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AnymexExpansionTile(
-                      title: 'Appearance',
+                      title: l10n.appearance, // 外观
                       content: Column(
                         children: [
                           _buildModeTemplates(),
                           const SizedBox(height: 30),
                           CustomSwitchTile(
                             icon: HugeIcons.strokeRoundedPaintBrush01,
-                            title: "Default Theme",
-                            description: "Play around with App theme",
+                            title: l10n.defaultTheme, // 默认主题
+                            description: l10n.defaultThemeDesc, // 描述
                             switchValue: defaultTheme,
                             onChanged: handleDefaultSwitch,
                           ),
                           const SizedBox(height: 10),
                           CustomSwitchTile(
                             icon: HugeIcons.strokeRoundedImage01,
-                            title: "Material You",
-                            description:
-                                "Take color from your wallpaper (A12+)",
+                            title: l10n.materialYou, // Material You
+                            description: l10n.materialYouDesc,
                             switchValue: materialTheme,
                             onChanged: handleMaterialSwitch,
                           ),
@@ -218,9 +219,8 @@ class _SettingsThemeState extends State<SettingsTheme> {
                               children: [
                                 CustomSwitchTile(
                                   icon: HugeIcons.strokeRoundedBlur,
-                                  title: "Liquid Mode",
-                                  description:
-                                      "Make everything glassy & liquidy...",
+                                  title: l10n.liquidMode, // 液态模式
+                                  description: l10n.liquidModeDesc,
                                   switchValue: settings.liquidMode,
                                   onChanged: (e) {
                                     settings.disableGradient = false;
@@ -234,9 +234,8 @@ class _SettingsThemeState extends State<SettingsTheme> {
                                           CustomTile(
                                             icon: HugeIcons
                                                 .strokeRoundedImageAdd01,
-                                            title: "Liquid Background",
-                                            description:
-                                                "Choose a custom background for liquid mode.",
+                                            title: l10n.liquidBackground, // 液态背景
+                                            description: l10n.liquidBackgroundDesc,
                                             onTap: () async {
                                               await Liquid.pickLiquidBackground(
                                                   context);
@@ -248,9 +247,9 @@ class _SettingsThemeState extends State<SettingsTheme> {
                                                 settings.retainOriginalColor,
                                             icon: HugeIcons
                                                 .strokeRoundedImageComposition,
-                                            title: "Retain Original Color",
+                                            title: l10n.retainOriginalColor,
                                             description:
-                                                "Enable this if you want to retain the original color of your wallpaper",
+                                                l10n.retainOriginalColorDesc,
                                             onChanged: (e) => settings
                                                 .retainOriginalColor = e,
                                           ),
@@ -260,9 +259,9 @@ class _SettingsThemeState extends State<SettingsTheme> {
                                                 settings.usePosterColor,
                                             icon: HugeIcons
                                                 .strokeRoundedImageDownload,
-                                            title: "Use Poster Color",
+                                            title: l10n.usePosterColor,
                                             description:
-                                                "Applies anime/manga poster color on details page",
+                                                l10n.usePosterColorDesc,
                                             onChanged: (e) =>
                                                 settings.usePosterColor = e,
                                           ),
@@ -270,10 +269,10 @@ class _SettingsThemeState extends State<SettingsTheme> {
                                           CustomTile(
                                             icon:
                                                 HugeIcons.strokeRoundedRefresh,
-                                            title: "Reset to Default Picture",
+                                            title: l10n.resetToDefaultPicture, // 重置默认图片
                                             postFix: 0.width(),
                                             description:
-                                                "Reset to default wallpaper!",
+                                                l10n.resetToDefaultPictureDesc,
                                             onTap: () => settings
                                                 .liquidBackgroundPath = "",
                                           ),
@@ -290,24 +289,23 @@ class _SettingsThemeState extends State<SettingsTheme> {
                     const SizedBox(height: 10),
                     AnymexExpansionTile(
                         initialExpanded: true,
-                        title: 'Extras',
+                        title: l10n.extras, // 额外
                         content: Column(
                           children: [
                             Obx(() {
                               return CustomSwitchTile(
                                   disabled: settings.liquidMode,
                                   icon: HugeIcons.strokeRoundedFlower,
-                                  title: "Bloom",
-                                  description:
-                                      "Enables a soft, glowing gradient effect.",
+                                  title: l10n.bloom, // 绽放
+                                  description: l10n.bloomDesc,
                                   switchValue: !settings.disableGradient,
                                   onChanged: (val) =>
                                       settings.disableGradient = !val);
                             }),
                             CustomTile(
                               icon: HugeIcons.strokeRoundedPaintBoard,
-                              title: "Palette",
-                              description: "Choose your favourite palette!",
+                              title: l10n.palette, // 调色板
+                              description: l10n.paletteDesc,
                               onTap: () {
                                 showPaletteSelectionDialog(context);
                               },
@@ -315,27 +313,25 @@ class _SettingsThemeState extends State<SettingsTheme> {
                             const SizedBox(height: 10),
                             CustomSwitchTile(
                               icon: HugeIcons.strokeRoundedMoon,
-                              title: "Oled Mode",
-                              description: "Go Super Dark Mode!",
+                              title: l10n.oledMode, // OLED 模式
+                              description: l10n.oledModeDesc,
                               switchValue: isOled,
                               onChanged: handleOledSwitch,
                             ),
                             const SizedBox(height: 10),
-                            // ExpansionTile(title: AnymexText(text: "Custom Theme")),
                             CustomSwitchTile(
                               icon: HugeIcons.strokeRoundedColors,
-                              title: "Custom Theme",
-                              description: "Choose your favourite color!",
+                              title: l10n.customTheme, // 自定义主题
+                              description: l10n.customThemeDesc,
                               switchValue: customTheme,
                               onChanged: handleCustomThemeSwitch,
                             ),
                             const SizedBox(height: 10),
                             CustomTile(
                               icon: HugeIcons
-                                  .strokeRoundedPlayCircle, // Changed from strokeRoundedAnimation
-                              title: "Logo Animation",
-                              description:
-                                  "Customize your logo animation style",
+                                  .strokeRoundedPlayCircle,
+                              title: l10n.logoAnimation, // Logo 动画
+                              description: l10n.logoAnimationDesc,
                               onTap: _showLogoAnimationDialog,
                             ),
                           ],
@@ -348,7 +344,7 @@ class _SettingsThemeState extends State<SettingsTheme> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AnymexText(
-                              text: "Custom Themes",
+                              text: l10n.customThemes, // 自定义主题
                               size: 16,
                               variant: TextVariant.semiBold,
                               color: context.colors.primary,
@@ -370,9 +366,11 @@ class _SettingsThemeState extends State<SettingsTheme> {
   }
 
   void showPaletteSelectionDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) {
+        final l10nDialog = AppLocalizations.of(context)!;
         return Dialog(
           backgroundColor: context.colors.surface,
           shape: RoundedRectangleBorder(
@@ -386,9 +384,9 @@ class _SettingsThemeState extends State<SettingsTheme> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Palettes',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Text(
+                  l10nDialog.palettes, // 调色板
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
                 SuperListView.builder(
@@ -428,7 +426,7 @@ class _SettingsThemeState extends State<SettingsTheme> {
                             backgroundColor:
                                 context.colors.surfaceContainer,
                           ),
-                          child: Text('Cancel',
+                          child: Text(l10nDialog.cancel,
                               style: TextStyle(
                                   fontSize: 14,
                                   color: context.colors.primary,
@@ -448,8 +446,8 @@ class _SettingsThemeState extends State<SettingsTheme> {
                             backgroundColor:
                                 context.colors.primaryFixed,
                           ),
-                          child: const Text('Confirm',
-                              style: TextStyle(
+                          child: Text(l10nDialog.confirm,
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontFamily: "LexendDeca",
                                   color: Colors.black,
@@ -468,6 +466,7 @@ class _SettingsThemeState extends State<SettingsTheme> {
   }
 
   Widget _buildModeTemplates() {
+    final l10n = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -485,6 +484,20 @@ class _SettingsThemeState extends State<SettingsTheme> {
               brightness: Brightness.dark);
           bool isSelected = themeMode == theme['label'];
           bool isSystem = theme['label'] == "System";
+          String displayLabel;
+          switch (theme['label']) {
+            case 'Light':
+              displayLabel = l10n.lightMode;
+              break;
+            case 'Dark':
+              displayLabel = l10n.darkMode;
+              break;
+            case 'System':
+              displayLabel = l10n.systemDefault;
+              break;
+            default:
+              displayLabel = theme['label'];
+          }
           return AnymexOnTap(
             onTap: () {
               handleThemeMode(theme['label']);
@@ -717,7 +730,7 @@ class _SettingsThemeState extends State<SettingsTheme> {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  theme['label'],
+                  displayLabel,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -729,6 +742,7 @@ class _SettingsThemeState extends State<SettingsTheme> {
   }
 
   Widget _buildColorTemplates() {
+    final l10n = AppLocalizations.of(context)!;
     return GridView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
