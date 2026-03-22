@@ -13,6 +13,7 @@ class AppLocalizations {
 
   static const Map<String, String> _en = {
     // 通用
+    'installExtension': 'Install',
     'adult': 'Adult',
     'filter': 'Filters',
     'image': 'Image',
@@ -247,6 +248,7 @@ class AppLocalizations {
 
   static const Map<String, String> _zh = {
     // 通用
+    'installExtension': '安装',
     'adult': '成人内容',
     'filter': '筛选',
     'image': '图片搜索',
@@ -489,6 +491,7 @@ class AppLocalizations {
   }
 
   // 通用 getter
+  String get installExtension => _strings['installExtension']!;
   String get adult => _strings['adult']!;
   String get filter => _strings['filter']!;
   String get image => _strings['image']!;
