@@ -17,6 +17,7 @@
   "playerDescription": "播放器设置说明",
   "uiDescription": "用户界面设置",
   "ui": "界面",
+  "extractingShaders": "正在解压着色器...",
   "downloadCompleteExtracting": "下载完成，正在解压...",
   "downloadingShaders": "正在下载着色器...",
   "connecting": "连接中...",
