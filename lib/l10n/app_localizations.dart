@@ -1297,6 +1297,7 @@ class AppLocalizations {
   }
 
   // 所有 getter 统一放在此处，每个键只定义一次
+  String get finalizingInstall => _strings['finalizingInstall']!;
   String get extractingShaders => _strings['extractingShaders']!;
   String get downloadCompleteExtracting => _strings['downloadCompleteExtracting']!;
   String get downloadingShaders => _strings['downloadingShaders']!;
