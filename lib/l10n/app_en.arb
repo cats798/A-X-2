@@ -18,6 +18,7 @@
   "uiDescription": "UI Settings",
   "ui": "UI",
   "episode": "Episode",
+  "initDownload": "Initialize download"
   "storageManagerDescription": "Manage storage and cache settings",
   "storageManager": "Storage Manager",
   "backupRestoreDescription": "Backup and restore your data",
