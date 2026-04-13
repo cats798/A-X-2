@@ -17,6 +17,7 @@
   "playerDescription": "Player Description",
   "uiDescription": "UI Settings",
   "ui": "UI",
+  "installComplete": "Installation,
   "finalizingInstall": "Finalizing installation...",
   "extractingShaders": "Extracting shaders...",
   "downloadCompleteExtracting": "Download complete, extracting...",
