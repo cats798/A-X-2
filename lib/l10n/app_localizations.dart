@@ -1299,6 +1299,7 @@ class AppLocalizations {
   // 所有 getter 统一放在此处，每个键只定义一次
   String get shareLogs => _strings['shareLogs']!;
   String get extensionsDescription => _strings['extensionsDescription']!;
+  String get shareLogsDescription => _strings['shareLogsDescription']!;
   String get themeDescription => _strings['themeDescription']!;
   String get readerDescription => _strings['readerDescription']!;
   String get playerDescription => _strings['playerDescription']!;
