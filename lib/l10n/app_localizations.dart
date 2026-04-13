@@ -1318,6 +1318,7 @@ class AppLocalizations {
   String get specialThanks => _strings['specialThanks']!;
   String get communityContributors => _strings['communityContributors']!;
   String get staff => _strings['staff']!;
+  String get initDownload => _strings['initDownload']!;
   String get episode => _strings['episode']!;
   String get noContributors => _strings['noContributors']!;
   String get failedToLoadContributors => _strings['failedToLoadContributors']!;
