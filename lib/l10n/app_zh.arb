@@ -17,7 +17,7 @@
   "playerDescription": "播放器设置说明",
   "uiDescription": "用户界面设置",
   "ui": "界面",
-  "complete""installComplete": "安装完成",
+  "installComplete": "安装完成",
   "finalizingInstall": "正在完成安装...",
   "extractingShaders": "正在解压着色器...",
   "downloadCompleteExtracting": "下载完成，正在解压...",
