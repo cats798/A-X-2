@@ -10,7 +10,7 @@
   "guest": "访客",
   "shareLogs": "分享日志",
   "shareLogsDescription": "分享应用日志文件以帮助开发者诊断问题",
-  "shareLogsDescription': "与开发者分享日志",
+  "shareLogsDescription": "与开发者分享日志",
   "extensionsDescription": "扩展功能",
   "themeDescription": "主题设置说明",
   "readerDescription": "阅读器设置说明",
