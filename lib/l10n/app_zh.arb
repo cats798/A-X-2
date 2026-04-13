@@ -18,7 +18,7 @@
   "uiDescription": "用户界面设置",
   "ui": "界面",
   "episode": "集",
-  "initDownload": "初始化下载"
+  "initDownload": "初始化下载",
   "storageManagerDescription": "管理存储和缓存设置",
   "storageManager": "存储管理",
   "backupRestoreDescription": "备份和恢复你的数据",
