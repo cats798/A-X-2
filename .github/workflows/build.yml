@@ -61,6 +61,11 @@ jobs:
 
       - name: Build iOS (unsigned for TrollStore)
         run: |
+          # 清理 Pods 并重新安装，解决 MPV 框架缺失问题
+          cd ios
+          rm -rf Pods Podfile.lock
+          pod install --repo-update
+          cd ..
           flutter build ios --release --no-codesign
           mkdir -p build/ios/iphoneos/Payload
           ln -s ../Runner.app build/ios/iphoneos/Payload/Runner.app
