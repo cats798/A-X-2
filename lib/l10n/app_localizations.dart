@@ -1897,6 +1897,7 @@ class AppLocalizations {
   String get import => _strings['import']!;
   String get refresh => _strings['refresh']!;
   String get reload => _strings['reload']!;
+  String get aboutDescription => _strings['aboutDescription']!;
 
   // ======================== 带参数的方法 ========================
   String installExtensionFirst(String sourceName) => _strings['installExtensionFirst']!.replaceAll('{sourceName}', sourceName);
