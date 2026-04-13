@@ -10,7 +10,7 @@
   "guest": "Guest",
   "shareLogs": "Share Logs",
   "shareLogsDescription": "Share app log files to help developers diagnose issues",
-  "shareLogsDescription': "Share logs with developer",
+  "shareLogsDescription": "Share logs with developer",
   "extensionsDescription": "Extensions",
   "themeDescription": "Theme description",
   "readerDescription": "Reader settings description",
