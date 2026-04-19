@@ -17,6 +17,7 @@
   "playerDescription": "播放器设置说明",
   "uiDescription": "用户界面设置",
   "ui": "界面",
+  "days": "天",
   "downloadFailed": "下载失败",
   "shadersInstalledSuccess": "着色器安装成功！",
   "installComplete": "安装完成",
